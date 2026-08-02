@@ -1,0 +1,7 @@
+openai
+anthropic
+google-generativeai
+PyMuPDF
+streamlit
+python-dotenv
+pandas
