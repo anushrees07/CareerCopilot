@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+
+:root{
+    --bg:#050816;
+    --card:#0D1222;
+    --text:#F8FAFC;
+    --muted:#94A3B8;
+    --purple:#8B5CF6;
+    --blue:#3B82F6;
+    --cyan:#06B6D4;
+}
+
+html,
+body,
+[class*="css"]{
+    font-family:'Outfit',sans-serif;
+}
+
+.stApp{
+    background:
+        radial-gradient(circle at 15% 20%, rgba(139,92,246,.18), transparent 35%),
+        radial-gradient(circle at 85% 15%, rgba(6,182,212,.12), transparent 30%),
+        linear-gradient(180deg,#050816,#090D18);
+}
+
+header,
+footer,
+#MainMenu{
+    visibility:hidden;
+}
+
+.cc-hero{
+    padding-top:60px;
+    padding-bottom:30px;
+}
+
+.cc-badge{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:999px;
+    background:rgba(139,92,246,.15);
+    color:#C4B5FD;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.cc-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:72px;
+    line-height:1.05;
+    color:white;
+    margin-bottom:18px;
+}
+
+.cc-title span{
+    color:#8B5CF6;
+}
+
+.cc-subtitle{
+    max-width:760px;
+    font-size:22px;
+    color:#AEB8CF;
+    line-height:1.8;
+}
+/* ---------- FEATURE SECTION ---------- */
+
+.feature-section{
+
+    padding:90px 20px;
+
+}
+
+.section-title{
+
+    text-align:center;
+    font-size:2.4rem;
+    color:white;
+    font-weight:700;
+
+}
+
+.section-subtitle{
+
+    text-align:center;
+    color:#A0A0B5;
+    margin-top:10px;
+    margin-bottom:60px;
+
+}
+
+/* ---------- GRID ---------- */
+
+.cards-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+    gap:30px;
+
+}
+
+/* ---------- CARD ---------- */
+
+.feature-card{
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:22px;
+
+    padding:35px;
+
+    transition:.35s;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#7B61FF;
+
+    box-shadow:
+    0 0 30px rgba(123,97,255,.35);
+
+}
+
+.card-icon{
+
+    font-size:2.4rem;
+
+    margin-bottom:20px;
+
+}
+
+.feature-card h3{
+
+    color:white;
+
+    margin-bottom:12px;
+
+}
+
+.feature-card p{
+
+    color:#BDBDD7;
+
+    line-height:1.7;
+
+}
+/* =========================
+        NAVBAR
+========================= */
+
+.cc-navbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 40px;
+
+    background:rgba(255,255,255,.04);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    margin-bottom:50px;
+
+}
+
+.cc-logo{
+
+    color:white;
+
+    font-size:1.5rem;
+
+    font-weight:700;
+
+}
+
+.cc-nav-links{
+
+    display:flex;
+
+    gap:35px;
+
+}
+
+.cc-nav-links span{
+
+    color:#BDBDD7;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.cc-nav-links span:hover{
+
+    color:#7B61FF;
+
+}
+/* ==========================
+        STATS SECTION
+========================== */
+
+.stats-section{
+
+    padding:90px 20px;
+
+}
+
+.stats-heading{
+
+    text-align:center;
+
+    color:white;
+
+    font-size:2.3rem;
+
+    margin-bottom:55px;
+
+}
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:28px;
+
+}
+
+.stat-card{
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    backdrop-filter:blur(18px);
+
+    text-align:center;
+
+    padding:35px;
+
+    transition:.35s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#7B61FF;
+
+    box-shadow:0 0 28px rgba(123,97,255,.35);
+
+}
+
+.stat-card h1{
+
+    font-size:3rem;
+
+    color:#7B61FF;
+
+    margin-bottom:12px;
+
+}
+
+.stat-card p{
+
+    color:#C8C8D8;
+
+    font-size:1rem;
+
+}
+/* ==========================
+        FOOTER
+========================== */
+
+.cc-footer{
+
+    margin-top:100px;
+
+    padding:50px 20px;
+
+    text-align:center;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.footer-logo{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:white;
+
+    margin-bottom:15px;
+
+}
+
+.footer-text{
+
+    color:#BDBDD7;
+
+    font-size:1rem;
+
+    margin-bottom:10px;
+
+}
+
+.footer-copy{
+
+    color:#7B7B8A;
+
+    font-size:.9rem;
+
+}
