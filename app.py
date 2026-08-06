@@ -1,14 +1,28 @@
 import streamlit as st
 
+# ==============================
+# UI
+# ==============================
 from app.ui.theme import load_theme
 
-from app.pages.dashboard import show as dashboard_page
-from app.pages.resume import show as resume_page
-from app.pages.internships import show as internships_page
-from app.pages.ai_chat import show as ai_chat_page
-from app.pages.settings import show as settings_page
+# ==============================
+# Pages
+# ==============================
+from app.pages import (
+    dashboard,
+    resume_analyzer,
+    opportunities,
+    skill_gap,
+    ai_coach,
+    interview_prep,
+    roadmap,
+    analytics,
+    settings,
+)
 
-
+# ==============================
+# PAGE CONFIG
+# ==============================
 st.set_page_config(
     page_title="CareerCopilot",
     page_icon="🚀",
@@ -16,21 +30,54 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+# ==============================
+# LOAD THEME
+# ==============================
 load_theme()
 
-pages = {
-    "🏠 Dashboard": dashboard_page,
-    "📄 Resume": resume_page,
-    "💼 Internships": internships_page,
-    "🤖 AI Coach": ai_chat_page,
-    "⚙️ Settings": settings_page,
+# ==============================
+# PAGE REGISTRY
+# ==============================
+PAGES = {
+    "🏠 Dashboard": dashboard.show,
+    "📄 Resume Analyzer": resume_analyzer.show,
+    "💼 Opportunities": opportunities.show,
+    "🧠 Skill Gap": skill_gap.show,
+    "🤖 AI Coach": ai_coach.show,
+    "🎤 Interview Prep": interview_prep.show,
+    "🗺 Roadmap": roadmap.show,
+    "📊 Analytics": analytics.show,
+    "⚙ Settings": settings.show,
 }
 
-st.sidebar.title("🚀 CareerCopilot")
+# ==============================
+# SESSION STATE
+# ==============================
+if "page" not in st.session_state:
+    st.session_state.page = "🏠 Dashboard"
 
-selected = st.sidebar.radio(
+# If an invalid page somehow gets stored
+if st.session_state.page not in PAGES:
+    st.session_state.page = "🏠 Dashboard"
+
+# ==============================
+# SIDEBAR
+# ==============================
+st.sidebar.markdown("# 🚀 CareerCopilot")
+st.sidebar.caption("AI Powered Career Platform")
+
+selected_page = st.sidebar.radio(
     "Navigation",
-    list(pages.keys()),
+    list(PAGES.keys()),
+    index=list(PAGES.keys()).index(st.session_state.page),
 )
 
-pages[selected]()
+# Update page if user clicks sidebar
+if selected_page != st.session_state.page:
+    st.session_state.page = selected_page
+    st.rerun()
+
+# ==============================
+# PAGE RENDER
+# ==============================
+PAGES[st.session_state.page]()

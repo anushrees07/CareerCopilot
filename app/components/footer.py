@@ -1,25 +1,54 @@
 import streamlit as st
+from datetime import datetime
 
 
 def show():
 
-    st.markdown(
-        """
-        <div class="cc-footer">
+    year = datetime.now().year
 
-            <div class="footer-logo">
-                🚀 CareerCopilot
-            </div>
+    st.write("")
+    st.divider()
 
-            <p class="footer-text">
-                Build your dream career with AI powered tools.
-            </p>
+    left, center, right = st.columns([2, 2, 1])
 
-            <p class="footer-copy">
-                © 2026 CareerCopilot. Built with ❤️ using Streamlit & AI.
-            </p>
+    with left:
 
-        </div>
-        """,
-        unsafe_allow_html=True
+        st.markdown(
+            """
+### 🚀 CareerCopilot
+
+Build your dream career using Artificial Intelligence.
+"""
+        )
+
+    with center:
+
+        st.markdown(
+            """
+### Quick Links
+
+🏠 Dashboard
+
+📄 Resume Analyzer
+
+💼 Opportunities
+
+🤖 AI Coach
+"""
+        )
+
+    with right:
+
+        st.markdown(
+            f"""
+### Version
+
+v1.0.0
+
+© {year}
+"""
+        )
+
+    st.caption(
+        "Made with ❤️ using Streamlit • Gemini • OpenAI • Claude • OpenRouter"
     )

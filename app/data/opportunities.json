@@ -1,0 +1,41 @@
+[
+    {
+        "title": "Python Developer Intern",
+        "company": "Google",
+        "location": "Bengaluru",
+        "stipend": "₹50,000/month",
+        "url": "https://careers.google.com",
+        "skills": [
+            "Python",
+            "Git",
+            "SQL",
+            "Pandas"
+        ]
+    },
+    {
+        "title": "AI Intern",
+        "company": "Microsoft",
+        "location": "Hyderabad",
+        "stipend": "₹60,000/month",
+        "url": "https://careers.microsoft.com",
+        "skills": [
+            "Python",
+            "Machine Learning",
+            "Git",
+            "NumPy"
+        ]
+    },
+    {
+        "title": "ML Engineer Intern",
+        "company": "NVIDIA",
+        "location": "Remote",
+        "stipend": "₹80,000/month",
+        "url": "https://www.nvidia.com/en-us/about-nvidia/careers/",
+        "skills": [
+            "Python",
+            "Deep Learning",
+            "PyTorch",
+            "Linux"
+        ]
+    }
+]

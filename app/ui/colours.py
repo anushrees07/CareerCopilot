@@ -1,0 +1,26 @@
+"""
+CareerCopilot Color System
+"""
+
+# Backgrounds
+BACKGROUND = "#070B14"
+SURFACE = "#111827"
+CARD = "#161F2F"
+
+# Primary Colors
+PRIMARY = "#8B5CF6"
+SECONDARY = "#3B82F6"
+ACCENT = "#06B6D4"
+
+# Text Colors
+TEXT_PRIMARY = "#F8FAFC"
+TEXT_SECONDARY = "#CBD5E1"
+TEXT_MUTED = "#94A3B8"
+
+# Status
+SUCCESS = "#22C55E"
+WARNING = "#F59E0B"
+ERROR = "#EF4444"
+
+# Borders
+BORDER = "#2A3347"
