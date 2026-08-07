@@ -1,0 +1,144 @@
+/* ==========================================================
+   Aurora Background V5
+========================================================== */
+
+.stApp{
+
+background:
+
+radial-gradient(circle at 0% 0%,
+rgba(124,58,237,.15),
+transparent 35%),
+
+radial-gradient(circle at 100% 100%,
+rgba(6,182,212,.15),
+transparent 35%),
+
+linear-gradient(
+180deg,
+var(--bg),
+var(--bg-secondary),
+var(--bg)
+);
+
+overflow:hidden;
+
+position:relative;
+
+}
+
+/* Left Aurora */
+
+.stApp::before{
+
+content:"";
+
+position:fixed;
+
+width:650px;
+
+height:650px;
+
+left:-180px;
+
+top:-180px;
+
+border-radius:50%;
+
+background:
+
+radial-gradient(circle,
+rgba(124,58,237,.28),
+transparent 72%);
+
+filter:blur(90px);
+
+animation:leftBlob 18s ease-in-out infinite alternate;
+
+pointer-events:none;
+
+z-index:-2;
+
+}
+
+/* Right Aurora */
+
+.stApp::after{
+
+content:"";
+
+position:fixed;
+
+width:650px;
+
+height:650px;
+
+right:-180px;
+
+bottom:-180px;
+
+border-radius:50%;
+
+background:
+
+radial-gradient(circle,
+rgba(6,182,212,.22),
+transparent 72%);
+
+filter:blur(90px);
+
+animation:rightBlob 22s ease-in-out infinite alternate;
+
+pointer-events:none;
+
+z-index:-2;
+
+}
+
+@keyframes leftBlob{
+
+0%{
+
+transform:
+
+translate(0px,0px)
+
+scale(1);
+
+}
+
+100%{
+
+transform:
+
+translate(130px,90px)
+
+scale(1.15);
+
+}
+
+}
+
+@keyframes rightBlob{
+
+0%{
+
+transform:
+
+translate(0px,0px)
+
+scale(1);
+
+}
+
+100%{
+
+transform:
+
+translate(-120px,-80px)
+
+scale(1.2);
+
+}
+
+}

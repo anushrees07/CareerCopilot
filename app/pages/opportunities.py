@@ -1,119 +1,54 @@
 import streamlit as st
 
+from app.storage.profile_manager import load_profile
 
-def opportunity_card(title, company, location, stipend, match, url):
+from app.services.opportunity_engine import load_opportunities
+from app.services.recommendation_engine import calculate_match
 
-    with st.container(border=True):
-
-        c1, c2 = st.columns([4, 1])
-
-        with c1:
-
-            st.subheader(title)
-
-            st.caption(company)
-
-            st.write(f"📍 {location}")
-
-            st.write(f"💰 {stipend}")
-
-        with c2:
-
-            st.metric("Match", f"{match}%")
-
-        st.link_button(
-            "Apply 🚀",
-            url,
-            use_container_width=True,
-        )
+from app.components.opportunity_cards import show as opportunity_cards
 
 
 def show():
 
-    st.markdown(
-        """
-<div class="ai-badge">
-💼 AI Opportunity Finder
-</div>
-""",
-        unsafe_allow_html=True,
+    st.title("💼 Opportunity Intelligence")
+
+    st.caption(
+        "Discover opportunities matched specifically to your profile."
     )
 
-    st.markdown(
-        """
-<div class="section-title">
-Find Opportunities Smarter
-</div>
-""",
-        unsafe_allow_html=True,
-    )
+    profile = load_profile()
 
-    st.markdown(
-        """
-<div class="section-sub">
-Search internships, jobs and hackathons with AI-powered matching.
-</div>
-""",
-        unsafe_allow_html=True,
-    )
+    if not profile["skills"]:
 
-    st.write("")
-
-    c1, c2, c3 = st.columns(3)
-
-    keyword = c1.text_input(
-        "Role",
-        "Python Developer",
-    )
-
-    location = c2.text_input(
-        "Location",
-        "Bengaluru",
-    )
-
-    opportunity_type = c3.selectbox(
-        "Type",
-        [
-            "Internship",
-            "Job",
-            "Hackathon",
-        ],
-    )
-
-    st.write("")
-
-    if st.button(
-        "🔍 Search Opportunities",
-        use_container_width=True,
-    ):
-
-        st.success("3 opportunities found")
-
-        st.write("")
-
-        opportunity_card(
-            "Python Developer Intern",
-            "Google",
-            "Bengaluru",
-            "₹50,000/month",
-            96,
-            "https://careers.google.com",
+        st.warning(
+            "Please upload and analyze your resume first."
         )
 
-        opportunity_card(
-            "AI Intern",
-            "Microsoft",
-            "Hyderabad",
-            "₹60,000/month",
-            92,
-            "https://careers.microsoft.com",
+        return
+
+    opportunities = load_opportunities()
+
+    ranked = []
+
+    for opp in opportunities:
+
+        score = calculate_match(
+            opp,
+            profile["skills"],
         )
 
-        opportunity_card(
-            "ML Engineer Intern",
-            "NVIDIA",
-            "Remote",
-            "₹80,000/month",
-            95,
-            "https://www.nvidia.com/en-us/about-nvidia/careers/",
+        ranked.append(
+            (score, opp)
+        )
+
+    ranked.sort(
+        reverse=True,
+        key=lambda x: x[0],
+    )
+
+    for score, opp in ranked:
+
+        opportunity_cards(
+            opp,
+            score,
         )

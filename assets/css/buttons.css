@@ -1,0 +1,311 @@
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+/* ---------- Base Button ---------- */
+
+.stButton > button{
+
+width:100%;
+
+height:56px;
+
+border:none;
+
+border-radius:18px;
+
+cursor:pointer;
+
+font-size:15px;
+
+font-weight:700;
+
+letter-spacing:.3px;
+
+color:white;
+
+position:relative;
+
+overflow:hidden;
+
+background:
+
+linear-gradient(
+135deg,
+#8B5CF6,
+#6D28D9
+);
+
+box-shadow:
+
+0 10px 25px rgba(139,92,246,.28);
+
+transition:
+all .35s ease;
+
+}
+
+
+/* ---------- Hover ---------- */
+
+.stButton > button:hover{
+
+transform:
+
+translateY(-4px)
+scale(1.02);
+
+background:
+
+linear-gradient(
+135deg,
+#A855F7,
+#8B5CF6,
+#3B82F6
+);
+
+box-shadow:
+
+0 15px 40px rgba(139,92,246,.45),
+
+0 0 40px rgba(139,92,246,.30);
+
+}
+
+
+/* ---------- Click ---------- */
+
+.stButton > button:active{
+
+transform:
+
+scale(.96);
+
+}
+
+
+/* ---------- Shine Animation ---------- */
+
+.stButton > button::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-120%;
+
+width:60%;
+
+height:100%;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.35),
+
+transparent
+
+);
+
+transition:.8s;
+
+}
+
+.stButton > button:hover::before{
+
+left:150%;
+
+}
+
+
+/* ---------- Glow Ring ---------- */
+
+.stButton > button::after{
+
+content:"";
+
+position:absolute;
+
+inset:-2px;
+
+border-radius:20px;
+
+background:
+
+linear-gradient(
+135deg,
+rgba(139,92,246,.35),
+rgba(6,182,212,.25)
+);
+
+opacity:0;
+
+z-index:-1;
+
+filter:blur(16px);
+
+transition:.35s;
+
+}
+
+.stButton > button:hover::after{
+
+opacity:1;
+
+}
+
+
+/* ==========================================================
+   Sidebar Buttons
+========================================================== */
+
+section[data-testid="stSidebar"] .stButton>button{
+
+background:
+
+rgba(255,255,255,.03);
+
+border:1px solid rgba(255,255,255,.06);
+
+box-shadow:none;
+
+height:48px;
+
+}
+
+section[data-testid="stSidebar"] .stButton>button:hover{
+
+background:
+
+rgba(139,92,246,.16);
+
+border-color:#8B5CF6;
+
+box-shadow:
+
+0 0 18px rgba(139,92,246,.25);
+
+}
+
+
+/* ==========================================================
+   Download Buttons
+========================================================== */
+
+.stDownloadButton > button{
+
+height:52px;
+
+border-radius:18px;
+
+font-weight:700;
+
+background:
+
+linear-gradient(
+135deg,
+#2563EB,
+#06B6D4
+);
+
+color:white;
+
+border:none;
+
+transition:.35s;
+
+}
+
+.stDownloadButton > button:hover{
+
+transform:
+
+translateY(-3px);
+
+box-shadow:
+
+0 0 30px rgba(6,182,212,.30);
+
+}
+
+
+/* ==========================================================
+   File Upload Button
+========================================================== */
+
+[data-testid="stFileUploader"] button{
+
+background:
+
+linear-gradient(
+135deg,
+#8B5CF6,
+#7C3AED
+);
+
+color:white;
+
+border:none;
+
+border-radius:16px;
+
+font-weight:700;
+
+}
+
+
+/* ==========================================================
+   Disabled
+========================================================== */
+
+.stButton > button:disabled{
+
+opacity:.45;
+
+cursor:not-allowed;
+
+box-shadow:none;
+
+transform:none;
+
+}
+
+
+/* ==========================================================
+   Floating Animation
+========================================================== */
+
+.primary-float{
+
+animation:buttonFloat 4s ease-in-out infinite;
+
+}
+
+@keyframes buttonFloat{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-3px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}

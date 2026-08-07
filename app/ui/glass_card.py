@@ -2,41 +2,24 @@ import streamlit as st
 
 
 def show(
-    title="",
-    value="",
-    subtitle="",
-    icon="✨",
+    title: str,
+    value: str = "",
+    subtitle: str = "",
+    icon: str = "",
 ):
 
     with st.container(border=True):
 
-        c1, c2 = st.columns([6, 1])
+        top_left, top_right = st.columns([5, 1])
 
-        with c1:
+        with top_left:
+            st.markdown(f"### {icon} {title}")
 
-            st.markdown(
-                f"### {icon} {title}"
-            )
-
-        with c2:
-
-            st.markdown("⭐")
+        with top_right:
+            st.markdown("✨")
 
         if value:
-
-            st.markdown(
-                f"""
-<h1 style="
-font-size:38px;
-margin-top:0;
-margin-bottom:0;
-">
-{value}
-</h1>
-""",
-                unsafe_allow_html=True,
-            )
+            st.markdown(f"## {value}")
 
         if subtitle:
-
             st.caption(subtitle)

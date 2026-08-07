@@ -3,37 +3,30 @@ import streamlit as st
 
 def show():
 
-    st.markdown(
-        """
-### 📂 Upload Resume
-Drag & Drop or browse your resume.
+    st.markdown("## 📄 Upload Resume")
 
-Supported formats:
+    with st.container(border=True):
 
-**PDF • DOCX**
+        st.markdown("### 🚀 Resume Intelligence")
+
+        st.write(
+            """
+Upload your resume to unlock:
+
+✅ ATS Analysis
+
+✅ AI Resume Review
+
+✅ Skill Detection
+
+✅ Career Health Update
 """
-    )
-
-    uploaded = st.file_uploader(
-        "",
-        type=["pdf", "docx"],
-        label_visibility="collapsed",
-    )
-
-    if uploaded:
-
-        st.success("✅ Resume uploaded successfully!")
-
-        st.write("")
-
-        st.metric(
-            "File Name",
-            uploaded.name,
         )
 
-        st.metric(
-            "Size",
-            f"{round(uploaded.size/1024,1)} KB",
+        uploaded = st.file_uploader(
+            "Choose Resume",
+            type=["pdf", "docx"],
+            help="Supported formats: PDF, DOCX",
         )
 
     return uploaded

@@ -1,345 +1,122 @@
-/* =====================================================
-   CAREERCOPILOT UI V2
-   PART 1
-   Theme • Layout • Typography • Background
-===================================================== */
-
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* ---------------- Root ---------------- */
-
-:root{
-
---bg:#070B14;
---surface:#101827;
---surface2:#161F2F;
-
---purple:#8B5CF6;
---blue:#3B82F6;
---cyan:#06B6D4;
-
---green:#22C55E;
---yellow:#F59E0B;
---red:#EF4444;
-
---text:#F8FAFC;
---text2:#CBD5E1;
---muted:#94A3B8;
-
---border:#2A3347;
-
---radius:22px;
-
-}
-
-/* ---------------- Page ---------------- */
-
-html,
-body,
-[class*="css"]{
-
-font-family:"Space Grotesk",sans-serif;
-
-background:var(--bg);
-
-color:var(--text);
-
-}
-
-/* Streamlit Main */
+/* ======================================================
+                CAREERCOPILOT AURORA THEME
+====================================================== */
 
 .stApp{
 
-background:
-radial-gradient(circle at top left,#4423a611 0%,transparent 28%),
-radial-gradient(circle at bottom right,#0ea5e911 0%,transparent 32%),
-linear-gradient(
-180deg,
-#060B13,
-#09101B,
-#070B14
-);
+    background:
+    radial-gradient(circle at 15% 15%, rgba(90,120,255,.20), transparent 30%),
+    radial-gradient(circle at 90% 20%, rgba(0,220,255,.15), transparent 35%),
+    radial-gradient(circle at 80% 80%, rgba(120,60,255,.12), transparent 30%),
+    radial-gradient(circle at 20% 80%, rgba(70,255,220,.08), transparent 25%),
+    #060816;
 
-min-height:100vh;
+    background-attachment:fixed;
 
+    color:white;
 }
+/* ======================================================
+                PREMIUM GLASS CARDS
+====================================================== */
 
-/* ---------------- Typography ---------------- */
+.glass{
 
-h1{
+background:rgba(255,255,255,.05);
 
-font-size:54px;
+backdrop-filter:blur(18px);
 
-font-weight:800;
+border-radius:24px;
 
-letter-spacing:-1px;
-
-color:white;
-
-}
-
-h2{
-
-font-size:34px;
-
-font-weight:700;
-
-}
-
-h3{
-
-font-size:24px;
-
-font-weight:700;
-
-}
-
-p{
-
-color:var(--text2);
-
-font-size:16px;
-
-line-height:1.8;
-
-}
-
-/* ---------------- Hero ---------------- */
-
-.ai-badge{
-
-display:inline-block;
-
-padding:10px 18px;
-
-background:rgba(139,92,246,.15);
-
-border:1px solid rgba(139,92,246,.30);
-
-border-radius:999px;
-
-font-size:14px;
-
-font-weight:600;
-
-color:#C4B5FD;
-
-margin-bottom:22px;
-
-backdrop-filter:blur(16px);
-
-}
-
-.section-title{
-
-font-size:52px;
-
-font-weight:800;
-
-line-height:1.15;
-
-margin-bottom:18px;
-
-background:linear-gradient(
-90deg,
-white,
-#b794ff,
-#56ccf2
-);
-
-background-clip:text;
--webkit-background-clip:text;
-
-color:transparent;
--webkit-text-fill-color:transparent;
-
-}
-
-.section-sub{
-
-font-size:18px;
-
-max-width:760px;
-
-color:#AEB7C5;
-
-line-height:1.8;
-
-margin-bottom:35px;
-
-}
-
-/* ---------------- Containers ---------------- */
-
-div[data-testid="stVerticalBlock"]{
-
-gap:1rem;
-
-}
-
-/* ---------------- Glass Cards ---------------- */
-
-div[data-testid="stVerticalBlock"]>div:has(.glass-card){
-
-background:rgba(17,24,39,.70);
-
-backdrop-filter:blur(22px);
-
-border-radius:22px;
-
-border:1px solid rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.10);
 
 box-shadow:
-
-0 15px 45px rgba(0,0,0,.35),
-
-0 0 30px rgba(139,92,246,.08);
+0 0 25px rgba(110,231,255,.08);
 
 padding:24px;
-
-}
-
-/* Generic Container */
-
-div[data-testid="stContainer"]{
-
-border-radius:20px;
-
-transition:.35s;
-
-}
-
-div[data-testid="stContainer"]:hover{
-
-transform:translateY(-4px);
-
-}
-
-/* ---------------- Scrollbar ---------------- */
-
-::-webkit-scrollbar{
-
-width:10px;
-
-}
-
-::-webkit-scrollbar-track{
-
-background:#0E1625;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-background:#8B5CF6;
-
-border-radius:30px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-background:#A78BFA;
-
-}
-
-/* ---------------- Divider ---------------- */
-
-hr{
-
-border:none;
-
-height:1px;
-
-background:#202A3D;
-
-margin:35px 0;
-
-}
-
-/* ---------------- Links ---------------- */
-
-a{
-
-text-decoration:none;
-
-color:#8B5CF6;
 
 transition:.3s;
 
 }
 
-a:hover{
+.glass:hover{
 
-color:#A78BFA;
+transform:translateY(-5px);
 
-}
-/* =====================================================
-   CAREERCOPILOT UI V2
-   PART 2
-   Cards • Buttons • Skills • AI Components
-=====================================================*/
-
-
-/* -----------------------------
-   Card Hover Animation
-------------------------------*/
-
-div[data-testid="stContainer"]{
-
-transition:all .35s ease;
-
-}
-
-div[data-testid="stContainer"]:hover{
-
-transform:translateY(-6px);
+border:1px solid #6EE7FF;
 
 box-shadow:
-
-0 18px 45px rgba(0,0,0,.35),
-
-0 0 25px rgba(139,92,246,.18);
+0 0 30px rgba(110,231,255,.28);
 
 }
 
+/* ======================================================
+                NEON SIDEBAR
+====================================================== */
 
-/* -----------------------------
-   Primary Buttons
-------------------------------*/
+section[data-testid="stSidebar"]{
+
+background:
+linear-gradient(
+180deg,
+#0D1327,
+#111A35
+);
+
+border-right:1px solid rgba(255,255,255,.08);
+
+}
+
+/* ===========================
+   Beautiful Navigation
+=========================== */
+
+.stRadio label{
+
+font-size:18px;
+
+font-weight:700;
+
+color:white;
+
+transition:.3s;
+
+}
+
+.stRadio label:hover{
+
+color:#6EE7FF;
+
+text-shadow:
+0 0 10px #6EE7FF;
+
+}
+
+/* ===========================
+   Animated Buttons
+=========================== */
 
 .stButton>button{
 
 width:100%;
 
-height:52px;
+border-radius:16px;
+
+background:
+linear-gradient(
+90deg,
+#5B7CFF,
+#39D6FF
+);
 
 border:none;
 
-border-radius:16px;
-
-font-size:15px;
-
 font-weight:700;
-
-letter-spacing:.2px;
-
-background:
-
-linear-gradient(
-135deg,
-#8B5CF6,
-#6D28D9
-);
 
 color:white;
 
-transition:.30s;
+height:48px;
 
-box-shadow:
-
-0 8px 22px rgba(139,92,246,.25);
+transition:.3s;
 
 }
 
@@ -347,1354 +124,374 @@ box-shadow:
 
 transform:translateY(-3px);
 
-background:
-
-linear-gradient(
-135deg,
-#9F67FF,
-#7C3AED
-);
-
 box-shadow:
-
-0 12px 30px rgba(139,92,246,.40);
-
-}
-
-
-/* -----------------------------
-   Secondary Buttons
-------------------------------*/
-
-.stDownloadButton>button{
-
-border-radius:16px;
-
-height:50px;
-
-font-weight:600;
+0 0 25px rgba(57,214,255,.35);
 
 }
 
+/* ===========================
+   Premium Inputs
+=========================== */
 
-/* -----------------------------
-   Metric Cards
-------------------------------*/
+.stTextInput input{
 
-.metric-card{
+background:#121C37;
 
-background:
+border-radius:15px;
 
-linear-gradient(
-180deg,
-rgba(255,255,255,.03),
-rgba(255,255,255,.015)
-);
-
-padding:24px;
-
-border-radius:22px;
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(18px);
-
-transition:.35s;
-
-}
-
-.metric-card:hover{
-
-transform:translateY(-5px);
-
-border-color:#8B5CF6;
-
-}
-
-.metric-title{
-
-font-size:14px;
-
-color:#94A3B8;
-
-font-weight:600;
-
-}
-
-.metric-value{
-
-font-size:42px;
-
-font-weight:800;
-
-margin-top:10px;
-
-margin-bottom:6px;
+border:1px solid rgba(255,255,255,.08);
 
 color:white;
 
 }
 
-.metric-sub{
+textarea{
 
-font-size:14px;
-
-color:#22C55E;
+background:#121C37 !important;
 
 }
 
+/* ===========================
+   Better Containers
+=========================== */
 
-/* -----------------------------
-   Skill Pills
-------------------------------*/
-
-.skill-pill{
-
-display:inline-block;
-
-padding:10px 18px;
-
-margin:8px;
-
-border-radius:999px;
-
-background:
-
-rgba(59,130,246,.12);
-
-border:
-
-1px solid rgba(59,130,246,.25);
-
-color:#BFDBFE;
-
-font-weight:600;
-
-font-size:14px;
-
-transition:.30s;
-
-}
-
-.skill-pill:hover{
-
-background:
-
-rgba(59,130,246,.25);
-
-transform:scale(1.05);
-
-}
-
-
-/* -----------------------------
-   Missing Skill
-------------------------------*/
-
-.missing-pill{
-
-display:inline-block;
-
-padding:10px 18px;
-
-margin:8px;
-
-border-radius:999px;
-
-background:
-
-rgba(239,68,68,.10);
-
-border:
-
-1px solid rgba(239,68,68,.25);
-
-color:#FCA5A5;
-
-font-weight:600;
-
-font-size:14px;
-
-}
-
-
-/* -----------------------------
-   AI Cards
-------------------------------*/
-
-.ai-card{
-
-padding:22px;
-
-margin-bottom:20px;
+div[data-testid="stVerticalBlock"]>div:has(.element-container){
 
 border-radius:20px;
 
-background:
-
-linear-gradient(
-
-135deg,
-
-rgba(139,92,246,.12),
-
-rgba(6,182,212,.08)
-
-);
-
-border:
-
-1px solid rgba(139,92,246,.20);
-
-transition:.35s;
-
-}
-
-.ai-card:hover{
-
-transform:translateY(-4px);
-
-box-shadow:
-
-0 0 28px rgba(139,92,246,.18);
-
 }
 
 
-/* -----------------------------
-   Progress Bar
-------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
-.stProgress>div>div{
+html,
+body,
+[class*="css"]{
+    font-family:"Inter",sans-serif;
+}
 
-background:
+.stApp{
 
-linear-gradient(
-
-90deg,
-
-#8B5CF6,
-
-#06B6D4
-
-);
-
-border-radius:999px;
+    background:#070B14;
+    color:#F8FAFC;
 
 }
 
+/* Hide Streamlit Branding */
 
-/* -----------------------------
-   Success Messages
-------------------------------*/
+#MainMenu,
+footer,
+header{
 
-.stAlert{
-
-border-radius:18px;
-
-border:none;
+    visibility:hidden;
 
 }
 
-
-/* -----------------------------
-   Expanders
-------------------------------*/
-
-details{
-
-border-radius:18px !important;
-
-background:#111827 !important;
-
-border:1px solid #2A3347 !important;
-
-padding:10px;
-
-}
-
-
-/* -----------------------------
-   Inputs
-------------------------------*/
-
-.stTextInput input,
-
-.stTextArea textarea,
-
-.stSelectbox{
-
-border-radius:16px !important;
-
-}
-
-
-/* -----------------------------
-   File Uploader
-------------------------------*/
-
-[data-testid="stFileUploader"]{
-
-border-radius:20px;
-
-padding:15px;
-
-background:#111827;
-
-border:2px dashed #8B5CF6;
-
-}
-/* =====================================================
-   CAREERCOPILOT UI V2
-   PART 3
-   Dashboard • Sidebar • Hero • Upload Area
-=====================================================*/
-
-
-/* -----------------------------
-   Sidebar
-------------------------------*/
+/* Sidebar */
 
 section[data-testid="stSidebar"]{
 
-background:
-linear-gradient(
-180deg,
-#0B1220,
-#101827,
-#0B1220
-);
+    background:#111827;
 
-border-right:1px solid rgba(255,255,255,.06);
+    border-right:1px solid #2A3347;
 
 }
 
-section[data-testid="stSidebar"] *{
-
-color:#F8FAFC;
-
-}
-
-section[data-testid="stSidebar"] .stButton>button{
-
-background:transparent;
-
-border:1px solid rgba(255,255,255,.06);
-
-box-shadow:none;
-
-text-align:left;
-
-padding-left:18px;
-
-}
-
-section[data-testid="stSidebar"] .stButton>button:hover{
-
-background:rgba(139,92,246,.18);
-
-border-color:#8B5CF6;
-
-}
-
-
-/* -----------------------------
-   Hero Section
-------------------------------*/
-
-.hero-card{
-
-background:
-
-linear-gradient(
-135deg,
-rgba(139,92,246,.18),
-rgba(59,130,246,.10)
-);
-
-border:1px solid rgba(255,255,255,.05);
-
-border-radius:28px;
-
-padding:42px;
-
-overflow:hidden;
-
-position:relative;
-
-margin-bottom:28px;
-
-}
-
-.hero-card::before{
-
-content:"";
-
-position:absolute;
-
-top:-120px;
-
-right:-120px;
-
-width:260px;
-
-height:260px;
-
-background:radial-gradient(
-circle,
-rgba(139,92,246,.25),
-transparent
-);
-
-}
-
-.hero-title{
-
-font-size:54px;
-
-font-weight:800;
-
-color:white;
-
-margin-bottom:15px;
-
-}
-
-.hero-sub{
-
-font-size:18px;
-
-line-height:1.8;
-
-color:#CBD5E1;
-
-max-width:700px;
-
-}
-
-
-/* -----------------------------
-   Upload Card
-------------------------------*/
-
-.upload-card{
-
-padding:28px;
-
-border-radius:24px;
-
-background:
-rgba(255,255,255,.03);
-
-border:2px dashed rgba(139,92,246,.40);
-
-transition:.35s;
-
-text-align:center;
-
-}
-
-.upload-card:hover{
-
-border-color:#8B5CF6;
-
-background:
-rgba(139,92,246,.06);
-
-transform:translateY(-4px);
-
-}
-
-
-/* -----------------------------
-   Opportunity Card
-------------------------------*/
-
-.job-card{
-
-padding:24px;
-
-border-radius:22px;
-
-background:
-linear-gradient(
-180deg,
-rgba(255,255,255,.02),
-rgba(255,255,255,.01)
-);
-
-border:1px solid rgba(255,255,255,.05);
-
-margin-bottom:20px;
-
-transition:.35s;
-
-}
-
-.job-card:hover{
-
-transform:translateY(-5px);
-
-border-color:#8B5CF6;
-
-box-shadow:
-
-0 0 25px rgba(139,92,246,.20);
-
-}
-
-
-/* -----------------------------
-   Timeline
-------------------------------*/
-
-.timeline{
-
-border-left:3px solid #8B5CF6;
-
-padding-left:25px;
-
-margin-top:25px;
-
-}
-
-.timeline-item{
-
-margin-bottom:25px;
-
-position:relative;
-
-}
-
-.timeline-item::before{
-
-content:"";
-
-position:absolute;
-
-left:-33px;
-
-top:4px;
-
-width:14px;
-
-height:14px;
-
-border-radius:50%;
-
-background:#8B5CF6;
-
-box-shadow:
-
-0 0 15px rgba(139,92,246,.5);
-
-}
-
-
-/* -----------------------------
-   Resume Stats
-------------------------------*/
-
-.resume-stat{
-
-background:#111827;
-
-border-radius:20px;
-
-padding:20px;
-
-text-align:center;
-
-border:1px solid rgba(255,255,255,.05);
-
-}
-
-
-/* -----------------------------
-   Metrics
-------------------------------*/
-
-[data-testid="metric-container"]{
-
-background:#111827;
-
-border-radius:20px;
-
-padding:20px;
-
-border:1px solid rgba(255,255,255,.05);
-
-}
-
-
-/* -----------------------------
-   Spinner
-------------------------------*/
-
-.stSpinner{
-
-color:#8B5CF6;
-
-}
-
-
-/* -----------------------------
-   Divider Upgrade
-------------------------------*/
-
-hr{
-
-height:2px;
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-#8B5CF6,
-transparent
-);
-
-border:none;
-
-margin:45px 0;
-
-}
-/* =====================================================
-   CAREERCOPILOT UI V2
-   PART 4
-   Aurora • Analytics • Animations
-=====================================================*/
-
-/* -----------------------------
-   Aurora Background
-------------------------------*/
-
-.stApp::before{
-
-content:"";
-
-position:fixed;
-
-top:-250px;
-left:-250px;
-
-width:600px;
-height:600px;
-
-background:
-radial-gradient(circle,
-rgba(139,92,246,.16),
-transparent 70%);
-
-filter:blur(70px);
-
-animation:aurora1 18s linear infinite;
-
-pointer-events:none;
-
-z-index:-1;
-
-}
-
-.stApp::after{
-
-content:"";
-
-position:fixed;
-
-right:-250px;
-bottom:-250px;
-
-width:650px;
-height:650px;
-
-background:
-radial-gradient(circle,
-rgba(6,182,212,.14),
-transparent 70%);
-
-filter:blur(80px);
-
-animation:aurora2 22s linear infinite;
-
-pointer-events:none;
-
-z-index:-1;
-
-}
-
-@keyframes aurora1{
-
-0%{
-
-transform:
-translate(0,0);
-
-}
-
-50%{
-
-transform:
-translate(120px,70px);
-
-}
-
-100%{
-
-transform:
-translate(0,0);
-
-}
-
-}
-
-@keyframes aurora2{
-
-0%{
-
-transform:
-translate(0,0);
-
-}
-
-50%{
-
-transform:
-translate(-110px,-90px);
-
-}
-
-100%{
-
-transform:
-translate(0,0);
-
-}
-
-}
-
-/* -----------------------------
-   Gradient Text
-------------------------------*/
-
-.gradient-text{
-
-background:
-
-linear-gradient(
-90deg,
-#FFFFFF,
-#C084FC,
-#60A5FA,
-#22D3EE
-);
-
-background-size:250%;
-
-background-clip:text;
--webkit-background-clip:text;
-
-color:transparent;
--webkit-text-fill-color:transparent;
-
-animation:gradientMove 6s linear infinite;
-
-font-weight:800;
-
-}
-
-@keyframes gradientMove{
-
-0%{
-
-background-position:0%;
-
-}
-
-100%{
-
-background-position:250%;
-
-}
-
-}
-
-/* -----------------------------
-   Analytics Card
-------------------------------*/
-
-.analytics-card{
-
-background:
-
-linear-gradient(
-180deg,
-rgba(255,255,255,.03),
-rgba(255,255,255,.015)
-);
-
-border-radius:24px;
-
-padding:24px;
-
-border:1px solid rgba(255,255,255,.05);
-
-transition:.35s;
-
-}
-
-.analytics-card:hover{
-
-transform:translateY(-6px);
-
-border-color:#8B5CF6;
-
-box-shadow:
-
-0 15px 35px rgba(139,92,246,.18);
-
-}
-
-/* -----------------------------
-   AI Response Card
-------------------------------*/
-
-.ai-response{
-
-padding:24px;
-
-border-radius:22px;
-
-background:
-
-linear-gradient(
-135deg,
-rgba(139,92,246,.12),
-rgba(59,130,246,.08)
-);
-
-border:1px solid rgba(139,92,246,.18);
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-.ai-response::after{
-
-content:"";
-
-position:absolute;
-
-top:0;
-left:-100%;
-
-width:50%;
-
-height:100%;
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.08),
-transparent
-);
-
-animation:shine 4s infinite;
-
-}
-
-@keyframes shine{
-
-100%{
-
-left:150%;
-
-}
-
-}
-
-/* -----------------------------
-   Typing Cursor
-------------------------------*/
-
-.typing{
-
-display:inline-block;
-
-border-right:3px solid #8B5CF6;
-
-animation:blink .8s infinite;
-
-}
-
-@keyframes blink{
-
-50%{
-
-border-color:transparent;
-
-}
-
-}
-
-/* -----------------------------
-   Pulse Badge
-------------------------------*/
-
-.pulse{
-
-animation:pulseGlow 2s infinite;
-
-}
-
-@keyframes pulseGlow{
-
-0%{
-
-box-shadow:
-
-0 0 0 rgba(139,92,246,0);
-
-}
-
-50%{
-
-box-shadow:
-
-0 0 25px rgba(139,92,246,.45);
-
-}
-
-100%{
-
-box-shadow:
-
-0 0 0 rgba(139,92,246,0);
-
-}
-
-}
-
-/* -----------------------------
-   Floating Animation
-------------------------------*/
-
-.float{
-
-animation:floatCard 5s ease-in-out infinite;
-
-}
-
-@keyframes floatCard{
-
-0%{
-
-transform:translateY(0px);
-
-}
-
-50%{
-
-transform:translateY(-6px);
-
-}
-
-100%{
-
-transform:translateY(0px);
-
-}
-
-}
-
-/* -----------------------------
-   Smooth Fade
-------------------------------*/
-
-.fade{
-
-animation:fadeIn .8s ease;
-
-}
-
-@keyframes fadeIn{
-
-from{
-
-opacity:0;
-
-transform:translateY(20px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-/* =====================================================
-   CAREERCOPILOT UI V2
-   PART 5
-   Final Polish • Responsive • Micro Animations
-=====================================================*/
-
-
-/* ===========================
-   Smooth Global Animation
-=========================== */
-
-*{
-
-transition:
-background .25s ease,
-color .25s ease,
-border .25s ease,
-box-shadow .30s ease,
-transform .30s ease;
-
-}
-
-
-/* ===========================
-   Image Styling
-=========================== */
-
-img{
-
-border-radius:18px;
-
-}
-
-
-/* ===========================
-   Tables
-=========================== */
-
-table{
-
-border-radius:18px;
-
-overflow:hidden;
-
-}
-
-thead tr{
-
-background:#151F30;
-
-}
-
-tbody tr:hover{
-
-background:rgba(139,92,246,.08);
-
-}
-
-
-/* ===========================
-   Code Blocks
-=========================== */
-
-pre{
-
-border-radius:18px !important;
-
-background:#0F172A !important;
-
-border:1px solid rgba(255,255,255,.06);
-
-}
-
-
-/* ===========================
-   Notification Cards
-=========================== */
-
-.stSuccess,
-.stWarning,
-.stError,
-.stInfo{
-
-border-radius:18px;
-
-}
-
-
-/* ===========================
-   Chat Messages
-=========================== */
-
-[data-testid="stChatMessage"]{
-
-border-radius:22px;
-
-background:rgba(255,255,255,.03);
-
-border:1px solid rgba(255,255,255,.05);
-
-}
-
-
-/* ===========================
-   Sidebar Metrics
-=========================== */
-
-section[data-testid="stSidebar"] [data-testid="metric-container"]{
-
-background:rgba(255,255,255,.03);
-
-border-radius:18px;
-
-}
-
-
-/* ===========================
-   Progress Glow
-=========================== */
-
-.stProgress{
-
-filter:drop-shadow(0 0 10px rgba(139,92,246,.30));
-
-}
-
-
-/* ===========================
-   Footer
-=========================== */
-
-.footer{
-
-margin-top:60px;
-
-padding:30px;
-
-text-align:center;
-
-color:#94A3B8;
-
-font-size:14px;
-
-border-top:1px solid rgba(255,255,255,.06);
-
-}
-
-
-/* ===========================
-   Glass Blur Utility
-=========================== */
-
-.glass{
-
-background:rgba(255,255,255,.04);
-
-backdrop-filter:blur(18px);
-
-border:1px solid rgba(255,255,255,.06);
-
-border-radius:22px;
-
-}
-
-
-/* ===========================
-   Glow Utility
-=========================== */
-
-.glow{
-
-box-shadow:
-
-0 0 25px rgba(139,92,246,.25);
-
-}
-
-
-/* ===========================
-   Fade Up Animation
-=========================== */
-
-.fade-up{
-
-animation:fadeUp .7s ease;
-
-}
-
-@keyframes fadeUp{
-
-0%{
-
-opacity:0;
-
-transform:translateY(25px);
-
-}
-
-100%{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-
-/* ===========================
-   Scale Animation
-=========================== */
-
-.scale{
-
-animation:scaleIn .45s ease;
-
-}
-
-@keyframes scaleIn{
-
-0%{
-
-transform:scale(.94);
-
-opacity:0;
-
-}
-
-100%{
-
-transform:scale(1);
-
-opacity:1;
-
-}
-
-}
-
-
-/* ===========================
-   Responsive
-=========================== */
-
-@media (max-width:1200px){
-
-.section-title{
-
-font-size:42px;
-
-}
-
-.hero-title{
-
-font-size:42px;
-
-}
-
-}
-
-@media (max-width:768px){
-
-.section-title{
-
-font-size:34px;
-
-}
-
-.hero-title{
-
-font-size:32px;
-
-}
-
-.section-sub{
-
-font-size:16px;
-
-}
-
-.metric-value{
-
-font-size:32px;
-
-}
+/* Buttons */
 
 .stButton>button{
 
-height:48px;
+    background:#8B5CF6;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:.8rem;
+
+    font-weight:600;
+
+    transition:.25s;
 
 }
 
+.stButton>button:hover{
+
+    background:#7C3AED;
+
+    transform:translateY(-2px);
+
 }
 
+/* Titles */
 
+h1,h2,h3{
+
+    color:#F8FAFC;
+
+    font-family:"Space Grotesk",sans-serif;
+
+}
+
+/* Cards (we'll use these later) */
+
+.glass-card{
+
+    background:#161F2F;
+
+    border:1px solid #2A3347;
+
+    border-radius:20px;
+
+    padding:24px;
+
+}
+/* ==========================================
+   SIDEBAR
+========================================== */
+
+section[data-testid="stSidebar"]{
+
+    background:#0D1324;
+
+    border-right:1px solid rgba(255,255,255,.08);
+
+}
+
+/* Sidebar Title */
+
+section[data-testid="stSidebar"] h1{
+
+    color:#FFFFFF;
+
+    font-weight:700;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.35);
+
+}
+
+/* Radio Labels */
+
+.stRadio label{
+
+    color:#F8FAFC !important;
+
+    font-weight:600;
+
+    font-size:16px;
+
+}
+
+/* Selected Item */
+
+.stRadio [aria-checked="true"]{
+
+    background:rgba(139,92,246,.18);
+
+    border-radius:12px;
+
+    box-shadow:
+        0 0 18px rgba(139,92,246,.35);
+
+}
+/* ==========================================
+   PREMIUM SIDEBAR
+========================================== */
+
+/* Sidebar background */
+section[data-testid="stSidebar"]{
+    background:linear-gradient(180deg,#0A0F1F,#111827);
+    border-right:1px solid rgba(139,92,246,.25);
+}
+
+/* Navigation title */
+section[data-testid="stSidebar"] p{
+    color:#F8FAFC !important;
+    font-weight:700;
+}
+
+/* Radio labels */
+div[role="radiogroup"] label{
+    color:#F8FAFC !important;
+    font-weight:600;
+    transition:.3s;
+}
+
+/* Hover */
+div[role="radiogroup"] label:hover{
+    color:#8B5CF6 !important;
+    text-shadow:0 0 12px rgba(139,92,246,.8);
+}
+
+/* Selected */
+div[role="radiogroup"] [data-checked="true"]{
+    background:rgba(139,92,246,.15);
+    border-radius:12px;
+}
+/* ==========================================
+   CONTAINERS
+========================================== */
+
+div[data-testid="stVerticalBlockBorderWrapper"]{
+
+    border-radius:22px !important;
+
+    border:1px solid rgba(139,92,246,.18) !important;
+
+    background:rgba(255,255,255,.03) !important;
+
+    transition:.3s;
+
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"]:hover{
+
+    border-color:#8B5CF6 !important;
+
+    box-shadow:0 0 25px rgba(139,92,246,.28);
+
+    transform:translateY(-4px);
+
+}
+/* ======================================
+   INSIGHT CARDS
+====================================== */
+
+div[data-testid="stVerticalBlockBorderWrapper"]{
+
+    transition:.3s;
+
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"]:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 0 25px rgba(139,92,246,.35);
+
+}
 /* ===========================
-   Selection
+      PREMIUM BUTTONS
 =========================== */
 
-::selection{
+.stButton > button{
 
-background:#8B5CF6;
+    background:linear-gradient(
+        135deg,
+        #8B5CF6,
+        #3B82F6
+    );
 
-color:white;
+    color:white;
 
-}
+    border:none;
 
+    border-radius:16px;
 
-/* ===========================
-   Final Glow
-=========================== */
+    padding:14px 18px;
 
-.hero-card,
-.metric-card,
-.analytics-card,
-.ai-card{
+    font-weight:700;
 
-position:relative;
+    transition:all .25s ease;
 
-overflow:hidden;
-
-}
-
-.hero-card::after,
-.metric-card::after,
-.analytics-card::after,
-.ai-card::after{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-background:
-
-linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,.03),
-transparent
-);
-
-transform:translateX(-120%);
-
-transition:1s;
+    box-shadow:
+        0 8px 24px rgba(139,92,246,.28);
 
 }
 
-.hero-card:hover::after,
-.metric-card:hover::after,
-.analytics-card:hover::after,
-.ai-card:hover::after{
+.stButton > button:hover{
 
-transform:translateX(120%);
+    transform:translateY(-3px);
 
+    box-shadow:
+        0 14px 36px rgba(139,92,246,.45);
+
+    filter:brightness(1.08);
+
+}
+
+.stButton > button:focus{
+
+    border:1px solid rgba(255,255,255,.25);
+
+}
+/* Resume Page */
+
+[data-testid="stMetric"]{
+    border-radius:20px;
+    padding:18px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.04);
+    transition:.3s;
+}
+
+[data-testid="stMetric"]:hover{
+    transform:translateY(-4px);
+    border-color:#8B5CF6;
+    box-shadow:0 0 25px rgba(139,92,246,.35);
+}
+/* ===== METRIC CARDS ===== */
+
+[data-testid="stMetric"]{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:18px;
+    backdrop-filter:blur(12px);
+    transition:.25s;
+}
+
+[data-testid="stMetric"]:hover{
+    border:1px solid #4FD8FF;
+    box-shadow:0 0 25px rgba(79,216,255,.30);
+    transform:translateY(-4px);
+}
+
+[data-testid="stMetricLabel"]{
+    color:#8FB7FF;
+    font-weight:700;
+}
+
+[data-testid="stMetricValue"]{
+    color:white;
+    text-shadow:
+        0 0 10px rgba(255,255,255,.4);
+}
+/* DAILY BRIEFING */
+
+.stAlert{
+    border-radius:18px !important;
+    border:1px solid rgba(255,255,255,.10) !important;
+}
+/* Career Health */
+
+.stProgress > div > div > div > div{
+    background:#5EEBFF !important;
+}
+
+.stProgress{
+    margin-bottom:10px;
+}
+/* ===============================
+AI Assistant
+=============================== */
+
+input{
+    border-radius:14px !important;
+}
+
+button[kind="primary"]{
+    border-radius:14px !important;
+}/* Footer */
+
+hr{
+    border-color:rgba(255,255,255,.08);
+}
+
+footer{
+    visibility:hidden;
 }

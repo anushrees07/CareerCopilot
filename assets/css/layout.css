@@ -1,0 +1,357 @@
+/* ==========================================================
+   LAYOUT
+   CareerCopilot UI V3
+==========================================================*/
+
+
+/* ===========================
+   Main App Width
+=========================== */
+
+.main .block-container{
+
+max-width:1450px;
+
+padding-top:2rem;
+
+padding-bottom:3rem;
+
+padding-left:3rem;
+
+padding-right:3rem;
+
+animation:pageFade .6s ease;
+
+}
+
+
+/* ===========================
+   Vertical Spacing
+=========================== */
+
+div[data-testid="stVerticalBlock"]{
+
+gap:1.25rem;
+
+}
+
+
+/* ===========================
+   Horizontal Spacing
+=========================== */
+
+div[data-testid="column"]{
+
+padding-left:.4rem;
+
+padding-right:.4rem;
+
+}
+
+
+/* ===========================
+   Section Wrapper
+=========================== */
+
+.section{
+
+margin-top:55px;
+
+margin-bottom:55px;
+
+}
+
+
+/* ===========================
+   Premium Divider
+=========================== */
+
+hr{
+
+border:none;
+
+height:1px;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(139,92,246,.5),
+
+transparent
+
+);
+
+margin:45px 0;
+
+}
+
+
+/* ===========================
+   Glass Section
+=========================== */
+
+.glass{
+
+padding:30px;
+
+border-radius:28px;
+
+background:
+
+linear-gradient(
+
+135deg,
+
+rgba(18,25,39,.82),
+
+rgba(12,18,30,.74)
+
+);
+
+border:1px solid rgba(255,255,255,.06);
+
+backdrop-filter:blur(24px);
+
+}
+
+
+/* ===========================
+   Page Heading
+=========================== */
+
+.page-title{
+
+font-size:56px;
+
+font-weight:800;
+
+letter-spacing:-2px;
+
+margin-bottom:18px;
+
+color:white;
+
+}
+
+
+.page-subtitle{
+
+font-size:18px;
+
+font-family:"Inter",sans-serif;
+
+line-height:1.9;
+
+max-width:780px;
+
+color:#CBD5E1;
+
+margin-bottom:40px;
+
+}
+
+
+/* ===========================
+   Section Heading
+=========================== */
+
+.section-title{
+
+font-size:36px;
+
+font-weight:700;
+
+margin-bottom:10px;
+
+color:white;
+
+}
+
+
+.section-description{
+
+font-size:16px;
+
+font-family:"Inter",sans-serif;
+
+color:#94A3B8;
+
+margin-bottom:30px;
+
+}
+
+
+/* ===========================
+   Card Grid
+=========================== */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(320px,1fr));
+
+gap:24px;
+
+}
+
+
+/* ===========================
+   Flex
+=========================== */
+
+.flex{
+
+display:flex;
+
+gap:22px;
+
+align-items:center;
+
+}
+
+
+/* ===========================
+   Center
+=========================== */
+
+.center{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+
+/* ===========================
+   Glass Blur Utility
+=========================== */
+
+.blur{
+
+backdrop-filter:blur(24px);
+
+}
+
+
+/* ===========================
+   Rounded
+=========================== */
+
+.round{
+
+border-radius:24px;
+
+}
+
+
+/* ===========================
+   Padding
+=========================== */
+
+.p20{
+
+padding:20px;
+
+}
+
+.p30{
+
+padding:30px;
+
+}
+
+.p40{
+
+padding:40px;
+
+}
+
+
+/* ===========================
+   Margin
+=========================== */
+
+.mt20{
+
+margin-top:20px;
+
+}
+
+.mt30{
+
+margin-top:30px;
+
+}
+
+.mt40{
+
+margin-top:40px;
+
+}
+
+.mb20{
+
+margin-bottom:20px;
+
+}
+
+.mb30{
+
+margin-bottom:30px;
+
+}
+
+.mb40{
+
+margin-bottom:40px;
+
+}
+
+
+/* ===========================
+   Shadow
+=========================== */
+
+.shadow{
+
+box-shadow:
+
+0 20px 50px rgba(0,0,0,.35);
+
+}
+
+
+/* ===========================
+   Entrance Animation
+=========================== */
+
+@keyframes pageFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}

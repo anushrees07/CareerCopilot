@@ -1,243 +1,127 @@
 import streamlit as st
 
 from app.components.upload_box import show as upload_box
-from app.components.analysis_progress import show as analysis_progress
+from app.components.resume_summary import show as resume_summary
+from app.components.career_health_update import show as career_health_update
 
 from app.services.resume_parser import extract_text
 from app.services.ats_engine import calculate_ats
 
 from app.ai.resume_analyzer import analyze_resume
 
-from app.storage.profile_manager import save_profile
-
 
 def show():
 
-    st.markdown(
-        """
-<div class="ai-badge">
-✨ Resume Intelligence
-</div>
-""",
-        unsafe_allow_html=True,
+    st.title("📄 Resume Intelligence")
+    st.caption(
+        "Upload your resume and let CareerCopilot analyze it using AI."
     )
 
-    st.markdown(
-        """
-<div class="section-title">
-Analyze Your Resume With AI
-</div>
-""",
-        unsafe_allow_html=True,
-    )
+    # ==========================================
+    # Upload Resume
+    # ==========================================
 
-    st.markdown(
-        """
-<div class="section-sub">
-Upload your resume to receive an ATS score,
-AI feedback, detected skills and career insights.
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-    st.write("")
-
-    col1, col2 = st.columns([2.3, 1])
-
-    with col1:
-
-        uploaded_file = upload_box()
-
-    with col2:
-
-        with st.container(border=True):
-
-            st.subheader("🚀 Features")
-
-            st.success("ATS Analysis")
-            st.success("Skill Detection")
-            st.success("AI Feedback")
-            st.success("Resume Summary")
-            st.success("Career Insights")
-            st.success("PDF & DOCX Support")
-
-    st.write("")
+    uploaded_file = upload_box()
 
     if uploaded_file is None:
-
-        st.info("👆 Upload your resume to begin.")
-
+        st.info("👆 Upload a PDF or DOCX resume to begin.")
         return
 
-    st.write("")
+    st.success(f"✅ Uploaded: {uploaded_file.name}")
 
-    if st.button(
-        "🚀 Analyze Resume",
-        use_container_width=True,
-    ):
+    # ==========================================
+    # Analysis Progress
+    # ==========================================
 
-        try:
+    progress = st.progress(0)
 
-            analysis_progress()
+    status = st.empty()
 
-            # -----------------------------
-            # Extract Resume Text
-            # -----------------------------
+    steps = [
+        "📄 Reading Resume...",
+        "🧠 Extracting Skills...",
+        "🎯 Calculating ATS Score...",
+        "🤖 Generating AI Feedback...",
+        "✅ Finalizing Report..."
+    ]
 
-            resume_text = extract_text(uploaded_file)
+    for i, step in enumerate(steps):
+        status.info(step)
+        progress.progress((i + 1) * 20)
 
-            if not resume_text.strip():
-                st.error(
-                    "Your resume appears to be empty or text couldn't be extracted."
-                )
-                return
+    status.success("Analysis Complete!")
 
-            # -----------------------------
-            # ATS
-            # -----------------------------
+    # ==========================================
+    # Parse Resume
+    # ==========================================
 
-            ats_score, skills = calculate_ats(
-                resume_text
-            )
+    try:
+        resume_text = extract_text(uploaded_file)
 
-            # -----------------------------
-            # AI Feedback
-            # -----------------------------
+    except Exception as e:
+        st.error(f"❌ {e}")
+        st.stop()
 
-            provider = provider_selector()
+    ats_score, skills = calculate_ats(resume_text)
 
-            ...
+    ai_feedback = analyze_resume(resume_text)
 
-            ai_feedback = analyze_resume(
-                resume_text,
-                provider,
-            )
+    from app.storage.profile_manager import save_profile
 
-            # -----------------------------
-            # Save Profile
-            # -----------------------------
+    career_health = min(
+        ats_score + len(skills),
+        100,
+    )
 
-            profile = {
+    save_profile(
+        {
+            "resume_name": uploaded_file.name,
+            "resume_text": resume_text,
+            "skills": skills,
+            "ats_score": ats_score,
+            "career_health": career_health,
+            "ai_feedback": ai_feedback,
+        }
+    )
 
-                "resume_name": uploaded_file.name,
+    # ==========================================
+    # Resume Summary
+    # ==========================================
 
-                "resume_text": resume_text,
+    st.divider()
 
-                "skills": skills,
+    resume_summary(
+        ats_score,
+        skills,
+    )
 
-                "ats_score": ats_score,
+    # ==========================================
+    # AI Feedback
+    # ==========================================
 
-                "career_health": ats_score,
+    st.divider()
 
-                "ai_feedback": ai_feedback,
+    st.subheader("🤖 AI Career Feedback")
 
-            }
+    st.markdown(ai_feedback)
 
-            save_profile(profile)
+    # ==========================================
+    # Career Health
+    # ==========================================
 
-            st.success(
-                f"Analysis completed successfully! Found {len(skills)} skills."
-            )
+    st.divider()
 
-            st.divider()
+    career_health_update(
+        before=72,
+        after=min(72 + len(skills), 100),
+    )
 
-            # =============================
-            # ATS
-            # =============================
+    # ==========================================
+    # Resume Preview
+    # ==========================================
 
-            st.markdown("## 📊 ATS Score")
+    st.divider()
 
-            st.metric(
-                "Overall ATS Score",
-                f"{ats_score}%"
-            )
+    with st.expander("📄 View Resume Text"):
 
-            st.progress(ats_score / 100)
-
-            st.write("")
-
-            # =============================
-            # Skills
-            # =============================
-
-            st.markdown("## 🧠 Skills Detected")
-
-            if skills:
-
-                cols = st.columns(4)
-
-                for i, skill in enumerate(skills):
-
-                    with cols[i % 4]:
-
-                        st.markdown(
-                            f"""
-<div class="skill-pill">
-{skill}
-</div>
-""",
-                            unsafe_allow_html=True,
-                        )
-
-            else:
-
-                st.warning(
-                    "No recognizable skills found."
-                )
-
-            st.write("")
-
-            # =============================
-            # AI Feedback
-            # =============================
-
-            st.markdown("## 🤖 AI Feedback")
-
-            st.markdown(
-                f"""
-<div class="ai-card">
-{ai_feedback}
-</div>
-""",
-                unsafe_allow_html=True,
-            )
-
-            st.write("")
-
-            # =============================
-            # Resume Stats
-            # =============================
-
-            c1, c2, c3 = st.columns(3)
-
-            with c1:
-
-                st.metric(
-                    "Skills",
-                    len(skills),
-                )
-
-            with c2:
-
-                st.metric(
-                    "Characters",
-                    len(resume_text.strip()),
-                )
-
-            with c3:
-
-                words = len(
-                    resume_text.strip().split()
-                )
-
-                st.metric(
-                    "Words",
-                    words,
-                )
-
-        except Exception as e:
-
-            st.error(
-                f"❌ Analysis failed.\n\n{e}"
-            )
+        st.text(resume_text[:5000])

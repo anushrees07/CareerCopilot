@@ -12,7 +12,7 @@ class GeminiProvider(BaseProvider):
 
         if not api_key:
             raise ValueError(
-                "Gemini API Key not found. Please add GEMINI_API_KEY to your .env file."
+                "Gemini API key not found. Please configure it in Settings or your .env file."
             )
 
         genai.configure(api_key=api_key)
@@ -21,12 +21,12 @@ class GeminiProvider(BaseProvider):
             "gemini-2.5-flash"
         )
 
-    def analyze_resume(self, resume_text: str) -> str:
+    def analyze_resume(self, resume_text: str):
 
         prompt = f"""
 You are an expert ATS Resume Reviewer and Career Coach.
 
-Analyze the following resume professionally.
+Analyze the following resume.
 
 Return your response in Markdown.
 
@@ -40,7 +40,7 @@ Include:
 
 # Missing Skills
 
-# Suggested Improvements
+# Resume Improvements
 
 # Final Verdict
 
@@ -53,7 +53,7 @@ Resume:
 
         return response.text
 
-    def chat(self, prompt: str) -> str:
+    def chat(self, prompt: str):
 
         response = self.model.generate_content(prompt)
 

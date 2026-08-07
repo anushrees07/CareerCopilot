@@ -5,8 +5,6 @@ from app.components.stat_cards import show as stat_cards
 from app.components.profile_summary import show as profile_summary
 from app.components.quick_actions import show as quick_actions
 
-# These components will be built next.
-# Comment them for now if they don't exist yet.
 
 try:
     from app.components.daily_briefing import show as daily_briefing
