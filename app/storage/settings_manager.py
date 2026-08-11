@@ -1,7 +1,10 @@
 import json
 from pathlib import Path
 
-SETTINGS_FILE = Path("app/storage/user_settings.json")
+
+SETTINGS_FILE = Path(
+    "app/storage/user_settings.json"
+)
 
 
 DEFAULT_SETTINGS = {
@@ -17,19 +20,57 @@ def load_settings():
 
     if not SETTINGS_FILE.exists():
 
-        save_settings(DEFAULT_SETTINGS)
+        save_settings(
+            DEFAULT_SETTINGS
+        )
 
-        return DEFAULT_SETTINGS
+        return DEFAULT_SETTINGS.copy()
 
-    with open(SETTINGS_FILE, "r") as f:
+    try:
 
-        return json.load(f)
+        with open(
+            SETTINGS_FILE,
+            "r",
+            encoding="utf-8",
+        ) as f:
+
+            saved_settings = json.load(f)
+
+    except (
+        json.JSONDecodeError,
+        OSError,
+    ):
+
+        return DEFAULT_SETTINGS.copy()
+
+    settings = DEFAULT_SETTINGS.copy()
+
+    settings.update(
+        saved_settings
+    )
+
+    return settings
 
 
 def save_settings(data):
 
-    SETTINGS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    SETTINGS_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
 
-    with open(SETTINGS_FILE, "w") as f:
+    settings = DEFAULT_SETTINGS.copy()
 
-        json.dump(data, f, indent=4)
+    settings.update(data)
+
+    with open(
+        SETTINGS_FILE,
+        "w",
+        encoding="utf-8",
+    ) as f:
+
+        json.dump(
+            settings,
+            f,
+            indent=4,
+        )

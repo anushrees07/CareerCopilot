@@ -1,29 +1,21 @@
-:root{
+/* =========================================================
+   CAREERCOPILOT DARK THEME
+   ========================================================= */
 
---bg:#050816;
---bg-secondary:#0B1220;
---surface:#111827;
+.cc-theme-dark {
 
---card:rgba(20,27,45,.72);
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(110, 231, 255, 0.08),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(139, 92, 246, 0.10),
+            transparent 35%
+        ),
+        var(--cc-bg);
 
---text:#FFFFFF;
---text2:#CBD5E1;
-
---muted:#94A3B8;
-
---border:rgba(255,255,255,.08);
-
---primary:#8B5CF6;
---secondary:#06B6D4;
-
---success:#22C55E;
---warning:#F59E0B;
---danger:#EF4444;
-
---shadow:
-0 10px 30px rgba(0,0,0,.35);
-
---glass:
-rgba(255,255,255,.05);
-
+    color: var(--cc-text);
 }

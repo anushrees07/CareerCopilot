@@ -15,13 +15,20 @@ def show():
 
     st.markdown("## 🤖 CareerCopilot AI")
 
-    with st.container(border=True):
+    with st.container(
+        border=True,
+        key="career-ai-panel",
+    ):
 
         st.markdown("### 👋 Welcome back!")
 
-        st.caption("Your personal AI career mentor.")
+        st.caption(
+            "Your personal AI career mentor."
+        )
 
-        st.write("How can I help you today?")
+        st.write(
+            "How can I help you today?"
+        )
 
         st.divider()
 
@@ -30,6 +37,7 @@ def show():
         for i, text in enumerate(SUGGESTIONS):
 
             with cols[i % 2]:
+
                 st.button(
                     text,
                     key=f"ai_{i}",
@@ -40,24 +48,34 @@ def show():
 
         prompt = st.text_input(
             "Ask CareerCopilot anything...",
-            placeholder="Example: How do I improve my resume for Google?"
+            placeholder=(
+                "Example: How do I improve "
+                "my resume for Google?"
+            ),
+            key="career_ai_prompt",
         )
 
         if st.button(
             "🚀 Ask AI",
+            key="career_ai_submit",
             use_container_width=True,
         ):
 
             if not prompt.strip():
 
-                st.warning("Please enter a question.")
+                st.warning(
+                    "Please enter a question."
+                )
 
             else:
 
-                with st.spinner("CareerCopilot is thinking..."):
+                with st.spinner(
+                    "CareerCopilot is thinking..."
+                ):
 
                     # Temporary response
                     st.success(
                         "AI integration is coming next! "
-                        "This panel will connect to Gemini, OpenAI, Claude and OpenRouter."
+                        "This panel will connect to Gemini, "
+                        "OpenAI, Claude and OpenRouter."
                     )

@@ -6,118 +6,150 @@ from app.storage.settings_manager import (
 )
 
 
+PROVIDERS = [
+    "Gemini",
+    "OpenAI",
+    "Claude",
+    "OpenRouter",
+]
+
+
 def show():
 
-    st.title("⚙ Settings")
+    st.title("⚙️ AI Settings")
 
     st.caption(
-        "Configure your AI providers."
+        "Choose your AI provider and securely configure your API key."
     )
 
     settings = load_settings()
 
+    # ========================================================
+    # PROVIDER
+    # ========================================================
+
     st.subheader("🤖 AI Provider")
 
+    current_provider = settings.get(
+        "provider",
+        "Gemini",
+    )
+
+    if current_provider not in PROVIDERS:
+        current_provider = "Gemini"
+
     provider = st.radio(
+        "Choose your AI provider",
+        PROVIDERS,
+        index=PROVIDERS.index(current_provider),
+        horizontal=True,
+    )
 
-        "Choose Provider",
+    st.write("")
 
-        [
+    provider_info = {
+        "Gemini": "Google Gemini models for fast AI-powered career analysis.",
+        "OpenAI": "OpenAI models for resume analysis and career guidance.",
+        "Claude": "Anthropic Claude models for detailed career insights.",
+        "OpenRouter": "Access multiple AI models through one OpenRouter API.",
+    }
 
-            "Gemini",
-
-            "OpenAI",
-
-            "Claude",
-
-            "OpenRouter",
-
-        ],
-
-        index=[
-
-            "Gemini",
-
-            "OpenAI",
-
-            "Claude",
-
-            "OpenRouter",
-
-        ].index(settings["provider"]),
-
+    st.info(
+        f"💡 {provider_info[provider]}"
     )
 
     st.divider()
 
-    st.subheader("🔑 API Keys")
+    # ========================================================
+    # API KEY
+    # ========================================================
 
-    gemini = st.text_input(
+    st.subheader("🔑 API Key")
 
-        "Gemini API Key",
+    key_names = {
+        "Gemini": "gemini_key",
+        "OpenAI": "openai_key",
+        "Claude": "claude_key",
+        "OpenRouter": "openrouter_key",
+    }
 
-        value=settings["gemini_key"],
+    key_labels = {
+        "Gemini": "Gemini API Key",
+        "OpenAI": "OpenAI API Key",
+        "Claude": "Claude API Key",
+        "OpenRouter": "OpenRouter API Key",
+    }
 
+    key_help = {
+        "Gemini": "Enter your Google Gemini API key.",
+        "OpenAI": "Enter your OpenAI API key.",
+        "Claude": "Enter your Anthropic API key.",
+        "OpenRouter": "Enter your OpenRouter API key.",
+    }
+
+    selected_key_name = key_names[provider]
+
+    selected_key = st.text_input(
+        key_labels[provider],
+        value=settings.get(
+            selected_key_name,
+            "",
+        ),
         type="password",
-
+        help=key_help[provider],
+        placeholder=f"Paste your {provider} API key here...",
     )
 
-    openai = st.text_input(
-
-        "OpenAI API Key",
-
-        value=settings["openai_key"],
-
-        type="password",
-
+    st.caption(
+        "🔒 Your API key is stored locally for this CareerCopilot installation."
     )
 
-    claude = st.text_input(
+    st.write("")
 
-        "Claude API Key",
+    # ========================================================
+    # CURRENT CONFIGURATION
+    # ========================================================
 
-        value=settings["claude_key"],
-
-        type="password",
-
+    existing_key = settings.get(
+        selected_key_name,
+        "",
     )
 
-    openrouter = st.text_input(
+    if existing_key:
 
-        "OpenRouter API Key",
-
-        value=settings["openrouter_key"],
-
-        type="password",
-
-    )
-
-    st.divider()
-
-    if st.button(
-
-        "💾 Save Settings",
-
-        use_container_width=True,
-
-    ):
-
-        save_settings(
-
-            {
-
-                "provider": provider,
-
-                "gemini_key": gemini,
-
-                "openai_key": openai,
-
-                "claude_key": claude,
-
-                "openrouter_key": openrouter,
-
-            }
-
+        st.success(
+            f"✅ {provider} API key is configured."
         )
 
-        st.success("Settings saved successfully!")
+    else:
+
+        st.warning(
+            f"⚠️ No {provider} API key configured yet."
+        )
+
+    st.divider()
+
+    # ========================================================
+    # SAVE
+    # ========================================================
+
+    if st.button(
+        "💾 Save AI Configuration",
+        use_container_width=True,
+        type="primary",
+    ):
+
+        updated_settings = settings.copy()
+
+        updated_settings["provider"] = provider
+        updated_settings[selected_key_name] = selected_key
+
+        save_settings(
+            updated_settings
+        )
+
+        st.success(
+            f"✅ {provider} selected successfully!"
+        )
+
+        st.rerun()

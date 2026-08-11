@@ -12,59 +12,125 @@ from app.ai.resume_analyzer import analyze_resume
 
 def show():
 
+    # ========================================================
+    # PAGE HEADER
+    # ========================================================
+
     st.title("📄 Resume Intelligence")
+
     st.caption(
         "Upload your resume and let CareerCopilot analyze it using AI."
     )
 
-    # ==========================================
-    # Upload Resume
-    # ==========================================
+    st.write("")
 
-    uploaded_file = upload_box()
+    # ========================================================
+    # UPLOAD RESUME
+    # ========================================================
+
+    with st.container(
+        border=True,
+        key="resume-uploader-card",
+    ):
+
+        uploaded_file = upload_box()
+
+    # ========================================================
+    # STOP UNTIL RESUME IS UPLOADED
+    # ========================================================
 
     if uploaded_file is None:
-        st.info("👆 Upload a PDF or DOCX resume to begin.")
+
+        st.info(
+            "👆 Upload a PDF or DOCX resume to begin."
+        )
+
         return
 
-    st.success(f"✅ Uploaded: {uploaded_file.name}")
+    # ========================================================
+    # UPLOAD SUCCESS
+    # ========================================================
 
-    # ==========================================
-    # Analysis Progress
-    # ==========================================
+    st.success(
+        f"✅ Uploaded: {uploaded_file.name}"
+    )
 
-    progress = st.progress(0)
+    st.write("")
 
-    status = st.empty()
+    # ========================================================
+    # ANALYSIS PROGRESS
+    # ========================================================
 
-    steps = [
-        "📄 Reading Resume...",
-        "🧠 Extracting Skills...",
-        "🎯 Calculating ATS Score...",
-        "🤖 Generating AI Feedback...",
-        "✅ Finalizing Report..."
-    ]
+    with st.container(
+        border=True,
+        key="resume-analysis-panel",
+    ):
 
-    for i, step in enumerate(steps):
-        status.info(step)
-        progress.progress((i + 1) * 20)
+        st.markdown(
+            "### 🧠 Resume Analysis"
+        )
 
-    status.success("Analysis Complete!")
+        progress = st.progress(0)
 
-    # ==========================================
-    # Parse Resume
-    # ==========================================
+        status = st.empty()
+
+        steps = [
+            "📄 Reading Resume...",
+            "🧠 Extracting Skills...",
+            "🎯 Calculating ATS Score...",
+            "🤖 Generating AI Feedback...",
+            "✅ Finalizing Report...",
+        ]
+
+        for i, step in enumerate(steps):
+
+            status.info(step)
+
+            progress.progress(
+                (i + 1) * 20
+            )
+
+        status.success(
+            "Analysis Complete!"
+        )
+
+    # ========================================================
+    # PARSE RESUME
+    # ========================================================
 
     try:
-        resume_text = extract_text(uploaded_file)
+
+        resume_text = extract_text(
+            uploaded_file
+        )
 
     except Exception as e:
-        st.error(f"❌ {e}")
+
+        st.error(
+            f"❌ {e}"
+        )
+
         st.stop()
 
-    ats_score, skills = calculate_ats(resume_text)
+    # ========================================================
+    # ATS ANALYSIS
+    # ========================================================
 
-    ai_feedback = analyze_resume(resume_text)
+    ats_score, skills = calculate_ats(
+        resume_text
+    )
+
+    # ========================================================
+    # AI ANALYSIS
+    # ========================================================
+
+    ai_feedback = analyze_resume(
+        resume_text
+    )
+
+    # ========================================================
+    # SAVE PROFILE
+    # ========================================================
 
     from app.storage.profile_manager import save_profile
 
@@ -84,44 +150,83 @@ def show():
         }
     )
 
-    # ==========================================
-    # Resume Summary
-    # ==========================================
+    # ========================================================
+    # RESUME SUMMARY
+    # ========================================================
 
-    st.divider()
+    st.write("")
 
-    resume_summary(
-        ats_score,
-        skills,
-    )
+    with st.container(
+        border=True,
+        key="resume-summary-panel",
+    ):
 
-    # ==========================================
-    # AI Feedback
-    # ==========================================
+        resume_summary(
+            ats_score,
+            skills,
+        )
 
-    st.divider()
+    # ========================================================
+    # AI FEEDBACK
+    # ========================================================
 
-    st.subheader("🤖 AI Career Feedback")
+    st.write("")
 
-    st.markdown(ai_feedback)
+    with st.container(
+        border=True,
+        key="resume-ai-feedback",
+    ):
 
-    # ==========================================
-    # Career Health
-    # ==========================================
+        st.markdown(
+            "### 🤖 AI Career Feedback"
+        )
 
-    st.divider()
+        st.markdown(
+            ai_feedback
+        )
 
-    career_health_update(
-        before=72,
-        after=min(72 + len(skills), 100),
-    )
+    # ========================================================
+    # CAREER HEALTH
+    # ========================================================
 
-    # ==========================================
-    # Resume Preview
-    # ==========================================
+    st.write("")
 
-    st.divider()
+    with st.container(
+        border=True,
+        key="resume-health-panel",
+    ):
 
-    with st.expander("📄 View Resume Text"):
+        st.markdown(
+            "### 💚 Career Health"
+        )
 
-        st.text(resume_text[:5000])
+        career_health_update(
+            before=72,
+            after=min(
+                72 + len(skills),
+                100,
+            ),
+        )
+
+    # ========================================================
+    # RESUME PREVIEW
+    # ========================================================
+
+    st.write("")
+
+    with st.container(
+        border=True,
+        key="resume-preview-panel",
+    ):
+
+        st.markdown(
+            "### 📄 Resume Preview"
+        )
+
+        with st.expander(
+            "View Resume Text"
+        ):
+
+            st.text(
+                resume_text[:5000]
+            )

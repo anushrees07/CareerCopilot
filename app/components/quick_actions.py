@@ -10,19 +10,39 @@ def show():
 
     st.markdown("## ⚡ Quick Actions")
 
-    col1, col2 = st.columns(2)
+    st.caption(
+        "Jump directly into the tools that move your career forward."
+    )
+
+    st.write("")
+
+    # ========================================================
+    # ROW 1
+    # ========================================================
+
+    col1, col2 = st.columns(
+        2,
+        gap="medium",
+    )
 
     with col1:
 
-        with st.container(border=True):
+        with st.container(
+            border=True,
+            key="quick-resume",
+        ):
 
-            st.subheader("📄 Resume Analyzer")
+            st.markdown("### 📄 Resume Analyzer")
+
             st.caption(
-                "Upload your resume and receive AI-powered feedback."
+                "Upload your resume and receive "
+                "AI-powered feedback."
             )
 
+            st.write("")
+
             if st.button(
-                "Open Resume Analyzer",
+                "Open Resume Analyzer →",
                 key="resume_btn",
                 use_container_width=True,
             ):
@@ -30,35 +50,56 @@ def show():
 
     with col2:
 
-        with st.container(border=True):
+        with st.container(
+            border=True,
+            key="quick-opportunities",
+        ):
 
-            st.subheader("💼 Opportunity Finder")
+            st.markdown("### 💼 Opportunity Finder")
+
             st.caption(
-                "Find internships, jobs, hackathons and more."
+                "Find internships, jobs, hackathons "
+                "and more."
             )
 
+            st.write("")
+
             if st.button(
-                "Explore Opportunities",
+                "Explore Opportunities →",
                 key="opp_btn",
                 use_container_width=True,
             ):
                 navigate("💼 Opportunities")
 
+    # ========================================================
+    # ROW 2
+    # ========================================================
+
     st.write("")
 
-    col3, col4 = st.columns(2)
+    col3, col4 = st.columns(
+        2,
+        gap="medium",
+    )
 
     with col3:
 
-        with st.container(border=True):
+        with st.container(
+            border=True,
+            key="quick-coach",
+        ):
 
-            st.subheader("🤖 AI Career Coach")
+            st.markdown("### 🤖 AI Career Coach")
+
             st.caption(
-                "Ask career questions and get personalized guidance."
+                "Ask career questions and get "
+                "personalized guidance."
             )
 
+            st.write("")
+
             if st.button(
-                "Talk to AI",
+                "Talk to AI →",
                 key="coach_btn",
                 use_container_width=True,
             ):
@@ -66,15 +107,22 @@ def show():
 
     with col4:
 
-        with st.container(border=True):
+        with st.container(
+            border=True,
+            key="quick-roadmap",
+        ):
 
-            st.subheader("🗺 Career Roadmap")
+            st.markdown("### 🗺️ Career Roadmap")
+
             st.caption(
-                "Generate a personalized roadmap for your dream role."
+                "Generate a personalized roadmap "
+                "for your dream role."
             )
 
+            st.write("")
+
             if st.button(
-                "Generate Roadmap",
+                "Generate Roadmap →",
                 key="roadmap_btn",
                 use_container_width=True,
             ):
