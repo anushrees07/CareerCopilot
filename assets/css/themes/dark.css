@@ -1,21 +1,141 @@
-/* =========================================================
+/* ============================================================
    CAREERCOPILOT DARK THEME
-   ========================================================= */
+   DEFAULT
+   ============================================================ */
 
-.cc-theme-dark {
+
+/* ============================================================
+   APP BACKGROUND
+   ============================================================ */
+
+html,
+body,
+[data-testid="stAppViewContainer"],
+[data-testid="stApp"] {
 
     background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(110, 231, 255, 0.08),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 85% 25%,
-            rgba(139, 92, 246, 0.10),
-            transparent 35%
-        ),
-        var(--cc-bg);
+        #030712 !important;
 
-    color: var(--cc-text);
+}
+
+
+/* ============================================================
+   MAIN AURORA BACKGROUND
+   ============================================================ */
+
+[data-testid="stAppViewContainer"] {
+
+    background:
+
+        radial-gradient(
+            circle at 12% 10%,
+            rgba(30, 64, 175, 0.18),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 88% 18%,
+            rgba(6, 182, 212, 0.14),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 70% 78%,
+            rgba(124, 58, 237, 0.13),
+            transparent 32%
+        ),
+
+        linear-gradient(
+            135deg,
+            #020617 0%,
+            #050817 45%,
+            #08071d 100%
+        ) !important;
+
+}
+
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+
+[data-testid="stMain"] {
+
+    background:
+        transparent !important;
+
+}
+
+
+/* ============================================================
+   GLOBAL TEXT
+   ============================================================ */
+
+[data-testid="stMain"] {
+
+    color:
+        #f8fafc !important;
+
+}
+
+
+/* ============================================================
+   GLASS CONTAINERS
+   ============================================================ */
+
+[data-testid="stVerticalBlockBorderWrapper"] {
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.48),
+            rgba(15, 23, 42, 0.25)
+        ) !important;
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.14) !important;
+
+    border-radius:
+        22px !important;
+
+    backdrop-filter:
+        blur(22px)
+        saturate(145%) !important;
+
+    -webkit-backdrop-filter:
+        blur(22px)
+        saturate(145%) !important;
+
+    box-shadow:
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.045),
+
+        0 18px 55px
+        rgba(0, 0, 0, 0.20) !important;
+
+}
+
+
+/* ============================================================
+   GLASS CARD HOVER
+   ============================================================ */
+
+[data-testid="stVerticalBlockBorderWrapper"]:hover {
+
+    border-color:
+        rgba(103, 232, 249, 0.30) !important;
+
+    box-shadow:
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.08),
+
+        0 22px 65px
+        rgba(0, 0, 0, 0.30),
+
+        0 0 28px
+        rgba(34, 211, 238, 0.07) !important;
+
 }

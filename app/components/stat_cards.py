@@ -1,17 +1,52 @@
 import streamlit as st
+
 from app.storage.profile_manager import load_profile
 
 
+# ============================================================
+# CAREERCOPILOT CAREER METRICS
+# PREMIUM V2
+# ============================================================
+
+
 def show():
+    """
+    Career Metrics dashboard section.
+
+    Data is sourced from the existing profile manager.
+    No fake deltas or invented analytics are displayed.
+    Visual styling is handled by the global UI/CSS system.
+    """
 
     profile = load_profile()
 
-    ats = profile.get("ats_score", 0)
-    skills = len(profile.get("skills", []))
-    health = profile.get("career_health", 0)
-    resume = profile.get("resume_name", "")
+    # ========================================================
+    # REAL PROFILE DATA
+    # ========================================================
 
-    st.markdown("### 📊 Career Metrics")
+    ats = profile.get("ats_score", 0)
+
+    skills = len(
+        profile.get("skills", [])
+    )
+
+    health = profile.get(
+        "career_health",
+        0,
+    )
+
+    resume = profile.get(
+        "resume_name",
+        "",
+    )
+
+    # ========================================================
+    # SECTION HEADER
+    # ========================================================
+
+    st.markdown(
+        "## 📊 Career Metrics"
+    )
 
     st.caption(
         "A quick snapshot of your current career readiness."
@@ -19,13 +54,17 @@ def show():
 
     st.write("")
 
+    # ========================================================
+    # METRIC GRID
+    # ========================================================
+
     col1, col2, col3, col4 = st.columns(
         4,
         gap="medium",
     )
 
     # ========================================================
-    # ATS
+    # ATS SCORE
     # ========================================================
 
     with col1:
@@ -35,12 +74,13 @@ def show():
             key="metric-ats",
         ):
 
-            st.markdown("### 🎯")
+            st.markdown(
+                "🎯"
+            )
 
             st.metric(
-                "ATS Score",
-                f"{ats}%",
-                delta="+8",
+                label="ATS Score",
+                value=f"{ats}%",
             )
 
             st.caption(
@@ -58,12 +98,13 @@ def show():
             key="metric-skills",
         ):
 
-            st.markdown("### 🧠")
+            st.markdown(
+                "🧠"
+            )
 
             st.metric(
-                "Skills",
-                skills,
-                delta="+2",
+                label="Skills",
+                value=skills,
             )
 
             st.caption(
@@ -81,12 +122,13 @@ def show():
             key="metric-health",
         ):
 
-            st.markdown("### 💚")
+            st.markdown(
+                "💚"
+            )
 
             st.metric(
-                "Career Health",
-                f"{health}%",
-                delta="+5",
+                label="Career Health",
+                value=f"{health}%",
             )
 
             st.caption(
@@ -94,7 +136,7 @@ def show():
             )
 
     # ========================================================
-    # RESUME
+    # RESUME STATUS
     # ========================================================
 
     with col4:
@@ -104,19 +146,27 @@ def show():
             key="metric-resume",
         ):
 
-            st.markdown("### 📄")
-
-            status = (
-                "Uploaded ✅"
-                if resume
-                else "Not Uploaded"
+            st.markdown(
+                "📄"
             )
 
+            if resume:
+
+                status = "Ready"
+
+                caption = "Resume uploaded"
+
+            else:
+
+                status = "Missing"
+
+                caption = "Upload your resume"
+
             st.metric(
-                "Resume",
-                status,
+                label="Resume",
+                value=status,
             )
 
             st.caption(
-                "Profile status"
+                caption
             )

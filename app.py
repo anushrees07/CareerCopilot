@@ -1,11 +1,25 @@
 import streamlit as st
 
 from app.storage.settings_manager import load_settings
+
+from app.ui.theme import load_theme
+
 from app.ui.appearance_manager import (
-    initialize,
+    initialize as initialize_appearance,
     show_theme_switcher,
     apply_theme,
 )
+
+from app.core.navigation import (
+    initialize as initialize_navigation,
+    get_current_page,
+    get_navigation_pages,
+    get_label,
+    navigate,
+    DASHBOARD,
+    AI_SETUP,
+)
+
 
 # ============================================================
 # PAGE CONFIG
@@ -18,13 +32,17 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+
 # ============================================================
-# INITIALIZE APPEARANCE
+# INITIALIZATION
 # ============================================================
 
-initialize()
+initialize_appearance()
+initialize_navigation()
 
+load_theme()
 apply_theme()
+
 
 # ============================================================
 # PAGE IMPORTS
@@ -47,32 +65,44 @@ from app.pages import ai_setup
 # ============================================================
 
 PAGES = {
-    "🏠 Dashboard": dashboard.show,
-    "📄 Resume Analyzer": resume_analyzer.show,
-    "💼 Opportunities": opportunities.show,
-    "🧠 Skill Gap": skill_gap.show,
-    "🤖 AI Coach": ai_coach.show,
-    "🎤 Interview Prep": interview_prep.show,
-    "🗺️ Roadmap": roadmap.show,
-    "📊 Analytics": analytics.show,
-    "⚙️ Settings": settings.show,
-    "🧠 AI Setup": ai_setup.show,
+
+    DASHBOARD:
+        dashboard.show,
+
+    "resume_analyzer":
+        resume_analyzer.show,
+
+    "opportunities":
+        opportunities.show,
+
+    "skill_gap":
+        skill_gap.show,
+
+    "ai_coach":
+        ai_coach.show,
+
+    "interview_prep":
+        interview_prep.show,
+
+    "roadmap":
+        roadmap.show,
+
+    "analytics":
+        analytics.show,
+
+    "settings":
+        settings.show,
+
+    AI_SETUP:
+        ai_setup.show,
 }
 
 
 # ============================================================
-# SESSION STATE
+# AI CONFIGURATION
 # ============================================================
 
-if "page" not in st.session_state:
-    st.session_state.page = "🏠 Dashboard"
-
-
-# ============================================================
-# AI CONFIGURATION CHECK
-# ============================================================
-
-def is_ai_configured():
+def is_ai_configured() -> bool:
 
     settings_data = load_settings()
 
@@ -82,13 +112,23 @@ def is_ai_configured():
     )
 
     provider_keys = {
-        "Gemini": "gemini_key",
-        "OpenAI": "openai_key",
-        "Claude": "claude_key",
-        "OpenRouter": "openrouter_key",
+
+        "Gemini":
+            "gemini_key",
+
+        "OpenAI":
+            "openai_key",
+
+        "Claude":
+            "claude_key",
+
+        "OpenRouter":
+            "openrouter_key",
     }
 
-    key_name = provider_keys.get(provider)
+    key_name = provider_keys.get(
+        provider
+    )
 
     if not key_name:
         return False
@@ -98,26 +138,31 @@ def is_ai_configured():
         "",
     )
 
-    if not isinstance(api_key, str):
+    if not isinstance(
+        api_key,
+        str,
+    ):
         return False
 
-    return bool(api_key.strip())
+    return bool(
+        api_key.strip()
+    )
 
 
 # ============================================================
-# FIRST-LAUNCH AI GATE
+# FIRST LAUNCH AI GATE
 # ============================================================
 
 if not is_ai_configured():
 
-    st.session_state.page = "🧠 AI Setup"
+    navigate(AI_SETUP)
 
 
 # ============================================================
-# AI SETUP SCREEN
+# AI SETUP PAGE
 # ============================================================
 
-if st.session_state.page == "🧠 AI Setup":
+if get_current_page() == AI_SETUP:
 
     ai_setup.show()
 
@@ -137,7 +182,7 @@ with st.sidebar:
     st.markdown(
         """
         <div class="cc-sidebar-brand">
-            🚀 <strong>CareerCopilot</strong>
+            🚀 CareerCopilot
         </div>
         """,
         unsafe_allow_html=True,
@@ -161,38 +206,27 @@ with st.sidebar:
     # NAVIGATION
     # --------------------------------------------------------
 
-    navigation_pages = [
-        "🏠 Dashboard",
-        "📄 Resume Analyzer",
-        "💼 Opportunities",
-        "🧠 Skill Gap",
-        "🤖 AI Coach",
-        "🎤 Interview Prep",
-        "🗺️ Roadmap",
-        "📊 Analytics",
-        "⚙️ Settings",
-    ]
+    for page in get_navigation_pages():
 
-    for page_name in navigation_pages:
+        label = get_label(page)
 
-        is_current = (
-            st.session_state.page == page_name
-        )
-
-        button_type = (
-            "primary"
-            if is_current
-            else "secondary"
+        current = (
+            get_current_page()
+            == page
         )
 
         if st.button(
-            page_name,
-            key=f"nav_{page_name}",
+            label,
+            key=f"nav_{page}",
             use_container_width=True,
-            type=button_type,
+            type=(
+                "primary"
+                if current
+                else "secondary"
+            ),
         ):
 
-            st.session_state.page = page_name
+            navigate(page)
 
             st.rerun()
 
@@ -226,7 +260,7 @@ with st.sidebar:
         )
 
     # --------------------------------------------------------
-    # CHANGE AI PROVIDER
+    # CHANGE PROVIDER
     # --------------------------------------------------------
 
     if st.button(
@@ -234,11 +268,15 @@ with st.sidebar:
         use_container_width=True,
     ):
 
-        st.session_state.page = "🧠 AI Setup"
+        navigate(AI_SETUP)
 
         st.rerun()
 
     st.write("")
+
+    # --------------------------------------------------------
+    # FOOTER
+    # --------------------------------------------------------
 
     st.caption(
         "CareerCopilot • AI Career Assistant"
@@ -246,11 +284,13 @@ with st.sidebar:
 
 
 # ============================================================
-# MAIN PAGE
+# CURRENT PAGE
 # ============================================================
 
+current_page = get_current_page()
+
 page_function = PAGES.get(
-    st.session_state.page
+    current_page
 )
 
 
@@ -260,13 +300,13 @@ page_function = PAGES.get(
 
 if page_function is None:
 
-    st.session_state.page = "🏠 Dashboard"
+    navigate(DASHBOARD)
 
     st.rerun()
 
 
 # ============================================================
-# RENDER CURRENT PAGE
+# RENDER
 # ============================================================
 
 page_function()

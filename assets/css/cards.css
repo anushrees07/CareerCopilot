@@ -1,558 +1,616 @@
-/* ==========================================================
-   CARDS
-========================================================== */
+/* ============================================================
+   CAREERCOPILOT PREMIUM METRIC CARDS
+   V1
+   ============================================================ */
 
 
-/* ===========================
-   Universal Glass Card
-=========================== */
+/* ============================================================
+   METRIC CARD BASE
+   ============================================================ */
 
-.glass-card{
+.st-key-metric-ats,
+.st-key-metric-skills,
+.st-key-metric-health,
+.st-key-metric-resume {
 
-position:relative;
+    position: relative !important;
 
-overflow:hidden;
+    min-height: 185px !important;
 
-background:
+    padding: 1.35rem !important;
 
-linear-gradient(
-135deg,
-rgba(18,25,39,.82),
-rgba(12,18,30,.74)
-);
+    border-radius: 22px !important;
 
-backdrop-filter:blur(24px);
+    border: 1px solid rgba(148, 163, 184, 0.20) !important;
 
-border:1px solid rgba(255,255,255,.06);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.72),
+            rgba(15, 23, 42, 0.42)
+        ) !important;
 
-border-radius:26px;
+    backdrop-filter:
+        blur(22px)
+        saturate(145%) !important;
 
-padding:26px;
+    -webkit-backdrop-filter:
+        blur(22px)
+        saturate(145%) !important;
 
-transition:.35s;
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
 
-box-shadow:
+    overflow: hidden !important;
 
-0 12px 40px rgba(0,0,0,.28);
+    transition:
+        transform 0.28s ease,
+        border-color 0.28s ease,
+        box-shadow 0.28s ease !important;
+}
+
+
+/* ============================================================
+   TOP AURORA
+   ============================================================ */
+
+.st-key-metric-ats::before,
+.st-key-metric-skills::before,
+.st-key-metric-health::before,
+.st-key-metric-resume::before {
+
+    content: "" !important;
+
+    position: absolute !important;
+
+    width: 150px !important;
+    height: 150px !important;
+
+    top: -80px !important;
+    right: -50px !important;
+
+    border-radius: 50% !important;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(34, 211, 238, 0.16),
+            transparent 70%
+        ) !important;
+
+    filter: blur(12px) !important;
+
+    pointer-events: none !important;
+}
+
+
+/* ============================================================
+   PREMIUM TOUCH / HOVER GLOW
+   ============================================================ */
+
+.st-key-metric-ats:hover,
+.st-key-metric-skills:hover,
+.st-key-metric-health:hover,
+.st-key-metric-resume:hover {
+
+    transform:
+        translateY(-7px)
+        scale(1.015) !important;
+
+    border-color:
+        rgba(103, 232, 249, 0.55) !important;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.30),
+        0 0 18px rgba(34, 211, 238, 0.20),
+        0 0 38px rgba(34, 211, 238, 0.16),
+        0 0 70px rgba(99, 102, 241, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+
+/* ============================================================
+   MOVING INNER LIGHT
+   ============================================================ */
+
+.st-key-metric-ats:hover::before,
+.st-key-metric-skills:hover::before,
+.st-key-metric-health:hover::before,
+.st-key-metric-resume:hover::before {
+
+    width:
+        220px !important;
+
+    height:
+        220px !important;
+
+    top:
+        -105px !important;
+
+    right:
+        -75px !important;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(34, 211, 238, 0.32),
+            rgba(99, 102, 241, 0.14),
+            transparent 70%
+        ) !important;
+
+    filter:
+        blur(16px) !important;
+
+    transition:
+        all 0.35s ease !important;
+}
+
+
+/* ============================================================
+   VALUE GLOW ON TOUCH
+   ============================================================ */
+
+.st-key-metric-ats:hover [data-testid="stMetricValue"],
+.st-key-metric-skills:hover [data-testid="stMetricValue"],
+.st-key-metric-health:hover [data-testid="stMetricValue"],
+.st-key-metric-resume:hover [data-testid="stMetricValue"] {
+
+    color:
+        #ecfeff !important;
+
+    text-shadow:
+        0 0 8px rgba(103, 232, 249, 0.55),
+        0 0 20px rgba(34, 211, 238, 0.38),
+        0 0 38px rgba(99, 102, 241, 0.18) !important;
+
+    transition:
+        color 0.25s ease,
+        text-shadow 0.25s ease !important;
+}
+
+
+/* ============================================================
+   LABEL GLOW
+   ============================================================ */
+
+.st-key-metric-ats:hover [data-testid="stMetricLabel"],
+.st-key-metric-skills:hover [data-testid="stMetricLabel"],
+.st-key-metric-health:hover [data-testid="stMetricLabel"],
+.st-key-metric-resume:hover [data-testid="stMetricLabel"] {
+
+    color:
+        rgba(226, 232, 240, 0.95) !important;
+
+    transition:
+        color 0.25s ease !important;
+}
+
+
+/* ============================================================
+   CARD ICON
+   ============================================================ */
+
+.st-key-metric-ats
+[data-testid="stMarkdownContainer"] p:first-child,
+.st-key-metric-skills
+[data-testid="stMarkdownContainer"] p:first-child,
+.st-key-metric-health
+[data-testid="stMarkdownContainer"] p:first-child,
+.st-key-metric-resume
+[data-testid="stMarkdownContainer"] p:first-child {
+
+    font-size: 1.45rem !important;
+
+    line-height: 1 !important;
+
+    margin-bottom: 0.7rem !important;
+
+    filter:
+        drop-shadow(
+            0 0 8px rgba(34, 211, 238, 0.25)
+        ) !important;
+}
+
+
+/* ============================================================
+   STREAMLIT METRIC
+   ============================================================ */
+
+.st-key-metric-ats [data-testid="stMetric"],
+.st-key-metric-skills [data-testid="stMetric"],
+.st-key-metric-health [data-testid="stMetric"],
+.st-key-metric-resume [data-testid="stMetric"] {
+
+    background: transparent !important;
+
+    border: none !important;
+
+    padding: 0 !important;
+
+    box-shadow: none !important;
+}
+
+
+/* ============================================================
+   METRIC LABEL
+   ============================================================ */
+
+.st-key-metric-ats [data-testid="stMetricLabel"],
+.st-key-metric-skills [data-testid="stMetricLabel"],
+.st-key-metric-health [data-testid="stMetricLabel"],
+.st-key-metric-resume [data-testid="stMetricLabel"] {
+
+    font-family:
+        "Outfit",
+        "Space Grotesk",
+        sans-serif !important;
+
+    font-size:
+        0.88rem !important;
+
+    font-weight:
+        600 !important;
+
+    letter-spacing:
+        0.01em !important;
+
+    color:
+        rgba(203, 213, 225, 0.72) !important;
+}
+
+
+/* ============================================================
+   METRIC VALUE
+   ============================================================ */
+
+.st-key-metric-ats [data-testid="stMetricValue"],
+.st-key-metric-skills [data-testid="stMetricValue"],
+.st-key-metric-health [data-testid="stMetricValue"],
+.st-key-metric-resume [data-testid="stMetricValue"] {
+
+    font-family:
+        "Sora",
+        "Space Grotesk",
+        sans-serif !important;
+
+    font-size:
+        clamp(1.7rem, 2.4vw, 2.25rem) !important;
+
+    line-height:
+        1.05 !important;
+
+    font-weight:
+        850 !important;
+
+    letter-spacing:
+        -0.045em !important;
+
+    color:
+        #f8fafc !important;
+
+    text-shadow:
+        0 0 18px rgba(255, 255, 255, 0.08) !important;
+}
+
+
+/* ============================================================
+   DELTA
+   ============================================================ */
+
+.st-key-metric-ats [data-testid="stMetricDelta"],
+.st-key-metric-skills [data-testid="stMetricDelta"],
+.st-key-metric-health [data-testid="stMetricDelta"],
+.st-key-metric-resume [data-testid="stMetricDelta"] {
+
+    font-family:
+        "Outfit",
+        sans-serif !important;
+
+    font-size:
+        0.78rem !important;
+
+    font-weight:
+        650 !important;
+}
+
+
+/* ============================================================
+   CARD CAPTION
+   ============================================================ */
+
+.st-key-metric-ats [data-testid="stCaptionContainer"],
+.st-key-metric-skills [data-testid="stCaptionContainer"],
+.st-key-metric-health [data-testid="stCaptionContainer"],
+.st-key-metric-resume [data-testid="stCaptionContainer"] {
+
+    margin-top:
+        0.75rem !important;
+
+    font-family:
+        "Outfit",
+        sans-serif !important;
+
+    font-size:
+        0.78rem !important;
+
+    font-weight:
+        500 !important;
+
+    color:
+        rgba(148, 163, 184, 0.72) !important;
+}
+
+
+/* ============================================================
+   INDIVIDUAL CARD ACCENTS
+   ============================================================ */
+
+.st-key-metric-ats {
+
+    border-color:
+        rgba(59, 130, 246, 0.20) !important;
+}
+
+
+.st-key-metric-skills {
+
+    border-color:
+        rgba(167, 139, 250, 0.20) !important;
+}
+
+
+.st-key-metric-health {
+
+    border-color:
+        rgba(34, 197, 94, 0.20) !important;
+}
+
+
+.st-key-metric-resume {
+
+    border-color:
+        rgba(34, 211, 238, 0.20) !important;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+    .st-key-metric-ats,
+    .st-key-metric-skills,
+    .st-key-metric-health,
+    .st-key-metric-resume {
+
+        min-height:
+            170px !important;
+
+    }
 
 }
 
 
-/* Hover */
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
 
-.glass-card:hover{
+@media (prefers-reduced-motion: reduce) {
 
-transform:
+    .st-key-metric-ats,
+    .st-key-metric-skills,
+    .st-key-metric-health,
+    .st-key-metric-resume {
 
-translateY(-8px);
+        transition: none !important;
 
-border-color:
+    }
 
-rgba(139,92,246,.35);
+}
+/* ============================================================
+   AI DAILY BRIEFING
+   PREMIUM INTELLIGENCE CARD
+   ============================================================ */
 
-box-shadow:
+.st-key-daily_briefing {
 
-0 25px 60px rgba(0,0,0,.42),
+    position: relative !important;
 
-0 0 35px rgba(139,92,246,.18);
+    padding: 1.7rem !important;
 
+    border-radius: 26px !important;
+
+    border:
+        1px solid rgba(99, 102, 241, 0.22) !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(15, 23, 42, 0.76),
+            rgba(30, 27, 75, 0.48)
+        ) !important;
+
+    backdrop-filter:
+        blur(24px)
+        saturate(150%) !important;
+
+    -webkit-backdrop-filter:
+        blur(24px)
+        saturate(150%) !important;
+
+    box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.20),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+
+    overflow: hidden !important;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease !important;
 }
 
 
-/* Shine */
+/* ============================================================
+   AURORA
+   ============================================================ */
 
-.glass-card::before{
+.st-key-daily_briefing::before {
 
-content:"";
+    content: "" !important;
 
-position:absolute;
+    position: absolute !important;
 
-top:0;
+    width: 280px !important;
+    height: 280px !important;
 
-left:-130%;
+    top: -150px !important;
+    right: -80px !important;
 
-width:70%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(34, 211, 238, 0.18),
+            rgba(99, 102, 241, 0.12),
+            transparent 70%
+        ) !important;
 
-height:100%;
+    filter: blur(18px) !important;
 
-background:
+    pointer-events: none !important;
 
-linear-gradient(
-
-90deg,
-
-transparent,
-
-rgba(255,255,255,.08),
-
-transparent
-
-);
-
-transition:1s;
-
-}
-
-.glass-card:hover::before{
-
-left:160%;
-
+    transition:
+        all 0.4s ease !important;
 }
 
 
-/* ===========================
-   Card Title
-=========================== */
+/* ============================================================
+   HOVER GLOW
+   ============================================================ */
 
-.card-title{
+.st-key-daily_briefing:hover {
 
-font-size:26px;
+    transform:
+        translateY(-5px) !important;
 
-font-weight:700;
+    border-color:
+        rgba(103, 232, 249, 0.38) !important;
 
-color:white;
-
-margin-bottom:12px;
-
+    box-shadow:
+        0 28px 65px rgba(0, 0, 0, 0.28),
+        0 0 25px rgba(34, 211, 238, 0.10),
+        0 0 55px rgba(99, 102, 241, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
 }
 
 
-/* ===========================
-   Card Description
-=========================== */
+.st-key-daily_briefing:hover::before {
 
-.card-sub{
+    width:
+        360px !important;
 
-font-family:"Inter",sans-serif;
+    height:
+        360px !important;
 
-font-size:15px;
-
-line-height:1.8;
-
-color:#B7C3D4;
-
-margin-bottom:22px;
-
+    background:
+        radial-gradient(
+            circle,
+            rgba(34, 211, 238, 0.26),
+            rgba(99, 102, 241, 0.16),
+            transparent 70%
+        ) !important;
 }
 
 
-/* ===========================
-   Metric Card
-=========================== */
+/* ============================================================
+   BRIEFING HEADINGS
+   ============================================================ */
 
-.metric-card{
+.st-key-daily_briefing h3,
+.st-key-daily_briefing h4 {
 
-background:
+    font-family:
+        "Sora",
+        "Space Grotesk",
+        sans-serif !important;
 
-linear-gradient(
-180deg,
-rgba(255,255,255,.04),
-rgba(255,255,255,.02)
-);
+    font-weight:
+        800 !important;
 
-border-radius:24px;
+    letter-spacing:
+        -0.025em !important;
 
-padding:24px;
-
-border:1px solid rgba(255,255,255,.06);
-
-transition:.35s;
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-.metric-card:hover{
-
-transform:translateY(-7px);
-
-border-color:#8B5CF6;
-
-box-shadow:
-
-0 18px 45px rgba(139,92,246,.22);
-
-}
-
-.metric-value{
-
-font-size:46px;
-
-font-weight:800;
-
-margin:14px 0;
-
-color:white;
-
-}
-
-.metric-label{
-
-font-size:15px;
-
-color:#94A3B8;
-
+    color:
+        #f8fafc !important;
 }
 
 
-/* ===========================
-   AI Recommendation Card
-=========================== */
+/* ============================================================
+   BRIEFING TEXT
+   ============================================================ */
 
-.ai-card{
+.st-key-daily_briefing p {
 
-background:
+    font-family:
+        "Outfit",
+        "Space Grotesk",
+        sans-serif !important;
 
-linear-gradient(
-135deg,
+    color:
+        rgba(203, 213, 225, 0.82) !important;
 
-rgba(139,92,246,.12),
-
-rgba(59,130,246,.06)
-
-);
-
-border-radius:22px;
-
-padding:24px;
-
-border:1px solid rgba(139,92,246,.20);
-
-margin-bottom:20px;
-
-transition:.35s;
-
-}
-
-.ai-card:hover{
-
-transform:translateY(-5px);
-
-box-shadow:
-
-0 0 28px rgba(139,92,246,.22);
-
+    line-height:
+        1.6 !important;
 }
 
 
-/* ===========================
-   Dashboard Action Card
-=========================== */
+/* ============================================================
+   INSIGHT BOXES
+   ============================================================ */
 
-.action-card{
+.st-key-daily_briefing
+[data-testid="stAlert"] {
 
-background:
+    border-radius:
+        16px !important;
 
-linear-gradient(
-180deg,
-rgba(255,255,255,.025),
-rgba(255,255,255,.015)
-);
+    border:
+        1px solid rgba(148, 163, 184, 0.15) !important;
 
-border-radius:24px;
+    backdrop-filter:
+        blur(14px) !important;
 
-padding:26px;
-
-border:1px solid rgba(255,255,255,.05);
-
-transition:.35s;
-
-height:100%;
-
-}
-
-.action-card:hover{
-
-transform:translateY(-8px);
-
-border-color:#8B5CF6;
-
-box-shadow:
-
-0 18px 40px rgba(139,92,246,.18);
-
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.10) !important;
 }
 
 
-/* ===========================
-   Opportunity Card
-=========================== */
+/* ============================================================
+   SUGGESTION ITEMS
+   ============================================================ */
 
-.job-card{
+.st-key-daily_briefing
+[data-testid="stMarkdownContainer"] strong {
 
-background:
+    color:
+        #e0f2fe !important;
 
-rgba(17,24,39,.82);
-
-border-radius:24px;
-
-padding:24px;
-
-border:1px solid rgba(255,255,255,.05);
-
-margin-bottom:22px;
-
-transition:.35s;
-
-}
-
-.job-card:hover{
-
-transform:translateY(-6px);
-
-border-color:#3B82F6;
-
-box-shadow:
-
-0 15px 35px rgba(59,130,246,.18);
-
+    font-weight:
+        750 !important;
 }
 
 
-/* ===========================
-   Resume Card
-=========================== */
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
 
-.resume-card{
+@media (prefers-reduced-motion: reduce) {
 
-background:
+    .st-key-daily_briefing {
 
-linear-gradient(
-
-135deg,
-
-rgba(34,197,94,.08),
-
-rgba(34,197,94,.02)
-
-);
-
-border-radius:24px;
-
-padding:22px;
-
-border:1px solid rgba(34,197,94,.20);
-
-}
-
-
-/* ===========================
-   Timeline Card
-=========================== */
-
-.timeline-card{
-
-background:
-
-rgba(255,255,255,.025);
-
-padding:20px;
-
-border-left:4px solid #8B5CF6;
-
-border-radius:18px;
-
-margin-bottom:18px;
-
-}
-
-
-/* ===========================
-   Skill Pills
-=========================== */
-
-.skill-pill{
-
-display:inline-flex;
-
-align-items:center;
-
-padding:10px 18px;
-
-margin:7px;
-
-border-radius:999px;
-
-background:
-
-rgba(59,130,246,.12);
-
-border:1px solid rgba(59,130,246,.25);
-
-font-weight:600;
-
-font-size:14px;
-
-color:#DBEAFE;
-
-transition:.3s;
-
-}
-
-.skill-pill:hover{
-
-transform:scale(1.07);
-
-background:
-
-rgba(59,130,246,.22);
-
-}
-
-
-/* Missing Skill */
-
-.missing-pill{
-
-display:inline-flex;
-
-align-items:center;
-
-padding:10px 18px;
-
-margin:7px;
-
-border-radius:999px;
-
-background:
-
-rgba(239,68,68,.10);
-
-border:1px solid rgba(239,68,68,.25);
-
-font-weight:600;
-
-font-size:14px;
-
-color:#FCA5A5;
-
-}
-
-
-/* ===========================
-   Progress Card
-=========================== */
-
-.progress-card{
-
-background:
-
-rgba(255,255,255,.03);
-
-padding:22px;
-
-border-radius:22px;
-
-border:1px solid rgba(255,255,255,.05);
-
-}
-
-
-/* ===========================
-   Card Entrance
-=========================== */
-
-.glass-card,
-.metric-card,
-.action-card,
-.ai-card,
-.job-card{
-
-animation:cardFade .7s ease;
-
-}
-
-@keyframes cardFade{
-
-from{
-
-opacity:0;
-
-transform:translateY(25px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-/* ===========================================
-METRIC ICON
-=========================================== */
-
-.metric-card{
-
-position:relative;
-
-overflow:hidden;
-
-cursor:pointer;
-
-}
-
-.metric-card::before{
-
-content:"";
-
-position:absolute;
-
-top:-80px;
-
-right:-80px;
-
-width:180px;
-
-height:180px;
-
-background:
-
-radial-gradient(
-
-circle,
-
-rgba(139,92,246,.18),
-
-transparent 70%
-
-);
-
-transition:.5s;
-
-}
-
-.metric-card:hover::before{
-
-transform:scale(1.3);
-
-}
-
-.metric-value{
-
-font-size:42px;
-
-font-weight:800;
-
-margin-top:12px;
-
-margin-bottom:6px;
-
-color:white;
-
-}
-
-.metric-label{
-
-font-size:16px;
-
-font-weight:600;
-
-color:#CBD5E1;
-
+        transition:
+            none !important;
+    }
 }

@@ -2,51 +2,45 @@ from pathlib import Path
 import streamlit as st
 
 
+# ============================================================
+# CAREERCOPILOT GLOBAL THEME LOADER
+# ============================================================
+
+
 def load_theme():
-    """
-    Loads the CareerCopilot visual system.
 
-    Dark mode is the default.
-    Light mode uses the same components and layout,
-    but switches the CSS variables.
-    """
+    base_dir = Path(__file__).resolve().parents[2]
 
-    css_path = Path("assets/css/styles.css")
+    css_files = [
+        base_dir / "assets" / "css" / "styles.css",
+        base_dir / "assets" / "css" / "hero.css",
+    ]
 
-    if not css_path.exists():
-        st.error(f"CareerCopilot CSS not found: {css_path}")
+    css_parts = []
+
+    for css_file in css_files:
+
+        if not css_file.exists():
+            continue
+
+        try:
+            css_parts.append(
+                css_file.read_text(
+                    encoding="utf-8"
+                )
+            )
+
+        except Exception:
+            continue
+
+    if not css_parts:
         return
 
-    css = css_path.read_text(encoding="utf-8")
-
-    theme = st.session_state.get("theme", "dark")
-
-    if theme == "light":
-        theme_css = """
-        html {
-            color-scheme: light;
-        }
-
-        body {
-            background: #f6f7fb !important;
-        }
-        """
-    else:
-        theme_css = """
-        html {
-            color-scheme: dark;
-        }
-
-        body {
-            background: #060816 !important;
-        }
-        """
+    css = "\n\n".join(css_parts)
 
     st.markdown(
         f"""
         <style>
-        {theme_css}
-
         {css}
         </style>
         """,

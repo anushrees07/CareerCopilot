@@ -1,89 +1,34 @@
-/* =========================================================
-   CAREERCOPILOT DESIGN TOKENS
-   ========================================================= */
+/* ==========================================================
+   CareerCopilot Design Tokens
+========================================================== */
 
-:root {
+:root{
 
-    /* ---------- Core ---------- */
+    /* Radius */
 
-    --cc-bg: #070B18;
-    --cc-bg-secondary: #0D1428;
+    --radius-sm:14px;
+    --radius-md:20px;
+    --radius-lg:28px;
 
-    --cc-text: #F5F7FF;
-    --cc-text-secondary: #C8D2E3;
-    --cc-text-muted: #8F9BB3;
+    /* Blur */
 
-    /* ---------- Brand ---------- */
+    --blur:22px;
 
-    --cc-primary: #6EE7FF;
-    --cc-primary-soft: rgba(110, 231, 255, 0.18);
+    /* Animation */
 
-    --cc-purple: #8B5CF6;
-    --cc-purple-soft: rgba(139, 92, 246, 0.18);
+    --fast:.25s;
+    --normal:.4s;
+    --slow:.8s;
 
-    --cc-blue: #3B82F6;
+    /* Shadows */
 
-    /* ---------- Glass ---------- */
+    --shadow-sm:
+    0 8px 20px rgba(0,0,0,.15);
 
-    --cc-glass: rgba(16, 26, 50, 0.52);
-    --cc-glass-light: rgba(255, 255, 255, 0.055);
+    --shadow-md:
+    0 16px 40px rgba(0,0,0,.25);
 
-    --cc-border: rgba(110, 231, 255, 0.18);
-    --cc-border-hover: rgba(110, 231, 255, 0.42);
+    --shadow-lg:
+    0 30px 70px rgba(0,0,0,.35);
 
-    /* ---------- Shadows ---------- */
-
-    --cc-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.28);
-
-    --cc-glow:
-        0 0 35px rgba(110, 231, 255, 0.14);
-
-    /* ---------- Radius ---------- */
-
-    --cc-radius-sm: 10px;
-    --cc-radius-md: 16px;
-    --cc-radius-lg: 24px;
-    --cc-radius-xl: 30px;
-
-    /* ---------- Motion ---------- */
-
-    --cc-transition:
-        0.28s ease;
-
-}
-
-
-/* =========================================================
-   LIGHT THEME
-   ========================================================= */
-
-[data-theme="light"] {
-
-    --cc-bg: #F3F7FC;
-    --cc-bg-secondary: #EAF1FA;
-
-    --cc-text: #101828;
-    --cc-text-secondary: #344054;
-    --cc-text-muted: #667085;
-
-    --cc-primary: #0891B2;
-    --cc-primary-soft: rgba(8, 145, 178, 0.12);
-
-    --cc-purple: #7C3AED;
-    --cc-purple-soft: rgba(124, 58, 237, 0.10);
-
-    --cc-blue: #2563EB;
-
-    --cc-glass: rgba(255, 255, 255, 0.68);
-    --cc-glass-light: rgba(255, 255, 255, 0.82);
-
-    --cc-border: rgba(71, 85, 105, 0.14);
-    --cc-border-hover: rgba(8, 145, 178, 0.34);
-
-    --cc-shadow:
-        0 18px 45px rgba(15, 23, 42, 0.10);
-
-    --cc-glow:
-        0 0 35px rgba(8, 145, 178, 0.10);
 }
