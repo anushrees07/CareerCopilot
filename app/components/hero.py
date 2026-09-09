@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import streamlit as st
 
 from app.core.navigation import navigate
@@ -5,154 +7,106 @@ from app.core.navigation import navigate
 
 # ============================================================
 # CAREERCOPILOT HERO
+# NATIVE STREAMLIT VERSION
+# ZERO HTML
 # ============================================================
 
 
-def show():
-
-    # ========================================================
-    # HERO WRAPPER
-    # ========================================================
-
-    st.markdown(
-        '<div class="cc-hero">',
-        unsafe_allow_html=True,
-    )
+def show() -> None:
 
     left, right = st.columns(
-        [1.72, 1],
+        [1.7, 1],
         gap="large",
     )
 
     # ========================================================
-    # LEFT SIDE
+    # LEFT
     # ========================================================
 
     with left:
 
+        st.caption(
+            "✦ AI-POWERED CAREER PLATFORM"
+        )
+
         st.markdown(
+            "# Build Your Dream"
+        )
+
+        st.markdown(
+            "# Career With AI"
+        )
+
+        st.write(
             """
-            <div class="cc-hero-left">
-
-                <div class="cc-hero-badge">
-                    ✨ &nbsp; AI POWERED CAREER PLATFORM
-                </div>
-
-                <div class="cc-hero-title">
-
-                    <span class="cc-hero-line-one">
-                        Build Your Dream
-                    </span>
-
-                    <span class="cc-hero-line-two">
-                        <span class="cc-career-highlight">
-                            Career
-                        </span>
-                        &nbsp;With AI
-                    </span>
-
-                </div>
-
-                <div class="cc-hero-description">
-                    Analyze your resume, discover internships,
-                    identify skill gaps, prepare for interviews,
-                    generate career roadmaps, and accelerate
-                    your career using your favourite AI provider.
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True,
+            Analyze your resume, discover internships,
+            identify skill gaps, prepare for interviews,
+            generate career roadmaps, and accelerate
+            your career with AI.
+            """
         )
 
-        st.markdown(
-            '<div class="cc-hero-actions">',
-            unsafe_allow_html=True,
-        )
+        st.write("")
 
-        col1, col2 = st.columns(
+        action_1, action_2 = st.columns(
             2,
             gap="small",
         )
 
-        with col1:
+        with action_1:
 
             if st.button(
-                "📄  Analyze Resume",
+                "📄 Analyze Resume",
                 key="hero_analyze_resume",
                 use_container_width=True,
                 type="primary",
             ):
-
                 navigate("resume_analyzer")
                 st.rerun()
 
-        with col2:
+        with action_2:
 
             if st.button(
-                "💼  Explore Opportunities",
+                "💼 Explore Opportunities",
                 key="hero_opportunities",
                 use_container_width=True,
                 type="primary",
             ):
-
                 navigate("opportunities")
                 st.rerun()
 
-        st.markdown(
-            "</div>",
-            unsafe_allow_html=True,
-        )
-
     # ========================================================
-    # RIGHT SIDE
+    # RIGHT
     # ========================================================
 
     with right:
 
-        st.markdown(
-            """
-            <div class="cc-snapshot">
+        with st.container(border=True):
 
-                <div class="cc-snapshot-title">
-                    🚀 Career Snapshot
-                </div>
+            st.markdown(
+                "## 🚀 Career Snapshot"
+            )
 
-                <div class="cc-snapshot-subtitle">
-                    Your AI-powered career overview
-                </div>
+            st.caption(
+                "Your AI-powered career command center."
+            )
 
-                <div class="cc-snapshot-item">
-                    <div class="cc-snapshot-icon">📄</div>
-                    <div>Resume Intelligence</div>
-                </div>
+            st.divider()
 
-                <div class="cc-snapshot-item">
-                    <div class="cc-snapshot-icon">🤖</div>
-                    <div>Multi-AI Providers</div>
-                </div>
+            features = [
+                ("📄", "Resume Intelligence"),
+                ("🤖", "Multi-AI Providers"),
+                ("📈", "ATS Optimization"),
+                ("💼", "Opportunity Matching"),
+                ("🗺️", "Personalized Roadmap"),
+            ]
 
-                <div class="cc-snapshot-item">
-                    <div class="cc-snapshot-icon">📈</div>
-                    <div>ATS Optimization</div>
-                </div>
+            for icon, title in features:
 
-                <div class="cc-snapshot-item">
-                    <div class="cc-snapshot-icon">💼</div>
-                    <div>Opportunity Matching</div>
-                </div>
+                st.markdown(
+                    f"**{icon}  {title}**"
+                )
 
-                <div class="cc-snapshot-item">
-                    <div class="cc-snapshot-icon">🗺️</div>
-                    <div>Personalized Roadmap</div>
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    st.markdown(
-        "</div>",
-        unsafe_allow_html=True,
-    )
+                st.caption(
+                    "Ready to use"
+                )

@@ -1,21 +1,29 @@
 import streamlit as st
 
 
-def initialize_theme():
+def initialize_theme() -> None:
 
-    if "theme" not in st.session_state:
-        st.session_state.theme = "dark"
+    if "appearance" not in st.session_state:
+        st.session_state.appearance = "dark"
 
 
-def toggle_theme():
+def toggle_theme() -> None:
 
-    st.session_state.theme = (
+    current = st.session_state.get(
+        "appearance",
+        "dark",
+    )
+
+    st.session_state.appearance = (
         "light"
-        if st.session_state.theme == "dark"
+        if current == "dark"
         else "dark"
     )
 
 
-def current_theme():
+def current_theme() -> str:
 
-    return st.session_state.theme
+    return st.session_state.get(
+        "appearance",
+        "dark",
+    )

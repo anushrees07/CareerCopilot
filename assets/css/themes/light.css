@@ -1,86 +1,299 @@
-/* ============================================================
-   CAREERCOPILOT LIGHT THEME
-   PREMIUM GLASS
-   ============================================================ */
+:root {
+    --cc-bg: #f7f8ff;
 
+    --cc-surface:
+        rgba(255,255,255,.78);
 
-/* ============================================================
-   APP BACKGROUND
-   ============================================================ */
+    --cc-border:
+        rgba(99,102,241,.18);
 
-html,
-body,
-[data-testid="stAppViewContainer"],
-[data-testid="stApp"] {
+    --cc-text:
+        #11162f;
 
-    background:
-        #eef6ff !important;
+    --cc-muted:
+        #536078;
 
+    --cc-purple:
+        #7c3aed;
+
+    --cc-blue:
+        #2563eb;
+
+    --cc-cyan:
+        #0891b2;
+
+    --cc-pink:
+        #db2777;
 }
 
 
 /* ============================================================
-   LIGHT AURORA
+   LIGHT ATMOSPHERE
    ============================================================ */
 
-[data-testid="stAppViewContainer"] {
+.stApp {
 
     background:
 
         radial-gradient(
-            circle at 10% 8%,
-            rgba(56, 189, 248, 0.22),
-            transparent 30%
+            circle at 8% 12%,
+            rgba(99,102,241,.15),
+            transparent 18%
         ),
 
         radial-gradient(
-            circle at 90% 15%,
-            rgba(129, 140, 248, 0.20),
-            transparent 30%
+            circle at 88% 12%,
+            rgba(56,189,248,.17),
+            transparent 20%
         ),
 
         radial-gradient(
-            circle at 75% 80%,
-            rgba(192, 132, 252, 0.16),
-            transparent 32%
+            circle at 76% 72%,
+            rgba(217,70,239,.12),
+            transparent 23%
+        ),
+
+        radial-gradient(
+            circle at 18% 82%,
+            rgba(14,165,233,.10),
+            transparent 21%
         ),
 
         linear-gradient(
             135deg,
-            #f8fbff,
-            #edf6ff,
-            #f4f0ff
-        ) !important;
+            #ffffff 0%,
+            #f5f5ff 48%,
+            #fbfcff 100%
+        );
 
+    color:
+        var(--cc-text);
 }
 
 
 /* ============================================================
-   MAIN
+   FLOATING BUBBLES
    ============================================================ */
 
-[data-testid="stMain"] {
+.stApp::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    background:
+
+        radial-gradient(
+            circle at 12% 17%,
+            rgba(124,58,237,.12) 0 58px,
+            transparent 60px
+        ),
+
+        radial-gradient(
+            circle at 83% 20%,
+            rgba(34,211,238,.13) 0 78px,
+            transparent 80px
+        ),
+
+        radial-gradient(
+            circle at 73% 75%,
+            rgba(236,72,153,.10) 0 68px,
+            transparent 70px
+        ),
+
+        radial-gradient(
+            circle at 22% 78%,
+            rgba(59,130,246,.10) 0 52px,
+            transparent 54px
+        ),
+
+        radial-gradient(
+            circle at 49% 8%,
+            rgba(168,85,247,.08) 0 35px,
+            transparent 37px
+        );
+
+    animation:
+        cc-bubbles
+        13s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+.stApp::after {
+
+    content: "";
+
+    position: fixed;
+
+    width: 70vw;
+    height: 40vh;
+
+    right: -12vw;
+    top: 5vh;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    background:
+
+        radial-gradient(
+            ellipse,
+            rgba(139,92,246,.12),
+            transparent 58%
+        ),
+
+        radial-gradient(
+            ellipse at 35% 45%,
+            rgba(34,211,238,.10),
+            transparent 55%
+        );
+
+    filter:
+        blur(28px);
+
+    animation:
+        cc-light-orbit
+        15s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+@keyframes cc-bubbles {
+
+    from {
+        transform:
+            translate3d(0,0,0)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translate3d(20px,-15px,0)
+            scale(1.04);
+    }
+}
+
+
+@keyframes cc-light-orbit {
+
+    from {
+        transform:
+            translate3d(0,0,0)
+            rotate(-2deg);
+    }
+
+    to {
+        transform:
+            translate3d(-35px,18px,0)
+            rotate(2deg);
+    }
+}
+
+
+/* ============================================================
+   MAIN SURFACES
+   ============================================================ */
+
+section[data-testid="stMain"],
+[data-testid="stAppViewContainer"],
+[data-testid="stMainBlockContainer"] {
 
     background:
         transparent !important;
+}
 
-    color:
-        #0f172a !important;
 
+[data-testid="stMainBlockContainer"] {
+
+    max-width:
+        1500px;
+
+    padding-top:
+        2.5rem;
+
+    padding-bottom:
+        4rem;
 }
 
 
 /* ============================================================
-   GLOBAL TEXT
+   SIDEBAR
    ============================================================ */
 
-[data-testid="stMain"] h1,
-[data-testid="stMain"] h2,
-[data-testid="stMain"] h3 {
+section[data-testid="stSidebar"] {
+
+    background:
+        rgba(255,255,255,.82) !important;
+
+    border-right:
+        1px solid
+        rgba(99,102,241,.14);
+
+    box-shadow:
+        18px 0 60px
+        rgba(79,70,229,.08);
+
+    backdrop-filter:
+        blur(24px);
+}
+
+
+section[data-testid="stSidebar"] * {
 
     color:
-        #0f172a !important;
+        var(--cc-text);
+}
 
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+    color:
+        var(--cc-text) !important;
+
+    font-family:
+        "Space Grotesk",
+        "Inter",
+        sans-serif !important;
+
+    letter-spacing:
+        -0.035em !important;
+}
+
+
+p,
+label,
+[data-testid="stCaptionContainer"] {
+
+    color:
+        var(--cc-muted) !important;
+}
+
+
+[data-testid="stMarkdownContainer"] {
+
+    color:
+        var(--cc-text);
 }
 
 
@@ -88,223 +301,174 @@ body,
    HERO
    ============================================================ */
 
-.st-key-hero_content {
+.st-key-cc_hero {
 
-    background:
-        transparent !important;
+    padding:
+        2.2rem 0 3rem;
 
+    position:
+        relative;
 }
 
 
-/* ============================================================
-   HERO BADGE
-   ============================================================ */
+.st-key-hero_line_one h1,
+.st-key-hero_line_three h1 {
 
-.st-key-hero_content > div:first-child {
+    font-size:
+        clamp(
+            2.8rem,
+            5vw,
+            5rem
+        ) !important;
 
-    color:
-        #164e63 !important;
+    line-height:
+        .92 !important;
+
+    font-weight:
+        780 !important;
+
+    margin:
+        0 !important;
+}
+
+
+.st-key-hero_career h1 {
+
+    font-size:
+        clamp(
+            3.3rem,
+            6vw,
+            6.2rem
+        ) !important;
+
+    line-height:
+        .90 !important;
+
+    font-weight:
+        850 !important;
+
+    margin:
+        0 !important;
 
     background:
         linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.65),
-            rgba(224, 242, 254, 0.58)
-        ) !important;
+            90deg,
+            #0891b2,
+            #2563eb 32%,
+            #6366f1 55%,
+            #7c3aed 76%,
+            #db2777
+        );
 
-    border:
-        1px solid
-        rgba(14, 116, 144, 0.24) !important;
+    -webkit-background-clip:
+        text;
 
-    box-shadow:
-
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.90),
-
-        0 10px 30px
-        rgba(14, 116, 144, 0.10) !important;
-
-    backdrop-filter:
-        blur(20px)
-        saturate(150%) !important;
-
-}
-
-
-/* ============================================================
-   HERO WHITE TEXT
-   ============================================================ */
-
-.st-key-hero_title h3:first-child {
+    background-clip:
+        text;
 
     color:
-        #0f172a !important;
+        transparent !important;
 
-    text-shadow:
-        0 4px 20px
-        rgba(15, 23, 42, 0.10) !important;
-
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(99,102,241,.18)
+        );
 }
 
 
 /* ============================================================
-   CAREER
-   ============================================================ */
-
-.st-key-hero_title h3:nth-of-type(2) {
-
-    color:
-        #0f172a !important;
-
-}
-
-
-/* ============================================================
-   HERO DESCRIPTION
-   ============================================================ */
-
-.st-key-hero_content
-[data-testid="stMarkdownContainer"] p {
-
-    color:
-        rgba(30, 41, 59, 0.76) !important;
-
-}
-
-
-/* ============================================================
-   SNAPSHOT GLASS
+   SNAPSHOT
    ============================================================ */
 
 .st-key-career_snapshot {
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.72),
-            rgba(239, 246, 255, 0.48)
-        ) !important;
-
     border:
         1px solid
-        rgba(14, 116, 144, 0.18) !important;
+        rgba(99,102,241,.18);
 
-    box-shadow:
+    border-radius:
+        1.5rem;
 
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.95),
-
-        0 20px 55px
-        rgba(30, 64, 175, 0.10),
-
-        0 0 35px
-        rgba(56, 189, 248, 0.07) !important;
-
-    backdrop-filter:
-        blur(24px)
-        saturate(150%) !important;
-
-}
-
-
-/* ============================================================
-   SNAPSHOT HEADING
-   ============================================================ */
-
-.st-key-career_snapshot h2 {
-
-    color:
-        #0f172a !important;
-
-    text-shadow:
-        0 0 15px
-        rgba(14, 116, 144, 0.10) !important;
-
-}
-
-
-/* ============================================================
-   SNAPSHOT ITEMS
-   ============================================================ */
-
-.st-key-career_snapshot
-[data-testid="stMarkdownContainer"] p {
-
-    color:
-        #334155 !important;
-
-}
-
-
-/* ============================================================
-   SNAPSHOT ITEM HOVER
-   ============================================================ */
-
-.st-key-career_snapshot
-[data-testid="stMarkdownContainer"] p:hover {
-
-    color:
-        #0891b2 !important;
-
-    text-shadow:
-        0 0 10px
-        rgba(8, 145, 178, 0.18) !important;
-
-}
-
-
-/* ============================================================
-   ALL GLASS CARDS
-   ============================================================ */
-
-[data-testid="stVerticalBlockBorderWrapper"] {
+    padding:
+        1.4rem 1.45rem;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.68),
-            rgba(241, 248, 255, 0.48)
-        ) !important;
-
-    border:
-        1px solid
-        rgba(100, 116, 139, 0.18) !important;
+            rgba(255,255,255,.90),
+            rgba(246,247,255,.78)
+        );
 
     box-shadow:
 
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.95),
+        0 25px 75px
+        rgba(71,85,255,.10),
 
-        0 15px 45px
-        rgba(30, 64, 175, 0.08) !important;
+        inset 0 1px 0
+        rgba(255,255,255,.95);
 
     backdrop-filter:
-        blur(22px)
-        saturate(150%) !important;
+        blur(22px);
+}
 
+
+.st-key-career_snapshot
+[data-testid="stHorizontalBlock"] {
+
+    padding:
+        .7rem 0;
+
+    border-bottom:
+        1px solid
+        rgba(99,102,241,.08);
+}
+
+
+.st-key-career_snapshot
+[data-testid="stHorizontalBlock"]:last-child {
+
+    border-bottom:
+        0;
+}
+
+
+.st-key-career_snapshot
+[data-testid="stCaptionContainer"] {
+
+    color:
+        var(--cc-purple) !important;
+
+    font-weight:
+        700;
+
+    text-align:
+        right;
 }
 
 
 /* ============================================================
-   CARD HOVER
+   GLASS CARDS
    ============================================================ */
 
-[data-testid="stVerticalBlockBorderWrapper"]:hover {
+div[data-testid="stVerticalBlockBorderWrapper"] {
 
     border-color:
-        rgba(14, 165, 233, 0.35) !important;
+        rgba(99,102,241,.16) !important;
+
+    background:
+        rgba(255,255,255,.72) !important;
+
+    border-radius:
+        1.2rem !important;
 
     box-shadow:
 
+        0 18px 55px
+        rgba(79,70,229,.08),
+
         inset 0 1px 0
-        rgba(255, 255, 255, 1),
-
-        0 22px 60px
-        rgba(30, 64, 175, 0.13),
-
-        0 0 28px
-        rgba(14, 165, 233, 0.10) !important;
-
+        rgba(255,255,255,.90);
 }
 
 
@@ -312,38 +476,130 @@ body,
    BUTTONS
    ============================================================ */
 
-[data-testid="stButton"] button {
+.stButton button {
 
-    background:
-        linear-gradient(
-            135deg,
-            #4f46e5,
-            #7c3aed,
-            #0891b2
-        ) !important;
-
-    color:
-        #ffffff !important;
+    border-radius:
+        .95rem !important;
 
     border:
         1px solid
-        rgba(99, 102, 241, 0.30) !important;
+        rgba(99,102,241,.14) !important;
 
-    box-shadow:
-        0 10px 30px
-        rgba(79, 70, 229, 0.18) !important;
-
+    transition:
+        transform .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease !important;
 }
 
 
-[data-testid="stButton"] button:hover {
+.stButton button:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(124,58,237,.45) !important;
 
     box-shadow:
+        0 12px 35px
+        rgba(99,102,241,.13) !important;
+}
 
-        0 15px 40px
-        rgba(79, 70, 229, 0.28),
 
-        0 0 30px
-        rgba(8, 145, 178, 0.16) !important;
+/* ============================================================
+   METRICS
+   ============================================================ */
 
+[data-testid="stMetricLabel"] {
+
+    color:
+        #536078 !important;
+}
+
+
+[data-testid="stMetricValue"] {
+
+    color:
+        #11162f !important;
+
+    font-weight:
+        800 !important;
+}
+
+
+/* ============================================================
+   PROGRESS
+   ============================================================ */
+
+[data-testid="stProgress"]
+> div
+> div
+> div {
+
+    background:
+        linear-gradient(
+            90deg,
+            #0891b2,
+            #2563eb,
+            #7c3aed,
+            #db2777
+        ) !important;
+}
+
+
+/* ============================================================
+   CHAT
+   ============================================================ */
+
+[data-testid="stChatMessage"] {
+
+    background:
+        rgba(255,255,255,.72) !important;
+
+    border:
+        1px solid
+        rgba(99,102,241,.12);
+
+    border-radius:
+        1rem;
+}
+
+
+/* ============================================================
+   EXPANDERS
+   ============================================================ */
+
+[data-testid="stExpander"] {
+
+    border-color:
+        rgba(99,102,241,.14) !important;
+
+    background:
+        rgba(255,255,255,.60) !important;
+
+    border-radius:
+        1rem;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    [data-testid="stMainBlockContainer"] {
+        padding-top: 1rem;
+    }
+
+    .st-key-hero_line_one h1,
+    .st-key-hero_line_three h1 {
+        font-size:
+            2.8rem !important;
+    }
+
+    .st-key-hero_career h1 {
+        font-size:
+            3.6rem !important;
+    }
 }

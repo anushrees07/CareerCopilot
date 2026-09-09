@@ -1,658 +1,42 @@
 /* ============================================================
-   CAREERCOPILOT
-   PREMIUM GLASSMORPHIC DESIGN SYSTEM
-   DARK + LIGHT
+   CAREERCOPILOT SHARED DESIGN TOKENS
    ============================================================ */
-
-
-/* ============================================================
-   GLOBAL
-   ============================================================ */
-
-* {
-    box-sizing: border-box;
-}
-
-html,
-body,
-.stApp {
-    margin: 0 !important;
-    padding: 0 !important;
-    min-height: 100vh;
-}
-
-.stApp {
-    font-family:
-        "Inter",
-        "Space Grotesk",
-        "Segoe UI",
-        sans-serif !important;
-
-    color: var(--cc-text) !important;
-
-    background:
-        var(--cc-bg) !important;
-
-    overflow-x: hidden;
-}
-
-
-/* ============================================================
-   HIDE STREAMLIT DEFAULT CHROME
-   ============================================================ */
-
-#MainMenu {
-    visibility: hidden !important;
-}
-
-footer {
-    visibility: hidden !important;
-}
-
-header {
-    background: transparent !important;
-}
-
-
-/* ============================================================
-   MAIN APP BACKGROUND
-   ============================================================ */
-
-[data-testid="stAppViewContainer"] {
-    background:
-        transparent !important;
-}
-
-[data-testid="stMain"] {
-    background:
-        transparent !important;
-}
-
-.main {
-    background:
-        transparent !important;
-}
-
-
-/* ============================================================
-   DARK ATMOSPHERE
-   ============================================================ */
-
-.stApp::before {
-    content: "";
-
-    position: fixed;
-
-    width: 900px;
-    height: 900px;
-
-    top: -430px;
-    left: -300px;
-
-    border-radius: 50%;
-
-    pointer-events: none;
-
-    z-index: 0;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0, 212, 255, 0.16) 0%,
-            rgba(80, 70, 229, 0.14) 30%,
-            rgba(124, 58, 237, 0.08) 50%,
-            transparent 72%
-        );
-
-    filter: blur(45px);
-
-    animation:
-        ccAuroraLeft
-        16s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-
-/* ============================================================
-   SECOND AURORA
-   ============================================================ */
-
-.stApp::after {
-    content: "";
-
-    position: fixed;
-
-    width: 850px;
-    height: 850px;
-
-    right: -350px;
-    bottom: -380px;
-
-    border-radius: 50%;
-
-    pointer-events: none;
-
-    z-index: 0;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(236, 72, 153, 0.16) 0%,
-            rgba(124, 58, 237, 0.14) 30%,
-            rgba(37, 99, 235, 0.10) 52%,
-            transparent 72%
-        );
-
-    filter: blur(55px);
-
-    animation:
-        ccAuroraRight
-        20s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-
-@keyframes ccAuroraLeft {
-
-    0% {
-        transform:
-            translate3d(0, 0, 0)
-            scale(1);
-    }
-
-    100% {
-        transform:
-            translate3d(120px, 90px, 0)
-            scale(1.15);
-    }
-}
-
-
-@keyframes ccAuroraRight {
-
-    0% {
-        transform:
-            translate3d(0, 0, 0)
-            scale(1);
-    }
-
-    100% {
-        transform:
-            translate3d(-110px, -80px, 0)
-            scale(1.18);
-    }
-}
-
-
-/* ============================================================
-   LIGHT THEME BUBBLES
-   ============================================================ */
-
-[data-testid="stAppViewContainer"]::before {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 0;
-
-    opacity: 0;
-
-    transition:
-        opacity 0.5s ease;
-
-    background:
-
-        radial-gradient(
-            circle at 12% 18%,
-            rgba(99, 102, 241, 0.18) 0,
-            rgba(99, 102, 241, 0.08) 90px,
-            transparent 220px
-        ),
-
-        radial-gradient(
-            circle at 88% 16%,
-            rgba(56, 189, 248, 0.18) 0,
-            rgba(56, 189, 248, 0.07) 110px,
-            transparent 250px
-        ),
-
-        radial-gradient(
-            circle at 75% 72%,
-            rgba(168, 85, 247, 0.13) 0,
-            rgba(168, 85, 247, 0.05) 120px,
-            transparent 270px
-        ),
-
-        radial-gradient(
-            circle at 20% 78%,
-            rgba(14, 165, 233, 0.12) 0,
-            rgba(14, 165, 233, 0.04) 100px,
-            transparent 240px
-        );
-}
-
-
-/* Light theme is activated through the root color variables. */
 
 :root {
-    --cc-light-bubbles: 0;
+    --cc-radius-sm: 0.65rem;
+    --cc-radius-md: 0.9rem;
+    --cc-radius-lg: 1.2rem;
+    --cc-radius-xl: 1.5rem;
+
+    --cc-transition:
+        transform .18s ease,
+        opacity .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
 }
 
 
 /* ============================================================
-   CONTENT LAYER
+   GLOBAL INTERACTION
    ============================================================ */
 
-section[data-testid="stMain"] {
-    position: relative;
-    z-index: 2;
-}
-
-section[data-testid="stMain"] > div {
-    position: relative;
-    z-index: 2;
-}
-
-
-/* ============================================================
-   TYPOGRAPHY
-   ============================================================ */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-
-    font-family:
-        "Space Grotesk",
-        "Inter",
-        sans-serif !important;
-
-    color:
-        var(--cc-text) !important;
-
-    letter-spacing:
-        -0.035em !important;
-}
-
-
-p,
-label,
-span,
-.stMarkdown {
-
-    color:
-        var(--cc-text-soft);
-}
-
-
-/* ============================================================
-   SIDEBAR
-   ============================================================ */
-
-section[data-testid="stSidebar"] {
-
-    background:
-        var(--cc-sidebar) !important;
-
-    backdrop-filter:
-        blur(28px)
-        saturate(150%) !important;
-
-    -webkit-backdrop-filter:
-        blur(28px)
-        saturate(150%) !important;
-
-    border-right:
-        1px solid var(--cc-border) !important;
-
-    box-shadow:
-        18px 0 55px rgba(0, 0, 0, 0.16) !important;
-
-    z-index: 20 !important;
-}
-
-
-section[data-testid="stSidebar"] * {
-    color:
-        var(--cc-text-soft);
-}
-
-
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3 {
-    color:
-        var(--cc-text) !important;
-}
-
-
-section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
-    color:
-        var(--cc-text-muted) !important;
-}
-
-
-/* ============================================================
-   SIDEBAR BRAND
-   ============================================================ */
-
-.cc-sidebar-brand {
-
-    font-family:
-        "Space Grotesk",
-        sans-serif;
-
-    font-size:
-        22px;
-
-    font-weight:
-        800;
-
-    color:
-        var(--cc-text) !important;
-
-    letter-spacing:
-        -0.03em;
-
-    margin-bottom:
-        4px;
-}
-
-
-/* ============================================================
-   THEME LABEL
-   ============================================================ */
-
-.cc-theme-label {
-
-    font-family:
-        "Space Grotesk",
-        sans-serif;
-
-    font-size:
-        13px;
-
-    font-weight:
-        700;
-
-    color:
-        var(--cc-text-muted) !important;
-
-    margin-bottom:
-        8px;
-}
-
-
-/* ============================================================
-   BUTTON SYSTEM
-   ============================================================ */
-
-.stButton > button {
-
-    min-height:
-        44px !important;
-
-    border-radius:
-        14px !important;
-
-    font-family:
-        "Inter",
-        sans-serif !important;
-
-    font-weight:
-        650 !important;
-
-    border:
-        1px solid var(--cc-border) !important;
-
-    background:
-        var(--cc-card) !important;
-
-    color:
-        var(--cc-text) !important;
-
-    backdrop-filter:
-        blur(14px) !important;
-
-    -webkit-backdrop-filter:
-        blur(14px) !important;
-
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.10) !important;
+.stButton button,
+[data-testid="stDownloadButton"] button {
 
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease,
-        background 0.25s ease !important;
+        var(--cc-transition);
 }
 
 
-.stButton > button:hover {
-
-    transform:
-        translateY(-2px) !important;
-
-    border-color:
-        var(--cc-border-strong) !important;
-
-    box-shadow:
-        0 12px 30px rgba(59, 130, 246, 0.18),
-        0 0 25px rgba(139, 92, 246, 0.10) !important;
-}
-
-
-/* ============================================================
-   PRIMARY BUTTON
-   ============================================================ */
-
-.stButton > button[kind="primary"] {
-
-    background:
-        linear-gradient(
-            135deg,
-            #7c3aed 0%,
-            #6366f1 45%,
-            #3b82f6 100%
-        ) !important;
-
-    color:
-        #ffffff !important;
-
-    border:
-        1px solid rgba(255, 255, 255, 0.18) !important;
-
-    box-shadow:
-        0 10px 28px rgba(99, 102, 241, 0.30),
-        0 0 25px rgba(139, 92, 246, 0.12) !important;
-}
-
-
-.stButton > button[kind="primary"]:hover {
-
-    box-shadow:
-        0 14px 35px rgba(99, 102, 241, 0.40),
-        0 0 35px rgba(139, 92, 246, 0.22) !important;
-
-    filter:
-        brightness(1.08);
-}
-
-
-/* ============================================================
-   GLASS CONTAINERS
-   ============================================================ */
-
-div[data-testid="stVerticalBlockBorderWrapper"] {
-
-    background:
-        var(--cc-card) !important;
-
-    border:
-        1px solid var(--cc-border) !important;
-
-    border-radius:
-        24px !important;
-
-    backdrop-filter:
-        blur(24px)
-        saturate(150%) !important;
-
-    -webkit-backdrop-filter:
-        blur(24px)
-        saturate(150%) !important;
-
-    box-shadow:
-        var(--cc-shadow) !important;
-
-    overflow:
-        hidden;
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        border-color 0.3s ease !important;
-}
-
-
-div[data-testid="stVerticalBlockBorderWrapper"]:hover {
-
-    transform:
-        translateY(-3px);
-
-    border-color:
-        var(--cc-border-strong) !important;
-
-    box-shadow:
-        0 30px 75px rgba(0, 0, 0, 0.22),
-        0 0 35px rgba(99, 102, 241, 0.10) !important;
-}
-
-
-/* ============================================================
-   METRIC CARDS
-   ============================================================ */
-
-div[data-testid="stMetric"] {
-
-    position:
-        relative;
-
-    padding:
-        22px !important;
-
-    border-radius:
-        22px !important;
-
-    background:
-        var(--cc-card) !important;
-
-    border:
-        1px solid var(--cc-border) !important;
-
-    backdrop-filter:
-        blur(20px)
-        saturate(150%) !important;
-
-    -webkit-backdrop-filter:
-        blur(20px)
-        saturate(150%) !important;
-
-    box-shadow:
-        var(--cc-shadow) !important;
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        border-color 0.3s ease !important;
-
-    overflow:
-        hidden;
-}
-
-
-div[data-testid="stMetric"]::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        150px;
-
-    height:
-        150px;
-
-    right:
-        -70px;
-
-    top:
-        -80px;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(99, 102, 241, 0.18),
-            transparent 70%
-        );
-
-    pointer-events:
-        none;
-}
-
-
-div[data-testid="stMetric"]:hover {
-
-    transform:
-        translateY(-6px) !important;
-
-    box-shadow:
-        0 25px 55px rgba(0, 0, 0, 0.25),
-        0 0 28px rgba(99, 102, 241, 0.12) !important;
-
-    border-color:
-        var(--cc-border-strong) !important;
-}
-
-
-[data-testid="stMetricLabel"] {
-
-    color:
-        var(--cc-text-muted) !important;
-
-    font-weight:
-        600 !important;
-}
-
-
-[data-testid="stMetricValue"] {
-
-    color:
-        var(--cc-text) !important;
-
-    font-family:
-        "Space Grotesk",
-        sans-serif !important;
-
-    font-weight:
-        800 !important;
+.stButton button:focus-visible,
+[data-testid="stDownloadButton"] button:focus-visible {
+
+    outline:
+        2px solid
+        rgba(99,102,241,.55);
+
+    outline-offset:
+        3px;
 }
 
 
@@ -660,53 +44,13 @@ div[data-testid="stMetric"]:hover {
    INPUTS
    ============================================================ */
 
-input,
-textarea,
-[data-testid="stTextInput"] input,
-[data-testid="stTextArea"] textarea {
-
-    background:
-        var(--cc-card) !important;
-
-    color:
-        var(--cc-text) !important;
-
-    border:
-        1px solid var(--cc-border) !important;
+.stTextInput input,
+.stTextArea textarea,
+.stSelectbox div[data-baseweb="select"],
+.stNumberInput input {
 
     border-radius:
-        14px !important;
-
-    backdrop-filter:
-        blur(15px) !important;
-}
-
-
-input::placeholder,
-textarea::placeholder {
-
-    color:
-        var(--cc-text-muted) !important;
-}
-
-
-/* ============================================================
-   FILE UPLOADER
-   ============================================================ */
-
-[data-testid="stFileUploader"] section {
-
-    background:
-        var(--cc-card) !important;
-
-    border:
-        1px dashed var(--cc-border-strong) !important;
-
-    border-radius:
-        18px !important;
-
-    color:
-        var(--cc-text) !important;
+        var(--cc-radius-md) !important;
 }
 
 
@@ -716,47 +60,22 @@ textarea::placeholder {
 
 hr {
 
-    border:
-        none !important;
-
-    border-top:
-        1px solid var(--cc-divider) !important;
+    opacity:
+        .25;
 }
 
 
 /* ============================================================
-   ALERTS
+   TABLES
    ============================================================ */
 
-[data-testid="stAlert"] {
+[data-testid="stDataFrame"] {
 
     border-radius:
-        16px !important;
+        var(--cc-radius-lg);
 
-    backdrop-filter:
-        blur(18px) !important;
-
-    -webkit-backdrop-filter:
-        blur(18px) !important;
-}
-
-
-/* ============================================================
-   PROGRESS
-   ============================================================ */
-
-.stProgress > div > div > div > div {
-
-    background:
-        linear-gradient(
-            90deg,
-            #8b5cf6,
-            #3b82f6,
-            #22d3ee
-        ) !important;
-
-    border-radius:
-        999px !important;
+    overflow:
+        hidden;
 }
 
 
@@ -765,109 +84,34 @@ hr {
    ============================================================ */
 
 ::-webkit-scrollbar {
+
     width:
+        8px;
+
+    height:
         8px;
 }
 
+
 ::-webkit-scrollbar-track {
+
     background:
         transparent;
 }
 
+
 ::-webkit-scrollbar-thumb {
 
     background:
-        linear-gradient(
-            180deg,
-            #8b5cf6,
-            #3b82f6
-        );
+        rgba(99,102,241,.30);
 
     border-radius:
         999px;
 }
 
 
-/* ============================================================
-   LIGHT MODE BUBBLE ANIMATION
-   ============================================================ */
+::-webkit-scrollbar-thumb:hover {
 
-@keyframes ccBubbleFloat {
-
-    0% {
-        transform:
-            translate3d(0, 0, 0)
-            scale(1);
-    }
-
-    50% {
-        transform:
-            translate3d(15px, -20px, 0)
-            scale(1.04);
-    }
-
-    100% {
-        transform:
-            translate3d(-10px, 10px, 0)
-            scale(1);
-    }
-}
-
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-@media (max-width: 1100px) {
-
-    section[data-testid="stMain"] {
-        padding-left:
-            20px !important;
-
-        padding-right:
-            20px !important;
-    }
-
-}
-
-
-@media (max-width: 768px) {
-
-    div[data-testid="stMetric"] {
-
-        padding:
-            18px !important;
-
-        border-radius:
-            18px !important;
-    }
-
-    .stButton > button {
-        min-height:
-            42px !important;
-    }
-
-}
-
-
-/* ============================================================
-   REDUCED MOTION
-   ============================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-
-        animation-duration:
-            0.01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        transition-duration:
-            0.01ms !important;
-    }
-
+    background:
+        rgba(139,92,246,.55);
 }

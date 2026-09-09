@@ -13,6 +13,7 @@ ROADMAPS = {
         "AWS",
         "Projects",
     ],
+
     "Data Scientist": [
         "Python",
         "Statistics",
@@ -22,6 +23,7 @@ ROADMAPS = {
         "Machine Learning",
         "Projects",
     ],
+
     "Backend Developer": [
         "Python",
         "FastAPI",
@@ -31,9 +33,10 @@ ROADMAPS = {
         "AWS",
         "Projects",
     ],
+
     "Frontend Developer": [
-        "HTML",
-        "CSS",
+        "HTML fundamentals",
+        "CSS fundamentals",
         "JavaScript",
         "React",
         "TypeScript",
@@ -42,33 +45,13 @@ ROADMAPS = {
 }
 
 
-def show():
+def show() -> None:
 
-    st.markdown(
-        """
-<div class="ai-badge">
-🗺 AI Roadmap
-</div>
-""",
-        unsafe_allow_html=True,
-    )
+    st.title("🗺️ AI Career Roadmap")
 
-    st.markdown(
-        """
-<div class="section-title">
-Build Your Dream Career
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-<div class="section-sub">
-Generate a personalized roadmap toward your target role.
-</div>
-""",
-        unsafe_allow_html=True,
+    st.caption(
+        "Build a practical path from your current skills "
+        "to your target role."
     )
 
     role = st.selectbox(
@@ -76,18 +59,43 @@ Generate a personalized roadmap toward your target role.
         list(ROADMAPS.keys()),
     )
 
-    st.write("")
-
     roadmap = ROADMAPS[role]
 
-    for i, step in enumerate(roadmap):
+    st.write("")
 
-        progress = min((i + 1) * 10, 100)
+    st.subheader(
+        f"🚀 {role} Path"
+    )
 
-        st.markdown(f"### 📍 Stage {i+1}")
+    total = len(roadmap)
 
-        st.write(step)
+    for index, step in enumerate(
+        roadmap,
+        start=1,
+    ):
 
-        st.progress(progress / 100)
+        progress = index / total
 
-        st.write("")
+        with st.container(
+            border=True,
+            key=f"roadmap_stage_{index}",
+        ):
+
+            left, right = st.columns(
+                [4, 1],
+                gap="small",
+            )
+
+            with left:
+                st.subheader(
+                    f"{index:02d}  {step}"
+                )
+
+            with right:
+                st.caption(
+                    f"{int(progress * 100)}%"
+                )
+
+            st.progress(
+                progress
+            )

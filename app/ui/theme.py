@@ -1,48 +1,58 @@
-from pathlib import Path
-import streamlit as st
+from __future__ import annotations
 
 
 # ============================================================
-# CAREERCOPILOT GLOBAL THEME LOADER
+# CAREERCOPILOT THEME
+# ============================================================
+#
+# Native Streamlit theme helpers.
+#
+# No HTML.
+# No CSS injection.
+# No unsafe_allow_html.
 # ============================================================
 
 
-def load_theme():
+DARK_THEME = {
+    "background": "#050509",
+    "secondary_background": "#0B0B14",
+    "text": "#F8FAFC",
+    "primary": "#8B5CF6",
+    "accent": "#3B82F6",
+    "cyan": "#22D3EE",
+    "pink": "#EC4899",
+}
 
-    base_dir = Path(__file__).resolve().parents[2]
 
-    css_files = [
-        base_dir / "assets" / "css" / "styles.css",
-        base_dir / "assets" / "css" / "hero.css",
-    ]
+LIGHT_THEME = {
+    "background": "#F7F9FF",
+    "secondary_background": "#EEF3FF",
+    "text": "#111936",
+    "primary": "#7C3AED",
+    "accent": "#2563EB",
+    "cyan": "#0891B2",
+    "pink": "#DB2777",
+}
 
-    css_parts = []
 
-    for css_file in css_files:
+def get_theme(theme: str = "dark") -> dict:
+    """
+    Return the CareerCopilot design tokens
+    for the requested theme.
+    """
 
-        if not css_file.exists():
-            continue
+    if theme == "light":
 
-        try:
-            css_parts.append(
-                css_file.read_text(
-                    encoding="utf-8"
-                )
-            )
+        return LIGHT_THEME.copy()
 
-        except Exception:
-            continue
+    return DARK_THEME.copy()
 
-    if not css_parts:
-        return
 
-    css = "\n\n".join(css_parts)
+def load_theme() -> dict:
+    """
+    Compatibility helper used by app.py.
 
-    st.markdown(
-        f"""
-        <style>
-        {css}
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    Returns the default CareerCopilot theme tokens.
+    """
+
+    return get_theme("dark")

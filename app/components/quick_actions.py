@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import streamlit as st
 
 from app.core.navigation import (
@@ -9,45 +11,77 @@ from app.core.navigation import (
 )
 
 
-def show():
+def show() -> None:
     """Render CareerCopilot quick actions."""
 
-    st.markdown("### Quick Actions")
+    st.markdown("## ⚡ Quick Actions")
 
-    col1, col2 = st.columns(2)
+    st.caption(
+        "Jump directly into the actions that move your career forward."
+    )
 
-    with col1:
+    actions = [
+        (
+            "📄",
+            "Analyze Resume",
+            "Improve ATS compatibility and understand your resume.",
+            RESUME_ANALYZER,
+        ),
+        (
+            "💼",
+            "Find Opportunities",
+            "Discover internships that match your profile.",
+            OPPORTUNITIES,
+        ),
+        (
+            "🤖",
+            "Ask AI Coach",
+            "Get personalized career guidance from your AI coach.",
+            AI_COACH,
+        ),
+        (
+            "🗺️",
+            "Build Roadmap",
+            "Create a focused plan for your next career milestone.",
+            ROADMAP,
+        ),
+    ]
 
-        if st.button(
-            "📄 Analyze Resume",
-            use_container_width=True,
-            key="quick_resume",
-        ):
-            navigate(RESUME_ANALYZER)
-            st.rerun()
+    columns = st.columns(
+        4,
+        gap="medium",
+    )
 
-        if st.button(
-            "💼 Find Opportunities",
-            use_container_width=True,
-            key="quick_opportunities",
-        ):
-            navigate(OPPORTUNITIES)
-            st.rerun()
+    for column, (icon, title, description, page) in zip(
+        columns,
+        actions,
+    ):
 
-    with col2:
+        with column:
 
-        if st.button(
-            "🤖 Ask AI Coach",
-            use_container_width=True,
-            key="quick_ai_coach",
-        ):
-            navigate(AI_COACH)
-            st.rerun()
+            with st.container(
+                border=True,
+            ):
 
-        if st.button(
-            "🗺️ Build Roadmap",
-            use_container_width=True,
-            key="quick_roadmap",
-        ):
-            navigate(ROADMAP)
-            st.rerun()
+                st.markdown(
+                    f"### {icon}"
+                )
+
+                st.markdown(
+                    f"**{title}**"
+                )
+
+                st.caption(
+                    description
+                )
+
+                st.write("")
+
+                if st.button(
+                    "Open →",
+                    key=f"quick_action_{page}",
+                    use_container_width=True,
+                ):
+
+                    navigate(page)
+                    st.rerun()

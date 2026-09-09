@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import streamlit as st
 
 
@@ -5,185 +7,134 @@ import streamlit as st
 # CAREERCOPILOT APPEARANCE MANAGER
 # ============================================================
 #
-# Dark is the DEFAULT.
-# Light is completely controlled through CSS variables.
+# ZERO HTML
+# ZERO unsafe_allow_html
 #
-# This avoids the old problem where dark CSS remained active
-# after switching to light mode.
+# Streamlit's native theme is controlled through
+# .streamlit/config.toml.
+#
+# This module handles the user's appearance preference
+# and the UI controls around it.
 # ============================================================
 
 
-def initialize():
-    """
-    Initialize CareerCopilot appearance.
+SUPPORTED_THEMES = (
+    "dark",
+    "light",
+)
 
-    Dark mode is always the first-launch default.
+
+DEFAULT_THEME = "dark"
+
+
+# ============================================================
+# INITIALIZATION
+# ============================================================
+
+def initialize() -> None:
+    """
+    Initialize the CareerCopilot appearance state.
+
+    Dark mode is the default.
     """
 
     if "appearance" not in st.session_state:
-        st.session_state.appearance = "dark"
+
+        st.session_state.appearance = DEFAULT_THEME
 
 
-def get_current_theme():
+# ============================================================
+# GET CURRENT THEME
+# ============================================================
+
+def get_current_theme() -> str:
     """
-    Return current theme.
+    Return the currently selected appearance.
     """
 
     return st.session_state.get(
         "appearance",
-        "dark",
+        DEFAULT_THEME,
     )
 
 
-def set_theme(theme: str):
+# ============================================================
+# SET THEME
+# ============================================================
+
+def set_theme(theme: str) -> None:
     """
-    Change theme safely.
+    Safely update the appearance preference.
     """
 
-    if theme not in ("dark", "light"):
-        theme = "dark"
+    if theme not in SUPPORTED_THEMES:
+
+        theme = DEFAULT_THEME
 
     st.session_state.appearance = theme
 
 
 # ============================================================
-# THEME VARIABLES
+# TOGGLE THEME
 # ============================================================
 
-DARK_THEME = """
-:root {
-    color-scheme: dark;
+def toggle_theme() -> None:
+    """
+    Toggle between dark and light mode.
+    """
 
-    --cc-bg: #030712;
-    --cc-bg-secondary: #071225;
+    current = get_current_theme()
 
-    --cc-text: #f8fafc;
-    --cc-text-soft: #d6deec;
-    --cc-text-muted: #8c9ab0;
+    if current == "dark":
 
-    --cc-card: rgba(10, 20, 43, 0.58);
-    --cc-card-strong: rgba(12, 24, 51, 0.78);
+        set_theme("light")
 
-    --cc-border: rgba(105, 190, 255, 0.22);
-    --cc-border-strong: rgba(110, 231, 255, 0.42);
+    else:
 
-    --cc-purple: #8b5cf6;
-    --cc-purple-bright: #a855f7;
-
-    --cc-blue: #3b82f6;
-    --cc-cyan: #22d3ee;
-    --cc-pink: #ec4899;
-
-    --cc-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.45),
-        0 0 35px rgba(59, 130, 246, 0.08);
-
-    --cc-button-text: #ffffff;
-
-    --cc-sidebar:
-        linear-gradient(
-            180deg,
-            rgba(3, 9, 24, 0.96),
-            rgba(7, 14, 32, 0.92)
-        );
-
-    --cc-divider:
-        rgba(148, 163, 184, 0.14);
-}
-"""
-
-
-LIGHT_THEME = """
-:root {
-    color-scheme: light;
-
-    --cc-bg: #f7f9ff;
-    --cc-bg-secondary: #eef3ff;
-
-    --cc-text: #111936;
-    --cc-text-soft: #334155;
-    --cc-text-muted: #64748b;
-
-    --cc-card: rgba(255, 255, 255, 0.62);
-    --cc-card-strong: rgba(255, 255, 255, 0.82);
-
-    --cc-border: rgba(99, 102, 241, 0.16);
-    --cc-border-strong: rgba(99, 102, 241, 0.30);
-
-    --cc-purple: #7c3aed;
-    --cc-purple-bright: #8b5cf6;
-
-    --cc-blue: #2563eb;
-    --cc-cyan: #0891b2;
-    --cc-pink: #db2777;
-
-    --cc-shadow:
-        0 22px 55px rgba(79, 70, 229, 0.10),
-        0 8px 25px rgba(15, 23, 42, 0.06);
-
-    --cc-button-text: #ffffff;
-
-    --cc-sidebar:
-        linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.92),
-            rgba(242, 246, 255, 0.94)
-        );
-
-    --cc-divider:
-        rgba(100, 116, 139, 0.16);
-}
-"""
+        set_theme("dark")
 
 
 # ============================================================
 # APPLY THEME
 # ============================================================
 
-def apply_theme():
+def apply_theme() -> None:
     """
-    Inject only the currently selected theme variables.
+    Compatibility function.
+
+    The previous implementation injected CSS directly into
+    the page using unsafe HTML.
+
+    That is intentionally removed.
+
+    Streamlit's native theme configuration now owns the
+    global application appearance.
     """
 
-    theme = get_current_theme()
-
-    if theme == "light":
-        css = LIGHT_THEME
-    else:
-        css = DARK_THEME
-
-    st.markdown(
-        f"""
-        <style>
-        {css}
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    return None
 
 
 # ============================================================
 # THEME SWITCHER
 # ============================================================
 
-def show_theme_switcher():
+def show_theme_switcher() -> None:
     """
-    Premium Dark / Light theme selector.
+    Render the native Streamlit theme switcher.
     """
 
     current = get_current_theme()
 
-    st.markdown(
-        '<div class="cc-theme-label">Appearance</div>',
-        unsafe_allow_html=True,
+    st.caption(
+        "Appearance"
     )
 
-    col1, col2 = st.columns(
+    dark_col, light_col = st.columns(
         2,
         gap="small",
     )
 
-    with col1:
+    with dark_col:
 
         if st.button(
             "🌙 Dark",
@@ -196,10 +147,13 @@ def show_theme_switcher():
             ),
         ):
 
-            set_theme("dark")
-            st.rerun()
+            if current != "dark":
 
-    with col2:
+                set_theme("dark")
+
+                st.rerun()
+
+    with light_col:
 
         if st.button(
             "☀️ Light",
@@ -212,5 +166,28 @@ def show_theme_switcher():
             ),
         ):
 
-            set_theme("light")
-            st.rerun()
+            if current != "light":
+
+                set_theme("light")
+
+                st.rerun()
+
+
+# ============================================================
+# DISPLAY HELPERS
+# ============================================================
+
+def is_dark_mode() -> bool:
+    """
+    Return True when dark mode is active.
+    """
+
+    return get_current_theme() == "dark"
+
+
+def is_light_mode() -> bool:
+    """
+    Return True when light mode is active.
+    """
+
+    return get_current_theme() == "light"

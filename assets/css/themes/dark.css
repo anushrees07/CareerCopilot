@@ -1,141 +1,642 @@
-/* ============================================================
-   CAREERCOPILOT DARK THEME
-   DEFAULT
-   ============================================================ */
+:root {
+    --cc-bg: #030511;
+    --cc-surface: rgba(10, 16, 38, 0.72);
+    --cc-surface-strong: rgba(12, 20, 48, 0.90);
 
+    --cc-border: rgba(101, 189, 255, 0.25);
+    --cc-border-hot: rgba(139, 92, 246, 0.65);
 
-/* ============================================================
-   APP BACKGROUND
-   ============================================================ */
+    --cc-text: #f7f9ff;
+    --cc-muted: #aeb8cf;
 
-html,
-body,
-[data-testid="stAppViewContainer"],
-[data-testid="stApp"] {
-
-    background:
-        #030712 !important;
-
+    --cc-cyan: #22d3ee;
+    --cc-blue: #3b82f6;
+    --cc-purple: #8b5cf6;
+    --cc-pink: #ec4899;
+    --cc-green: #22c55e;
+    --cc-gold: #fbbf24;
 }
 
 
 /* ============================================================
-   MAIN AURORA BACKGROUND
+   COSMIC BACKGROUND
    ============================================================ */
 
-[data-testid="stAppViewContainer"] {
+.stApp {
+    background:
+        radial-gradient(
+            circle at 75% 8%,
+            rgba(124, 58, 237, 0.25),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 15% 5%,
+            rgba(14, 165, 233, 0.18),
+            transparent 23%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(49, 46, 129, 0.08),
+            transparent 40%
+        ),
+        linear-gradient(
+            180deg,
+            #02040d 0%,
+            #050817 45%,
+            #030513 75%,
+            #010207 100%
+        );
+
+    color: var(--cc-text);
+}
+
+
+/* ============================================================
+   STAR FIELD
+   ============================================================ */
+
+.stApp::before {
+    content: "";
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    opacity: 0.72;
+
+    background-image:
+        radial-gradient(
+            circle at 7% 15%,
+            rgba(255,255,255,.95) 0 1px,
+            transparent 1.6px
+        ),
+        radial-gradient(
+            circle at 16% 72%,
+            rgba(34,211,238,.9) 0 1px,
+            transparent 1.7px
+        ),
+        radial-gradient(
+            circle at 27% 23%,
+            rgba(255,255,255,.75) 0 1px,
+            transparent 1.6px
+        ),
+        radial-gradient(
+            circle at 39% 9%,
+            rgba(139,92,246,.9) 0 1px,
+            transparent 1.7px
+        ),
+        radial-gradient(
+            circle at 49% 35%,
+            rgba(255,255,255,.8) 0 1px,
+            transparent 1.6px
+        ),
+        radial-gradient(
+            circle at 63% 13%,
+            rgba(34,211,238,.9) 0 1px,
+            transparent 1.7px
+        ),
+        radial-gradient(
+            circle at 74% 29%,
+            rgba(255,255,255,.9) 0 1px,
+            transparent 1.6px
+        ),
+        radial-gradient(
+            circle at 87% 14%,
+            rgba(139,92,246,.9) 0 1px,
+            transparent 1.7px
+        ),
+        radial-gradient(
+            circle at 94% 61%,
+            rgba(255,255,255,.75) 0 1px,
+            transparent 1.6px
+        );
+
+    background-size:
+        410px 290px,
+        520px 420px,
+        610px 360px,
+        470px 380px,
+        530px 330px,
+        650px 470px,
+        390px 300px,
+        720px 520px,
+        560px 400px;
+
+    animation:
+        cc-stars 22s linear infinite;
+}
+
+
+/* ============================================================
+   AURORA
+   ============================================================ */
+
+.stApp::after {
+    content: "";
+
+    position: fixed;
+
+    width: 90vw;
+    height: 45vh;
+
+    right: -20vw;
+    bottom: -10vh;
+
+    pointer-events: none;
+
+    z-index: 0;
 
     background:
-
         radial-gradient(
-            circle at 12% 10%,
-            rgba(30, 64, 175, 0.18),
-            transparent 30%
+            ellipse at center,
+            rgba(139,92,246,.28),
+            transparent 58%
         ),
-
         radial-gradient(
-            circle at 88% 18%,
-            rgba(6, 182, 212, 0.14),
-            transparent 28%
+            ellipse at 35% 55%,
+            rgba(34,211,238,.20),
+            transparent 52%
         ),
-
         radial-gradient(
-            circle at 70% 78%,
-            rgba(124, 58, 237, 0.13),
-            transparent 32%
-        ),
+            ellipse at 75% 65%,
+            rgba(236,72,153,.17),
+            transparent 46%
+        );
 
+    filter: blur(34px);
+
+    transform: rotate(-8deg);
+
+    animation:
+        cc-aurora 14s ease-in-out infinite alternate;
+}
+
+
+@keyframes cc-stars {
+
+    from {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    to {
+        transform:
+            translate3d(-28px, 20px, 0);
+    }
+}
+
+
+@keyframes cc-aurora {
+
+    from {
+        transform:
+            rotate(-8deg)
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    to {
+        transform:
+            rotate(-4deg)
+            translate3d(-50px, -25px, 0)
+            scale(1.10);
+    }
+}
+
+
+/* ============================================================
+   STREAMLIT SURFACES
+   ============================================================ */
+
+section[data-testid="stMain"],
+[data-testid="stAppViewContainer"],
+[data-testid="stMainBlockContainer"] {
+    background: transparent !important;
+}
+
+
+[data-testid="stMainBlockContainer"] {
+    max-width: 1500px;
+
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+}
+
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+section[data-testid="stSidebar"] {
+
+    background:
         linear-gradient(
-            135deg,
-            #020617 0%,
-            #050817 45%,
-            #08071d 100%
+            180deg,
+            rgba(3,7,22,.96),
+            rgba(5,8,24,.90)
         ) !important;
 
+    border-right:
+        1px solid
+        rgba(111,190,255,.20);
+
+    box-shadow:
+        20px 0 80px
+        rgba(0,0,0,.38);
+
+    backdrop-filter:
+        blur(25px);
+}
+
+
+section[data-testid="stSidebar"] * {
+    color: var(--cc-text);
 }
 
 
 /* ============================================================
-   MAIN CONTENT
+   TYPOGRAPHY
    ============================================================ */
 
-[data-testid="stMain"] {
-
-    background:
-        transparent !important;
-
-}
-
-
-/* ============================================================
-   GLOBAL TEXT
-   ============================================================ */
-
-[data-testid="stMain"] {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 
     color:
-        #f8fafc !important;
+        var(--cc-text) !important;
 
+    font-family:
+        "Space Grotesk",
+        "Inter",
+        sans-serif !important;
+
+    letter-spacing:
+        -0.035em !important;
+}
+
+
+p,
+label,
+[data-testid="stCaptionContainer"] {
+
+    color:
+        var(--cc-muted) !important;
+}
+
+
+[data-testid="stMarkdownContainer"] {
+    color:
+        var(--cc-text);
 }
 
 
 /* ============================================================
-   GLASS CONTAINERS
+   HERO
    ============================================================ */
 
-[data-testid="stVerticalBlockBorderWrapper"] {
+.st-key-cc_hero {
+
+    padding:
+        2.2rem 0 3rem 0;
+
+    position:
+        relative;
+}
+
+
+.st-key-hero_line_one h1,
+.st-key-hero_line_three h1 {
+
+    font-size:
+        clamp(
+            2.8rem,
+            5vw,
+            5rem
+        ) !important;
+
+    line-height:
+        .92 !important;
+
+    font-weight:
+        780 !important;
+
+    margin:
+        0 !important;
+}
+
+
+.st-key-hero_career h1 {
+
+    font-size:
+        clamp(
+            3.3rem,
+            6vw,
+            6.2rem
+        ) !important;
+
+    line-height:
+        .90 !important;
+
+    font-weight:
+        850 !important;
+
+    margin:
+        0 !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            #22d3ee 0%,
+            #3b82f6 30%,
+            #6366f1 52%,
+            #8b5cf6 72%,
+            #d946ef 100%
+        );
+
+    -webkit-background-clip:
+        text;
+
+    background-clip:
+        text;
+
+    color:
+        transparent !important;
+
+    filter:
+        drop-shadow(
+            0 0 16px
+            rgba(34,211,238,.20)
+        );
+
+    animation:
+        cc-career-glow
+        4s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+@keyframes cc-career-glow {
+
+    from {
+        filter:
+            drop-shadow(
+                0 0 9px
+                rgba(34,211,238,.25)
+            );
+    }
+
+    to {
+        filter:
+            drop-shadow(
+                0 0 32px
+                rgba(139,92,246,.65)
+            );
+    }
+}
+
+
+/* ============================================================
+   HERO SNAPSHOT
+   ============================================================ */
+
+.st-key-career_snapshot {
+
+    border:
+        1px solid
+        var(--cc-border);
+
+    border-radius:
+        1.5rem;
+
+    padding:
+        1.4rem 1.45rem;
 
     background:
         linear-gradient(
             145deg,
-            rgba(15, 23, 42, 0.48),
-            rgba(15, 23, 42, 0.25)
-        ) !important;
-
-    border:
-        1px solid
-        rgba(148, 163, 184, 0.14) !important;
-
-    border-radius:
-        22px !important;
-
-    backdrop-filter:
-        blur(22px)
-        saturate(145%) !important;
-
-    -webkit-backdrop-filter:
-        blur(22px)
-        saturate(145%) !important;
+            rgba(19,30,65,.88),
+            rgba(7,12,31,.72)
+        );
 
     box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.30),
+
+        0 0 55px
+        rgba(99,102,241,.14),
 
         inset 0 1px 0
-        rgba(255, 255, 255, 0.045),
+        rgba(255,255,255,.09);
 
-        0 18px 55px
-        rgba(0, 0, 0, 0.20) !important;
+    backdrop-filter:
+        blur(22px);
+}
 
+
+.st-key-career_snapshot
+[data-testid="stHorizontalBlock"] {
+
+    padding:
+        .7rem 0;
+
+    border-bottom:
+        1px solid
+        rgba(148,163,184,.10);
+}
+
+
+.st-key-career_snapshot
+[data-testid="stHorizontalBlock"]:last-child {
+
+    border-bottom:
+        0;
+}
+
+
+.st-key-career_snapshot
+[data-testid="stCaptionContainer"] {
+
+    color:
+        var(--cc-cyan) !important;
+
+    font-weight:
+        700;
+
+    text-align:
+        right;
 }
 
 
 /* ============================================================
-   GLASS CARD HOVER
+   GLASS CARDS
    ============================================================ */
 
-[data-testid="stVerticalBlockBorderWrapper"]:hover {
+div[data-testid="stVerticalBlockBorderWrapper"] {
 
     border-color:
-        rgba(103, 232, 249, 0.30) !important;
+        rgba(101,189,255,.20) !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12,20,46,.68),
+            rgba(6,10,26,.75)
+        ) !important;
+
+    border-radius:
+        1.2rem !important;
 
     box-shadow:
+        0 18px 55px
+        rgba(0,0,0,.20),
 
         inset 0 1px 0
-        rgba(255, 255, 255, 0.08),
+        rgba(255,255,255,.05);
+}
 
-        0 22px 65px
-        rgba(0, 0, 0, 0.30),
 
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.stButton button {
+
+    border-radius:
+        .95rem !important;
+
+    border:
+        1px solid
+        rgba(110,231,255,.18) !important;
+
+    transition:
+        transform .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease !important;
+}
+
+
+.stButton button:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(139,92,246,.60) !important;
+
+    box-shadow:
         0 0 28px
-        rgba(34, 211, 238, 0.07) !important;
+        rgba(99,102,241,.18) !important;
+}
 
+
+/* ============================================================
+   METRICS
+   ============================================================ */
+
+[data-testid="stMetric"] {
+    padding:
+        .4rem .2rem;
+}
+
+
+[data-testid="stMetricLabel"] {
+
+    color:
+        #b9c5dd !important;
+}
+
+
+[data-testid="stMetricValue"] {
+
+    color:
+        #f8fbff !important;
+
+    font-weight:
+        800 !important;
+}
+
+
+/* ============================================================
+   PROGRESS
+   ============================================================ */
+
+[data-testid="stProgress"]
+> div
+> div
+> div {
+
+    background:
+        linear-gradient(
+            90deg,
+            #22d3ee,
+            #3b82f6,
+            #8b5cf6,
+            #d946ef
+        ) !important;
+}
+
+
+/* ============================================================
+   CHAT
+   ============================================================ */
+
+[data-testid="stChatMessage"] {
+
+    background:
+        rgba(10,18,40,.62) !important;
+
+    border:
+        1px solid
+        rgba(101,189,255,.14);
+
+    border-radius:
+        1rem;
+}
+
+
+/* ============================================================
+   EXPANDERS
+   ============================================================ */
+
+[data-testid="stExpander"] {
+
+    border-color:
+        rgba(101,189,255,.18) !important;
+
+    background:
+        rgba(9,15,35,.55) !important;
+
+    border-radius:
+        1rem;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    [data-testid="stMainBlockContainer"] {
+        padding-top: 1rem;
+    }
+
+    .st-key-hero_line_one h1,
+    .st-key-hero_line_three h1 {
+        font-size:
+            2.8rem !important;
+    }
+
+    .st-key-hero_career h1 {
+        font-size:
+            3.6rem !important;
+    }
 }

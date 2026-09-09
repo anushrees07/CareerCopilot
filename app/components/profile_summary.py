@@ -1,9 +1,13 @@
+from __future__ import annotations
+
 import streamlit as st
 
 from app.storage.profile_manager import load_profile
 
 
-def show():
+def show() -> None:
+    """Render the user's AI-generated career profile."""
+
 
     profile = load_profile()
 
@@ -15,74 +19,90 @@ def show():
 
     st.write("")
 
+
     # ========================================================
-    # NO RESUME STATE
+    # EMPTY STATE
     # ========================================================
 
     if not profile.get("resume_name"):
 
         with st.container(
             border=True,
-            key="career-profile-empty",
         ):
 
-            st.markdown("### 📄 Your Career Profile is Waiting")
+            st.markdown(
+                "### 📄 Your Career Profile is Waiting"
+            )
 
             st.write(
-                "Upload your resume to unlock your personalized "
-                "career profile, extracted skills and AI insights."
+                "Upload your resume to unlock personalized "
+                "career insights, extracted skills and AI analysis."
             )
 
             st.write("")
 
-            col1, col2, col3 = st.columns(3)
+            col1, col2, col3 = st.columns(
+                3,
+                gap="medium",
+            )
 
             with col1:
-                st.markdown("📊")
+
+                st.markdown("### 📊")
                 st.caption("ATS Insights")
 
             with col2:
-                st.markdown("🧠")
+
+                st.markdown("### 🧠")
                 st.caption("Skill Intelligence")
 
             with col3:
-                st.markdown("🤖")
+
+                st.markdown("### 🤖")
                 st.caption("AI Career Summary")
 
         return
 
+
     # ========================================================
-    # RESUME INFORMATION
+    # RESUME + ATS
     # ========================================================
 
     with st.container(
         border=True,
-        key="career-profile-main",
     ):
 
-        col1, col2 = st.columns(
-            [1.4, 1],
+        left, right = st.columns(
+            [1.5, 1],
             gap="large",
         )
 
-        with col1:
+        with left:
 
             st.markdown("### 📄 Resume")
 
             st.success(
-                f"**{profile['resume_name']}**"
+                profile.get(
+                    "resume_name",
+                    "Resume uploaded",
+                )
             )
 
-        with col2:
+        with right:
 
-            ats = profile.get("ats_score", 0)
+            ats_score = profile.get(
+                "ats_score",
+                0,
+            )
 
             st.metric(
                 "🎯 ATS Score",
-                f"{ats}%",
+                f"{ats_score}%",
             )
 
+
     st.write("")
+
 
     # ========================================================
     # SKILLS
@@ -90,20 +110,27 @@ def show():
 
     with st.container(
         border=True,
-        key="career-profile-skills",
     ):
 
-        st.markdown("### 🧠 Extracted Skills")
+        st.markdown(
+            "### 🧠 Extracted Skills"
+        )
 
-        skills = profile.get("skills", [])
+        skills = profile.get(
+            "skills",
+            [],
+        )
 
         if skills:
 
-            cols = st.columns(4)
+            skill_columns = st.columns(
+                4,
+                gap="small",
+            )
 
-            for i, skill in enumerate(skills):
+            for index, skill in enumerate(skills):
 
-                with cols[i % 4]:
+                with skill_columns[index % 4]:
 
                     st.success(
                         skill
@@ -112,10 +139,12 @@ def show():
         else:
 
             st.warning(
-                "No skills extracted yet."
+                "No skills have been extracted yet."
             )
 
+
     st.write("")
+
 
     # ========================================================
     # AI SUMMARY
@@ -123,10 +152,11 @@ def show():
 
     with st.container(
         border=True,
-        key="career-profile-ai",
     ):
 
-        st.markdown("### 🤖 AI Career Summary")
+        st.markdown(
+            "### 🤖 AI Career Summary"
+        )
 
         feedback = profile.get(
             "ai_feedback",
@@ -135,7 +165,9 @@ def show():
 
         if feedback:
 
-            st.write(feedback)
+            st.write(
+                feedback
+            )
 
         else:
 

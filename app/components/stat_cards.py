@@ -1,62 +1,50 @@
+from __future__ import annotations
+
 import streamlit as st
 
 from app.storage.profile_manager import load_profile
 
 
 # ============================================================
-# CAREERCOPILOT CAREER METRICS
-# PREMIUM V2
+# CAREER METRICS
 # ============================================================
 
 
-def show():
-    """
-    Career Metrics dashboard section.
-
-    Data is sourced from the existing profile manager.
-    No fake deltas or invented analytics are displayed.
-    Visual styling is handled by the global UI/CSS system.
-    """
+def show() -> None:
 
     profile = load_profile()
 
-    # ========================================================
-    # REAL PROFILE DATA
-    # ========================================================
-
-    ats = profile.get("ats_score", 0)
-
-    skills = len(
-        profile.get("skills", [])
+    ats_score = profile.get(
+        "ats_score",
+        0,
     )
 
-    health = profile.get(
+    skills = len(
+        profile.get(
+            "skills",
+            [],
+        )
+    )
+
+    career_health = profile.get(
         "career_health",
         0,
     )
 
-    resume = profile.get(
+    resume_name = profile.get(
         "resume_name",
         "",
     )
-
-    # ========================================================
-    # SECTION HEADER
-    # ========================================================
 
     st.markdown(
         "## 📊 Career Metrics"
     )
 
     st.caption(
-        "A quick snapshot of your current career readiness."
+        "A live snapshot of your current career readiness."
     )
 
     st.write("")
-
-    # ========================================================
-    # METRIC GRID
-    # ========================================================
 
     col1, col2, col3, col4 = st.columns(
         4,
@@ -64,23 +52,18 @@ def show():
     )
 
     # ========================================================
-    # ATS SCORE
+    # ATS
     # ========================================================
 
     with col1:
 
-        with st.container(
-            border=True,
-            key="metric-ats",
-        ):
+        with st.container(border=True):
 
-            st.markdown(
-                "🎯"
-            )
+            st.markdown("### 🎯")
 
             st.metric(
-                label="ATS Score",
-                value=f"{ats}%",
+                "ATS Score",
+                f"{ats_score}%",
             )
 
             st.caption(
@@ -93,18 +76,13 @@ def show():
 
     with col2:
 
-        with st.container(
-            border=True,
-            key="metric-skills",
-        ):
+        with st.container(border=True):
 
-            st.markdown(
-                "🧠"
-            )
+            st.markdown("### 🧠")
 
             st.metric(
-                label="Skills",
-                value=skills,
+                "Skills",
+                skills,
             )
 
             st.caption(
@@ -117,18 +95,13 @@ def show():
 
     with col3:
 
-        with st.container(
-            border=True,
-            key="metric-health",
-        ):
+        with st.container(border=True):
 
-            st.markdown(
-                "💚"
-            )
+            st.markdown("### 💜")
 
             st.metric(
-                label="Career Health",
-                value=f"{health}%",
+                "Career Health",
+                f"{career_health}%",
             )
 
             st.caption(
@@ -136,37 +109,33 @@ def show():
             )
 
     # ========================================================
-    # RESUME STATUS
+    # RESUME
     # ========================================================
 
     with col4:
 
-        with st.container(
-            border=True,
-            key="metric-resume",
-        ):
+        with st.container(border=True):
 
-            st.markdown(
-                "📄"
-            )
+            st.markdown("### 📄")
 
-            if resume:
+            if resume_name:
 
-                status = "Ready"
+                st.metric(
+                    "Resume",
+                    "Ready",
+                )
 
-                caption = "Resume uploaded"
+                st.caption(
+                    "Resume uploaded"
+                )
 
             else:
 
-                status = "Missing"
+                st.metric(
+                    "Resume",
+                    "Missing",
+                )
 
-                caption = "Upload your resume"
-
-            st.metric(
-                label="Resume",
-                value=status,
-            )
-
-            st.caption(
-                caption
-            )
+                st.caption(
+                    "Upload your resume"
+                )

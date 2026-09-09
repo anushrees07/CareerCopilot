@@ -1,70 +1,64 @@
 import streamlit as st
 
+
 QUESTIONS = {
     "AI Engineer": [
         (
             "Explain supervised vs unsupervised learning.",
-            "Supervised learning uses labelled data while unsupervised learning finds hidden patterns in unlabelled data."
+            "Supervised learning uses labelled data while "
+            "unsupervised learning discovers patterns in "
+            "unlabelled data.",
         ),
         (
             "What is overfitting?",
-            "A model memorizes the training data instead of learning patterns."
+            "Overfitting happens when a model learns the "
+            "training data too closely and performs poorly "
+            "on unseen data.",
         ),
         (
             "Difference between TensorFlow and PyTorch?",
-            "TensorFlow is production-oriented while PyTorch is research-friendly."
+            "Both are deep-learning frameworks. PyTorch is "
+            "popular for research and experimentation, while "
+            "TensorFlow has strong production tooling.",
         ),
     ],
+
     "Backend Developer": [
         (
             "What is REST API?",
-            "An architectural style for communication using HTTP."
+            "REST is an architectural approach for designing "
+            "networked services around resources and HTTP.",
         ),
         (
             "Difference between Flask and FastAPI?",
-            "FastAPI is asynchronous and faster while Flask is lightweight and simple."
+            "Flask is lightweight and flexible. FastAPI provides "
+            "modern type hints, validation and strong async support.",
         ),
     ],
+
     "Data Scientist": [
         (
             "What is feature engineering?",
-            "Creating useful features from raw data."
+            "Feature engineering means transforming raw data "
+            "into useful inputs for machine-learning models.",
         ),
         (
             "Difference between Mean and Median?",
-            "Median is more robust to outliers."
+            "The mean is the arithmetic average. The median is "
+            "the middle value and is generally more resistant "
+            "to extreme outliers.",
         ),
     ],
 }
 
 
-def show():
+def show() -> None:
 
-    st.markdown(
-        """
-<div class="ai-badge">
-🎤 Interview Prep
-</div>
-""",
-        unsafe_allow_html=True,
-    )
+    st.title("🎤 Interview Prep")
 
-    st.markdown(
-        """
-<div class="section-title">
-Ace Your Next Interview
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-<div class="section-sub">
-Practice technical interviews powered by AI.
-</div>
-""",
-        unsafe_allow_html=True,
+    st.caption(
+        "Practice technical interviews with structured "
+        "questions, explanations and preparation tips."
     )
 
     role = st.selectbox(
@@ -83,31 +77,62 @@ Practice technical interviews powered by AI.
 
     st.write("")
 
-    if st.button(
-        "🎯 Generate Questions",
+    if not st.button(
+        f"🎯 Generate {difficulty} Questions",
         use_container_width=True,
+        type="primary",
+    ):
+        return
+
+    st.success(
+        "Interview session ready!"
+    )
+
+    st.write("")
+
+    questions = QUESTIONS[role]
+
+    for index, (
+        question,
+        answer,
+    ) in enumerate(
+        questions,
+        start=1,
     ):
 
-        st.success("Interview Ready!")
+        with st.container(
+            border=True,
+            key=f"interview_question_{index}",
+        ):
 
-        st.write("")
+            st.subheader(
+                f"Q{index}. {question}"
+            )
 
-        for i, (question, answer) in enumerate(QUESTIONS[role], start=1):
+            st.caption(
+                f"Difficulty • {difficulty}"
+            )
 
-            with st.expander(f"Q{i}. {question}"):
+            with st.expander(
+                "Reveal suggested answer"
+            ):
 
-                st.markdown("### ✅ Suggested Answer")
+                st.write(
+                    answer
+                )
 
-                st.info(answer)
+    st.write("")
 
-        st.divider()
+    st.subheader(
+        "💡 AI Interview Tips"
+    )
 
-        st.subheader("💡 AI Tips")
+    tips = [
+        "Use the STAR method for behavioral questions.",
+        "Keep technical answers concise, then expand when asked.",
+        "Explain your projects with measurable impact.",
+        "Practice speaking aloud instead of only reading answers.",
+    ]
 
-        st.success("Use the STAR method.")
-
-        st.success("Keep answers concise.")
-
-        st.success("Explain your projects with measurable impact.")
-
-        st.success("Practice speaking aloud.")
+    for tip in tips:
+        st.info(tip)

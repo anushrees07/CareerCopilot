@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import streamlit as st
 
 from app.storage.settings_manager import load_settings
@@ -22,7 +24,7 @@ from app.core.navigation import (
 
 
 # ============================================================
-# PAGE CONFIG
+# PAGE CONFIGURATION
 # ============================================================
 
 st.set_page_config(
@@ -65,36 +67,25 @@ from app.pages import ai_setup
 # ============================================================
 
 PAGES = {
+    DASHBOARD: dashboard.show,
 
-    DASHBOARD:
-        dashboard.show,
+    "resume_analyzer": resume_analyzer.show,
 
-    "resume_analyzer":
-        resume_analyzer.show,
+    "opportunities": opportunities.show,
 
-    "opportunities":
-        opportunities.show,
+    "skill_gap": skill_gap.show,
 
-    "skill_gap":
-        skill_gap.show,
+    "ai_coach": ai_coach.show,
 
-    "ai_coach":
-        ai_coach.show,
+    "interview_prep": interview_prep.show,
 
-    "interview_prep":
-        interview_prep.show,
+    "roadmap": roadmap.show,
 
-    "roadmap":
-        roadmap.show,
+    "analytics": analytics.show,
 
-    "analytics":
-        analytics.show,
+    "settings": settings.show,
 
-    "settings":
-        settings.show,
-
-    AI_SETUP:
-        ai_setup.show,
+    AI_SETUP: ai_setup.show,
 }
 
 
@@ -103,6 +94,10 @@ PAGES = {
 # ============================================================
 
 def is_ai_configured() -> bool:
+    """
+    Check whether the currently selected AI provider
+    has a usable API key configured.
+    """
 
     settings_data = load_settings()
 
@@ -112,23 +107,13 @@ def is_ai_configured() -> bool:
     )
 
     provider_keys = {
-
-        "Gemini":
-            "gemini_key",
-
-        "OpenAI":
-            "openai_key",
-
-        "Claude":
-            "claude_key",
-
-        "OpenRouter":
-            "openrouter_key",
+        "Gemini": "gemini_key",
+        "OpenAI": "openai_key",
+        "Claude": "claude_key",
+        "OpenRouter": "openrouter_key",
     }
 
-    key_name = provider_keys.get(
-        provider
-    )
+    key_name = provider_keys.get(provider)
 
     if not key_name:
         return False
@@ -138,10 +123,7 @@ def is_ai_configured() -> bool:
         "",
     )
 
-    if not isinstance(
-        api_key,
-        str,
-    ):
+    if not isinstance(api_key, str):
         return False
 
     return bool(
@@ -150,7 +132,7 @@ def is_ai_configured() -> bool:
 
 
 # ============================================================
-# FIRST LAUNCH AI GATE
+# FIRST-LAUNCH AI GATE
 # ============================================================
 
 if not is_ai_configured():
@@ -180,16 +162,11 @@ with st.sidebar:
     # --------------------------------------------------------
 
     st.markdown(
-        """
-        <div class="cc-sidebar-brand">
-            🚀 CareerCopilot
-        </div>
-        """,
-        unsafe_allow_html=True,
+        "## ✦ CareerCopilot"
     )
 
     st.caption(
-        "Your AI-powered career companion"
+        "AI Career Operating System"
     )
 
     st.divider()
@@ -198,21 +175,30 @@ with st.sidebar:
     # APPEARANCE
     # --------------------------------------------------------
 
+    st.markdown(
+        "### 🎨 Appearance"
+    )
+
     show_theme_switcher()
 
     st.divider()
 
     # --------------------------------------------------------
-    # NAVIGATION
+    # PRIMARY NAVIGATION
     # --------------------------------------------------------
+
+    st.markdown(
+        "### 🧭 Navigate"
+    )
+
+    current_page = get_current_page()
 
     for page in get_navigation_pages():
 
         label = get_label(page)
 
-        current = (
-            get_current_page()
-            == page
+        is_current = (
+            current_page == page
         )
 
         if st.button(
@@ -221,7 +207,7 @@ with st.sidebar:
             use_container_width=True,
             type=(
                 "primary"
-                if current
+                if is_current
                 else "secondary"
             ),
         ):
@@ -265,6 +251,7 @@ with st.sidebar:
 
     if st.button(
         "🔄 Change AI Provider",
+        key="change_ai_provider",
         use_container_width=True,
     ):
 
@@ -275,11 +262,15 @@ with st.sidebar:
     st.write("")
 
     # --------------------------------------------------------
-    # FOOTER
+    # SIDEBAR FOOTER
     # --------------------------------------------------------
 
     st.caption(
-        "CareerCopilot • AI Career Assistant"
+        "CareerCopilot"
+    )
+
+    st.caption(
+        "Build smarter. Apply better. Grow faster."
     )
 
 
@@ -306,7 +297,7 @@ if page_function is None:
 
 
 # ============================================================
-# RENDER
+# RENDER CURRENT PAGE
 # ============================================================
 
 page_function()

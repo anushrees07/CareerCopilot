@@ -3,88 +3,128 @@ import streamlit as st
 from app.ai.ai_factory import get_ai_provider
 
 
-def show():
+SUGGESTIONS = [
+    "How can I improve my resume?",
+    "What skills should I learn next?",
+    "How do I prepare for an AI/ML internship?",
+    "Review my career roadmap.",
+]
 
-    st.markdown(
-        """
-<div class="ai-badge">
-🤖 AI Career Coach
-</div>
-""",
-        unsafe_allow_html=True,
+
+def _send_prompt(prompt: str) -> None:
+    st.session_state.coach_prefill = prompt
+    st.rerun()
+
+
+def show() -> None:
+
+    st.title("🤖 AI Career Coach")
+
+    st.caption(
+        "Your personal career mentor for resumes, interviews, "
+        "skills, internships and career planning."
     )
-
-    st.markdown(
-        """
-<div class="section-title">
-Your Personal Career Mentor
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-<div class="section-sub">
-Ask career questions, interview doubts,
-resume advice or roadmap guidance.
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-    st.write("")
 
     if "coach_messages" not in st.session_state:
         st.session_state.coach_messages = []
 
+    st.write("")
+
+    with st.container(
+        border=True,
+        key="coach_intro",
+    ):
+
+        st.subheader(
+            "✦ Ask CareerCopilot"
+        )
+
+        st.write(
+            "Tell me what you're trying to achieve and "
+            "I'll help you turn it into your next practical step."
+        )
+
+        st.write("")
+
+        columns = st.columns(
+            2,
+            gap="small",
+        )
+
+        for index, prompt in enumerate(SUGGESTIONS):
+
+            with columns[index % 2]:
+
+                if st.button(
+                    prompt,
+                    key=f"coach_suggestion_{index}",
+                    use_container_width=True,
+                ):
+                    _send_prompt(prompt)
+
+    st.write("")
+
     for message in st.session_state.coach_messages:
 
-        with st.chat_message(message["role"]):
+        with st.chat_message(
+            message["role"]
+        ):
+            st.write(
+                message["content"]
+            )
 
-            st.markdown(message["content"])
+    prefill = st.session_state.pop(
+        "coach_prefill",
+        "",
+    )
 
     prompt = st.chat_input(
         "Ask CareerCopilot anything..."
     )
 
-    if prompt:
+    if prefill and not prompt:
+        prompt = prefill
 
-        st.session_state.coach_messages.append(
-            {
-                "role": "user",
-                "content": prompt,
-            }
-        )
+    if not prompt:
+        return
 
-        with st.chat_message("user"):
+    st.session_state.coach_messages.append(
+        {
+            "role": "user",
+            "content": prompt,
+        }
+    )
 
-            st.markdown(prompt)
+    with st.chat_message("user"):
+        st.write(prompt)
 
-        try:
+    try:
 
-            provider = get_ai_provider(
-                st.session_state.get(
-                    "selected_provider",
-                    "Gemini",
-                )
-            )
-
-            with st.spinner("Thinking..."):
-
-                response = provider.chat(prompt)
-
-        except Exception as e:
-
-            response = f"Error: {e}"
-
-        st.session_state.coach_messages.append(
-            {
-                "role": "assistant",
-                "content": response,
-            }
-        )
+        provider = get_ai_provider()
 
         with st.chat_message("assistant"):
 
-            st.markdown(response)
+            with st.spinner(
+                "CareerCopilot is thinking..."
+            ):
+                response = provider.chat(prompt)
+
+            st.write(response)
+
+    except Exception as exc:
+
+        response = (
+            "I couldn't reach the configured AI provider "
+            "right now.\n\n"
+            f"Details: {exc}"
+        )
+
+        with st.chat_message("assistant"):
+            st.error(response)
+
+    st.session_state.coach_messages.append(
+        {
+            "role": "assistant",
+            "content": response,
+        }
+    )
