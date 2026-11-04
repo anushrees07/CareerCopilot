@@ -1,3 +1,4 @@
+
 from __future__ import annotations
 
 import streamlit as st
@@ -5,173 +6,152 @@ import streamlit as st
 from app.storage.profile_manager import load_profile
 
 
+def _format_score(value: object) -> str:
+    """Return a safe, readable ATS score."""
+    if value is None or value == "":
+        return "Not calculated"
+
+    try:
+        score = float(value)
+    except (TypeError, ValueError):
+        return "Not available"
+
+    if not 0 <= score <= 100:
+        return "Not available"
+
+    return f"{score:g}%"
+
+
+def _get_skills(value: object) -> list[str]:
+    """Normalize skills into a clean list of strings."""
+    if not isinstance(value, (list, tuple, set)):
+        return []
+
+    return [
+        str(skill).strip()
+        for skill in value
+        if skill is not None and str(skill).strip()
+    ]
+
+
 def show() -> None:
-    """Render the user's AI-generated career profile."""
+    """Render the user's career profile."""
 
+    profile = load_profile() or {}
 
-    profile = load_profile()
+    resume_name = profile.get("resume_name")
+    has_resume = isinstance(resume_name, str) and bool(
+        resume_name.strip()
+    )
 
     st.markdown("## 👤 Career Profile")
 
     st.caption(
-        "Your AI-generated career identity based on your resume."
+        "Your career information and AI-generated insights "
+        "based on your resume."
     )
 
-    st.write("")
-
-
-    # ========================================================
+    # --------------------------------------------------------
     # EMPTY STATE
-    # ========================================================
+    # --------------------------------------------------------
 
-    if not profile.get("resume_name"):
-
-        with st.container(
-            border=True,
-        ):
-
-            st.markdown(
-                "### 📄 Your Career Profile is Waiting"
-            )
+    if not has_resume:
+        with st.container(border=True):
+            st.markdown("### 📄 Your Career Profile is Waiting")
 
             st.write(
-                "Upload your resume to unlock personalized "
-                "career insights, extracted skills and AI analysis."
+                "Upload your resume to build your career profile "
+                "and access personalized resume insights."
             )
 
             st.write("")
 
-            col1, col2, col3 = st.columns(
-                3,
-                gap="medium",
-            )
+            col1, col2, col3 = st.columns(3, gap="medium")
 
             with col1:
-
                 st.markdown("### 📊")
                 st.caption("ATS Insights")
 
             with col2:
-
                 st.markdown("### 🧠")
                 st.caption("Skill Intelligence")
 
             with col3:
-
                 st.markdown("### 🤖")
                 st.caption("AI Career Summary")
 
         return
 
+    # --------------------------------------------------------
+    # RESUME OVERVIEW
+    # --------------------------------------------------------
 
-    # ========================================================
-    # RESUME + ATS
-    # ========================================================
-
-    with st.container(
-        border=True,
-    ):
-
+    with st.container(border=True):
         left, right = st.columns(
             [1.5, 1],
             gap="large",
         )
 
         with left:
+            st.markdown("### 📄 Uploaded Resume")
 
-            st.markdown("### 📄 Resume")
+            st.success(resume_name.strip())
 
-            st.success(
-                profile.get(
-                    "resume_name",
-                    "Resume uploaded",
-                )
-            )
+            st.caption("Resume available in your career profile")
 
         with right:
-
-            ats_score = profile.get(
-                "ats_score",
-                0,
-            )
+            st.markdown("### 🎯 ATS Score")
 
             st.metric(
-                "🎯 ATS Score",
-                f"{ats_score}%",
+                label="Resume compatibility",
+                value=_format_score(profile.get("ats_score")),
             )
-
 
     st.write("")
 
+    # --------------------------------------------------------
+    # EXTRACTED SKILLS
+    # --------------------------------------------------------
 
-    # ========================================================
-    # SKILLS
-    # ========================================================
+    skills = _get_skills(profile.get("skills", []))
 
-    with st.container(
-        border=True,
-    ):
+    with st.container(border=True):
+        st.markdown("### 🧠 Extracted Skills")
 
-        st.markdown(
-            "### 🧠 Extracted Skills"
-        )
-
-        skills = profile.get(
-            "skills",
-            [],
+        st.caption(
+            "Skills identified and stored in your career profile."
         )
 
         if skills:
-
-            skill_columns = st.columns(
-                4,
-                gap="small",
-            )
+            skill_columns = st.columns(3, gap="small")
 
             for index, skill in enumerate(skills):
+                with skill_columns[index % 3]:
+                    st.success(skill)
 
-                with skill_columns[index % 4]:
-
-                    st.success(
-                        skill
-                    )
+            st.caption(f"{len(skills)} skills identified")
 
         else:
-
-            st.warning(
-                "No skills have been extracted yet."
+            st.info(
+                "No extracted skills are available yet. "
+                "Try analyzing your resume again."
             )
-
 
     st.write("")
 
+    # --------------------------------------------------------
+    # AI CAREER SUMMARY
+    # --------------------------------------------------------
 
-    # ========================================================
-    # AI SUMMARY
-    # ========================================================
+    with st.container(border=True):
+        st.markdown("### 🤖 AI Career Summary")
 
-    with st.container(
-        border=True,
-    ):
+        feedback = profile.get("ai_feedback", "")
 
-        st.markdown(
-            "### 🤖 AI Career Summary"
-        )
-
-        feedback = profile.get(
-            "ai_feedback",
-            "",
-        )
-
-        if feedback:
-
-            st.write(
-                feedback
-            )
-
+        if isinstance(feedback, str) and feedback.strip():
+            st.write(feedback.strip())
         else:
-
             st.info(
-                "Analyze your resume to receive "
-                "AI-powered career insights."
+                "Your AI career summary will appear here after "
+                "your resume has been analyzed."
             )

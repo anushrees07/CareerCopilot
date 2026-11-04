@@ -1,3 +1,4 @@
+
 from __future__ import annotations
 
 import streamlit as st
@@ -5,137 +6,97 @@ import streamlit as st
 from app.storage.profile_manager import load_profile
 
 
-# ============================================================
-# CAREER METRICS
-# ============================================================
+def _format_score(value: object) -> str:
+    """Format a stored score without presenting missing data as zero."""
+    if value is None or value == "":
+        return "Not calculated"
+
+    try:
+        score = float(value)
+    except (TypeError, ValueError):
+        return "Not available"
+
+    if not 0 <= score <= 100:
+        return "Not available"
+
+    return f"{score:g}%"
+
+
+def _count_skills(value: object) -> int:
+    """Safely count the skills stored in the profile."""
+    if isinstance(value, (list, tuple, set)):
+        return len(value)
+
+    return 0
 
 
 def show() -> None:
+    profile = load_profile() or {}
 
-    profile = load_profile()
-
-    ats_score = profile.get(
-        "ats_score",
-        0,
+    ats_score = _format_score(profile.get("ats_score"))
+    career_health = _format_score(
+        profile.get("career_health")
     )
 
-    skills = len(
-        profile.get(
-            "skills",
-            [],
-        )
+    skills = _count_skills(profile.get("skills", []))
+
+    resume_name = profile.get("resume_name")
+    has_resume = isinstance(resume_name, str) and bool(
+        resume_name.strip()
     )
 
-    career_health = profile.get(
-        "career_health",
-        0,
-    )
-
-    resume_name = profile.get(
-        "resume_name",
-        "",
-    )
-
-    st.markdown(
-        "## 📊 Career Metrics"
-    )
+    st.markdown("## 📊 Career Metrics")
 
     st.caption(
-        "A live snapshot of your current career readiness."
+        "A snapshot of your current career profile and readiness."
     )
 
     st.write("")
 
-    col1, col2, col3, col4 = st.columns(
-        4,
-        gap="medium",
-    )
+    metrics = st.columns(4, gap="medium")
 
-    # ========================================================
-    # ATS
-    # ========================================================
-
-    with col1:
-
+    # ATS SCORE
+    with metrics[0]:
         with st.container(border=True):
-
             st.markdown("### 🎯")
-
             st.metric(
-                "ATS Score",
-                f"{ats_score}%",
+                label="ATS Score",
+                value=ats_score,
             )
+            st.caption("Resume compatibility")
 
-            st.caption(
-                "Resume compatibility"
-            )
-
-    # ========================================================
     # SKILLS
-    # ========================================================
-
-    with col2:
-
+    with metrics[1]:
         with st.container(border=True):
-
             st.markdown("### 🧠")
-
             st.metric(
-                "Skills",
-                skills,
+                label="Skills",
+                value=skills,
             )
+            st.caption("Skills identified in your profile")
 
-            st.caption(
-                "Skills identified"
-            )
-
-    # ========================================================
     # CAREER HEALTH
-    # ========================================================
-
-    with col3:
-
+    with metrics[2]:
         with st.container(border=True):
-
             st.markdown("### 💜")
-
             st.metric(
-                "Career Health",
-                f"{career_health}%",
+                label="Career Health",
+                value=career_health,
             )
+            st.caption("Overall readiness")
 
-            st.caption(
-                "Overall readiness"
-            )
-
-    # ========================================================
-    # RESUME
-    # ========================================================
-
-    with col4:
-
+    # RESUME STATUS
+    with metrics[3]:
         with st.container(border=True):
-
             st.markdown("### 📄")
 
-            if resume_name:
+            st.metric(
+                label="Resume",
+                value="Ready" if has_resume else "Missing",
+            )
 
-                st.metric(
-                    "Resume",
-                    "Ready",
-                )
-
-                st.caption(
-                    "Resume uploaded"
-                )
-
-            else:
-
-                st.metric(
-                    "Resume",
-                    "Missing",
-                )
-
-                st.caption(
-                    "Upload your resume"
-                )
+            st.caption(
+                "Resume uploaded"
+                if has_resume
+                else "Upload your resume to get started"
+            )

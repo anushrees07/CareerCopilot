@@ -1,30 +1,27 @@
+
 from __future__ import annotations
 
 import streamlit as st
+
+from app.ui.theme import (
+    DEFAULT_THEME,
+    SUPPORTED_THEMES,
+    get_theme,
+)
 
 
 # ============================================================
 # CAREERCOPILOT APPEARANCE MANAGER
 # ============================================================
 #
-# ZERO HTML
-# ZERO unsafe_allow_html
+# Native Streamlit appearance management.
 #
-# Streamlit's native theme is controlled through
-# .streamlit/config.toml.
+# No HTML.
+# No JavaScript.
+# No unsafe_allow_html.
 #
-# This module handles the user's appearance preference
-# and the UI controls around it.
+# Preserves existing public functions.
 # ============================================================
-
-
-SUPPORTED_THEMES = (
-    "dark",
-    "light",
-)
-
-
-DEFAULT_THEME = "dark"
 
 
 # ============================================================
@@ -33,14 +30,16 @@ DEFAULT_THEME = "dark"
 
 def initialize() -> None:
     """
-    Initialize the CareerCopilot appearance state.
+    Initialize the user's appearance preference.
 
-    Dark mode is the default.
+    Dark mode remains the default.
     """
 
     if "appearance" not in st.session_state:
+        st.session_state["appearance"] = DEFAULT_THEME
 
-        st.session_state.appearance = DEFAULT_THEME
+    if st.session_state["appearance"] not in SUPPORTED_THEMES:
+        st.session_state["appearance"] = DEFAULT_THEME
 
 
 # ============================================================
@@ -52,10 +51,21 @@ def get_current_theme() -> str:
     Return the currently selected appearance.
     """
 
-    return st.session_state.get(
-        "appearance",
-        DEFAULT_THEME,
-    )
+    initialize()
+
+    return st.session_state["appearance"]
+
+
+# ============================================================
+# GET ACTIVE THEME TOKENS
+# ============================================================
+
+def get_active_theme() -> dict:
+    """
+    Return the design tokens for the active appearance.
+    """
+
+    return get_theme(get_current_theme())
 
 
 # ============================================================
@@ -67,11 +77,16 @@ def set_theme(theme: str) -> None:
     Safely update the appearance preference.
     """
 
-    if theme not in SUPPORTED_THEMES:
+    selected_theme = (
+        theme.lower().strip()
+        if isinstance(theme, str)
+        else DEFAULT_THEME
+    )
 
-        theme = DEFAULT_THEME
+    if selected_theme not in SUPPORTED_THEMES:
+        selected_theme = DEFAULT_THEME
 
-    st.session_state.appearance = theme
+    st.session_state["appearance"] = selected_theme
 
 
 # ============================================================
@@ -80,17 +95,14 @@ def set_theme(theme: str) -> None:
 
 def toggle_theme() -> None:
     """
-    Toggle between dark and light mode.
+    Toggle between dark and light appearances.
     """
 
     current = get_current_theme()
 
     if current == "dark":
-
         set_theme("light")
-
     else:
-
         set_theme("dark")
 
 
@@ -98,20 +110,20 @@ def toggle_theme() -> None:
 # APPLY THEME
 # ============================================================
 
-def apply_theme() -> None:
+def apply_theme() -> dict:
     """
-    Compatibility function.
+    Return the active theme tokens.
 
-    The previous implementation injected CSS directly into
-    the page using unsafe HTML.
+    Custom CSS injection is intentionally not used.
 
-    That is intentionally removed.
+    Streamlit's native global theme is configured separately
+    through .streamlit/config.toml.
 
-    Streamlit's native theme configuration now owns the
-    global application appearance.
+    Components can consume these tokens to render their
+    active appearance using native Streamlit functionality.
     """
 
-    return None
+    return get_active_theme()
 
 
 # ============================================================
@@ -120,14 +132,12 @@ def apply_theme() -> None:
 
 def show_theme_switcher() -> None:
     """
-    Render the native Streamlit theme switcher.
+    Display the native Streamlit theme controls.
     """
 
     current = get_current_theme()
 
-    st.caption(
-        "Appearance"
-    )
+    st.caption("Choose your appearance")
 
     dark_col, light_col = st.columns(
         2,
@@ -135,7 +145,6 @@ def show_theme_switcher() -> None:
     )
 
     with dark_col:
-
         if st.button(
             "🌙 Dark",
             key="cc_theme_dark",
@@ -146,15 +155,11 @@ def show_theme_switcher() -> None:
                 else "secondary"
             ),
         ):
-
             if current != "dark":
-
                 set_theme("dark")
-
                 st.rerun()
 
     with light_col:
-
         if st.button(
             "☀️ Light",
             key="cc_theme_light",
@@ -165,12 +170,15 @@ def show_theme_switcher() -> None:
                 else "secondary"
             ),
         ):
-
             if current != "light":
-
                 set_theme("light")
-
                 st.rerun()
+
+    active_theme = get_active_theme()
+
+    st.caption(
+        f"Active appearance: {active_theme['name'].capitalize()}"
+    )
 
 
 # ============================================================

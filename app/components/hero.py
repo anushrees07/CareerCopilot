@@ -1,3 +1,4 @@
+
 from __future__ import annotations
 
 import streamlit as st
@@ -5,45 +6,29 @@ import streamlit as st
 from app.core.navigation import navigate
 
 
-# ============================================================
-# CAREERCOPILOT HERO
-# NATIVE STREAMLIT VERSION
-# ZERO HTML
-# ============================================================
-
-
 def show() -> None:
-
     left, right = st.columns(
         [1.7, 1],
         gap="large",
     )
 
-    # ========================================================
-    # LEFT
-    # ========================================================
+    # --------------------------------------------------------
+    # HERO CONTENT
+    # --------------------------------------------------------
 
     with left:
+        st.caption("✦ YOUR AI-POWERED CAREER WORKSPACE")
 
-        st.caption(
-            "✦ AI-POWERED CAREER PLATFORM"
-        )
+        st.title("Build Your Dream Career.")
 
-        st.markdown(
-            "# Build Your Dream"
-        )
-
-        st.markdown(
-            "# Career With AI"
+        st.subheader(
+            "Make your next career move with clarity."
         )
 
         st.write(
-            """
-            Analyze your resume, discover internships,
-            identify skill gaps, prepare for interviews,
-            generate career roadmaps, and accelerate
-            your career with AI.
-            """
+            "Understand your strengths, improve your resume, "
+            "discover relevant internships, and prepare for "
+            "the opportunities ahead."
         )
 
         st.write("")
@@ -54,7 +39,6 @@ def show() -> None:
         )
 
         with action_1:
-
             if st.button(
                 "📄 Analyze Resume",
                 key="hero_analyze_resume",
@@ -65,7 +49,6 @@ def show() -> None:
                 st.rerun()
 
         with action_2:
-
             if st.button(
                 "💼 Explore Opportunities",
                 key="hero_opportunities",
@@ -75,38 +58,56 @@ def show() -> None:
                 navigate("opportunities")
                 st.rerun()
 
-    # ========================================================
-    # RIGHT
-    # ========================================================
+        st.caption(
+            "Start with your resume or explore opportunities. "
+            "Your next step is yours to choose."
+        )
+
+    # --------------------------------------------------------
+    # CAREER SNAPSHOT
+    # --------------------------------------------------------
 
     with right:
-
         with st.container(border=True):
-
-            st.markdown(
-                "## 🚀 Career Snapshot"
-            )
+            st.markdown("### 🚀 Career Snapshot")
 
             st.caption(
-                "Your AI-powered career command center."
+                "The tools that bring your career journey together."
             )
 
             st.divider()
 
             features = [
-                ("📄", "Resume Intelligence"),
-                ("🤖", "Multi-AI Providers"),
-                ("📈", "ATS Optimization"),
-                ("💼", "Opportunity Matching"),
-                ("🗺️", "Personalized Roadmap"),
+                (
+                    "📄",
+                    "Resume Intelligence",
+                    "Analyze your resume and identify areas to improve.",
+                ),
+                (
+                    "🤖",
+                    "Multiple AI Providers",
+                    "Work with the supported AI provider integrations.",
+                ),
+                (
+                    "📈",
+                    "ATS Insights",
+                    "Understand how your resume aligns with job requirements.",
+                ),
+                (
+                    "💼",
+                    "Internship Discovery",
+                    "Explore opportunities relevant to your career goals.",
+                ),
+                (
+                    "🗺️",
+                    "Career Roadmaps",
+                    "Get direction on the skills and steps ahead.",
+                ),
             ]
 
-            for icon, title in features:
+            for index, (icon, title, description) in enumerate(features):
+                st.markdown(f"**{icon}  {title}**")
+                st.caption(description)
 
-                st.markdown(
-                    f"**{icon}  {title}**"
-                )
-
-                st.caption(
-                    "Ready to use"
-                )
+                if index != len(features) - 1:
+                    st.divider()
